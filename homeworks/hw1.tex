@@ -1,0 +1,125 @@
+\documentclass{ctexart}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\usepackage{color, framed}
+\definecolor{shadecolor}{RGB}{241, 241, 255}
+\newcounter{problemname}
+\newenvironment{problem}{\begin{shaded}\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\end{shaded}\par}
+\newenvironment{solution}{\par\noindent\textbf{解答. }}{\par}
+
+% \usepackage{mathrsfs}
+
+\usepackage{geometry}
+\geometry{a4paper,scale=0.8}
+
+\input{../command.tex}
+
+\title{第一次作业}
+% \author{洪艺中 12335025}
+
+\begin{document}
+\maketitle
+\subsection{118页 习题2}
+\begin{problem}
+    设 $\Gamma^{i}_{jk}$ 为 $M$ 的仿射联络系数, 则 $\bar{\Gamma}^{i}_{jk}$ 也为 $M$ 的仿射联络系数的充分必要条件是, 存在 $(1, 2)$ 型张量场 $T$ 使得
+    \[
+        \bar{\Gamma}^{i}_{jk} = \Gamma^{i}_{jk} + T^{i}_{j}.
+    \]
+\end{problem}
+\begin{solution}
+    假设 $\nabla$, $\bar{\nabla}$ 分别是 $\Gamma^{i}_{jk}$ 和 $\bar{\Gamma}^{i}_{jk}$ 分别确定的仿射联络, 那么:
+    \[
+        \Div{X}{Y} = X(Y^{j})e_j + X^{i}Y^{j}\Gamma^{k}_{ij}e_{k}, \quad
+        \bDiv{X}{Y} = X(Y^{j})e_j + X^{i}Y^{j}\bar{\Gamma}^{k}_{ij}e_{k}.
+    \]
+    两式作差, 得到
+    \[
+        \Div{X}{Y} - \bDiv{X}{Y} = X^{i}Y^{j}\Gamma^{k}_{ij}e_{k} - X^{i}Y^{j}\bar{\Gamma}^{k}_{ij}e_{k}.
+    \]
+    而 $T(X, Y) := \Div{X}{Y} - \bDiv{X}{Y}$ 是 $(1, 2)$ 型张量. 这是因为由仿射联络的定义:
+    \[
+        \begin{aligned}
+        T(f_1X, f_2Y) 
+        &= f_1\Div{X}{fY} - f_1\bDiv{X}{fY} \\
+        &= f_1X(f_2)Y + f_1f_2\Div{X}{Y} - f_1X(f_2)Y - f_1f_2\bDiv{X}{Y} \\
+        &= f_1f_2T(X, Y).
+        \end{aligned}
+    \]
+    即 $T$ 是函数线性的, 遂是张量. 所以, $\bar{\Gamma}^{i}_{jk}$ 也为 $M$ 的仿射联络系数 $\Rightarrow$ 存在 $(1, 2)$ 型张量场 $T$ 使得
+    \[
+        \bar{\Gamma}^{i}_{jk} = \Gamma^{i}_{jk} + T^{i}_{jk}.
+    \]
+    反过来如果存在这样的 $T$, 那么可以定义:
+    \[
+        \bDiv{X}{Y} = \Div{X}{Y} + T(X, Y),
+    \]
+    由上面的推导可知 $\bnabla$ 是仿射联络, 且其联络系数即是 $\bar{\Gamma}$. 得证.
+\end{solution}
+\subsection{118页 习题3}
+\begin{problem}
+    设 $(M_1, \Gamma)$ 和 $(M_2, \bar{\Gamma})$ 分别为 $m_1$ 和 $m_2$ 维仿射联络空间, $(U_1, \phi_1; x^{i})$ 和 $(U_2, \phi_2; y^{\alpha})$ 分别为 $M_1$ 和 $M_2$ 的坐标图, 在积流形 $M = M_1 \times M_2$ 的坐标图 $(U_1 \times U_2, \phi_1 \times \phi_2; (x^{i}, y^{\alpha}))$ 上定义
+    \[
+        L^{i}_{jk} = \Gamma^{i}_{jk}, \quad L^{m_2 + a}_{m_2 + b, m_2 + c} = \bar{\Gamma}^{a}_{bc}, \quad \text{其余的\ }L^{\lambda}_{\mu\nu} = 0
+    \]
+    \[
+        (1 \leqslant i, j, k \leqslant m_1; 1 \leqslant a, b, c \leqslant m_2; q \leqslant \lambda, \mu, \nu \leqslant m_1 + m_2).
+    \]
+    则 $(M, L)$ 也是仿射联络空间.
+\end{problem}
+\begin{solution}
+    由于只有 $L$ 的三个指标都同时对应 $M_1$ 或 $M_2$ 上时才非零, 所以可以发现 $L$ 定义的联络 $1$--形式 $(^{M}\omega)$ 满足
+    \[
+        (^{M}\omega)^{i}_{jk} = (^{M_1}\omega)^{i}_{jk},
+        (^{M}\omega)^{m_2 + a}_{m_2 + b, m_2 + c} = (^{M_2}\omega)^{a}_{bc},
+        \text{其余的\ }(^{M}\omega)^{\lambda}_{\mu\nu} = 0.
+    \]
+    因此利用书上定义 3.1.2, 因为 $(^{M_1}\omega)$ 和 $(^{M_2}\omega)$ 分别满足联络形式的变换方程, 所以 $(^{M} \omega)$ 也满足, 即 $(M, L)$ 也是仿射联络空间.
+\end{solution}
+\subsection{119页 习题4}
+\begin{problem}
+    由 (3.1.17) 证明 (3.1.32). \\
+    (3.1.17): $\bar{\omega}^{i}_{j} = (a^{l}_{j}\omega^{k}_{l} + \dif a^{k}_{j})b^{i}_{k}$. \\
+    (3.1.32): $\bar{\Gamma}^{i}_{jk} = \dfrac{\partial \bar{x}^{i}}{\partial x^{l}}\left(\dfrac{\partial^2 x^l}{\partial \bar{x}^{j}\partial \bar{x}^{k}} + \Gamma^{l}_{pq}\dfrac{\partial x^{p}}{\partial \bar{x}^{j}}\dfrac{\partial x^q}{\partial \bar{x}^{k}}\right)$.
+\end{problem}
+\begin{solution}
+    \newcommand{\A}[2]{\dfrac{\partial x^{#1}}{\partial \bar{x}^{#2}}}
+    这里 $a^{j}_{i} = \dfrac{\partial x^{j}}{\partial \bar{x}^{i}}$. 再利用
+    \[
+        \Gamma^{i}_{jk} = \omega^{i}_{j}(e_k),
+    \]
+    代入得
+    \[
+    \begin{aligned}
+        &\bar{\Gamma}^{i}_{jk} = \bar{\omega}^{i}_{j}(\bar{e}_k)\\
+        =& (a^{p}_{j}\omega^{l}_{p}(a^{q}_{k}e_q) + (\dif a^{l}_{j})(a^{q}_{k}e_q))b^{i}_{l} \\
+        =& \left(\A{p}{j}\A{q}{k}\Gamma^{l}_{pq} + \dfrac{\partial}{\partial \bar{x}^{s}}\left(\A{l}{j}\right)\bar{\omega}^{s}(\bar{e}_k)\right)\dfrac{\partial \bar{x}^{i}}{\partial x^{l}} \\
+        =& \dfrac{\partial \bar{x}^{i}}{\partial x^{l}}\left(\dfrac{\partial^2 x^l}{\partial \bar{x}^{j}\partial \bar{x}^{k}} + \Gamma^{l}_{pq}\dfrac{\partial x^{p}}{\partial \bar{x}^{j}}\dfrac{\partial x^q}{\partial \bar{x}^{k}}\right).
+    \end{aligned}
+    \]
+\end{solution}
+\subsection{119页 习题8}
+\begin{problem}
+    设 $M$ 为 $C^{k}$ 流形, $\nabla$ 为 $M$ 的仿射联络, $\alpha(s, t) \colon (a, b) \times (c, d) \rightarrow M$ 为 $C^k$ 映射. 记 $\dfrac{\partial \alpha}{\partial s} = \alpha_{\ast}\left(\dfrac{\partial}{\partial s}\right)$, $\dfrac{\partial \alpha}{\partial t} = \alpha_{\ast}\left(\dfrac{\partial}{\partial t}\right)$. 证明 $\nabla$ 为对称联络的充要条件是对任意的 $\alpha$ 成立
+    \[
+        \Div{\frac{\partial \alpha}{\partial s}}{\dfrac{\partial \alpha}{\partial t}} = 
+        \Div{\frac{\partial \alpha}{\partial t}}{\dfrac{\partial \alpha}{\partial s}}.
+    \]
+\end{problem}
+\begin{solution}
+    对称即 $T(X, Y) = \Div{X}{Y} - \Div{Y}{X} - [X, Y] = 0$.
+
+    \newcommand{\dalpha}[1]{\dfrac{\partial \alpha}{\partial #1}}
+
+    "$\Rightarrow$": 如果对称, $T(\dalpha{s}, \dalpha{t}) = 0$, 因此只需证明 $\left[\dalpha{s}, \dalpha{t}\right] = 0$. 而
+    \[
+        \left[\dalpha{s}, \dalpha{t}\right] = \alpha_{\ast}\left[\dfrac{\partial}{\partial s}, \dfrac{\partial}{\partial t}\right] = 0.
+    \]
+    因此成立.
+
+    "$\Leftarrow$": 同样利用 $\left[\dalpha{s}, \dalpha{t}\right] = 0$, 可知 $T(X, Y) = 0$, 即对称. 得证.
+\end{solution}
+\end{document}
