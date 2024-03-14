@@ -1,0 +1,83 @@
+\documentclass{ctexart}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+\usepackage{color, framed}
+\definecolor{shadecolor}{RGB}{241, 241, 255}
+\newcounter{problemname}
+\newenvironment{problem}{\begin{shaded}\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\end{shaded}\par}
+\newenvironment{solution}{\par\noindent\textbf{解答. }}{\par}
+
+% \usepackage{mathrsfs}
+
+\usepackage{geometry}
+\geometry{a4paper,scale=0.8}
+
+\input{../command.tex}
+
+\title{第一次作业}
+\author{洪艺中 12335025}
+
+\begin{document}
+\maketitle
+\subsection{119页 习题7}
+\begin{problem}
+    设 $M$ 为 $C^{k + 1}$ 流形, $\nabla$ 为其上仿射联络. $X, Y$ 为 $M$ 的 $C^k$ 向量场, $X_p \not= 0$. 以 $C(s)$ 表示过 $p$ 点的向量场 $X$ 的积分曲线, $C(0) = p$. 以 $C^{-1}_{t}Y_{C(t)}$ 表示 $Y_{C(t)}$ 沿曲线 $C$ 平行移动到 $p$ 点所得的向量, 证明: 
+    \[
+        (\Div{X}{Y})_p = \lim_{t \rightarrow 0} \dfrac{1}{t} (C^{-1}_{t} Y_{C(t)} - Y_p).
+    \]
+\end{problem}
+\begin{solution}
+    取 $p$ 点处的一组正交标架 $\{e_1, \cdots, e_n\}$, 且 $e_1(t) = \dot{C}(t)$. 将 $e_i, i \geqslant 2$ 沿 $C(t)$ 平行移动得到 $C(t)$ 上一组标架场 $\{e_1(t), \cdots, e_n(t)\}$. 在这组基下, $Y(C(t)) = Y^i(t)e_i(t)$. 记 $Z_t(s) = C^{-1}_{s} Y_{C(t)}$ 为 $Y_{C(t)}$ 沿 $C$ 平行移动得到的向量场, 则 $Z_t(s) = Z_t^{i}(s)$ 关于 $\dot{C}(s) = e_1(s)$ 的协变导数是 $0$. 即
+    \[
+        \Div{e_1}{Z_t} = e_1(Z_t^{i}(s))e_i + Z_t^{i}(s)\Div{e_1}{e_i} = e_1(Z_t^{i}(s))e_i = 0
+    \]
+    所以 $Z_t^{i}(s)$ 都是常数, $Z_t^i(s) = Z_t^i(t) = Y^i(t)$. 因此不等式右边
+    \[
+        \begin{aligned}
+            &\lim_{t \rightarrow 0} \dfrac{1}{t} (C^{-1}_{t} Y_{C(t)} - Y_p)
+            = \lim_{t \rightarrow 0} \dfrac{1}{t} (Z_t(0) - Y_p) \\
+            =& \lim_{t \rightarrow 0} \dfrac{\left(Y^i(t) - Y^i(0)\right)e_i(t)}{t} \\
+            =& \dot{Y}^{i}(0)e_i(0),
+        \end{aligned}
+    \]
+    而不等式左边 $(\Div{X}{Y})_{p} = e_1(Y^i)e_i = \dot{Y}^{i}(0)e_i(0)$. 因此两者相等.
+\end{solution}
+
+\subsection{119页 习题9}
+\begin{problem}
+    设 $\{e_i\}, 1 \leqslant i \leqslant m$ 为 $C^{k}$ 流形 $M^{n}$ 上的局部基向量场. $\{\omega^{i}\}$ 为其对偶基向量场, $\{\omega^i_j\}$ 为仿射联络 $1$--形式.
+
+    \begin{enumerate}[label=(\roman*)]
+        \item 证明: 测地线的微分方程为
+        \[
+            \dfrac{\dif}{\dif t}\left(\dfrac{\omega^{k}}{\dif t}\right)
+        \]
+        \item 关于 $\mathbb{R}^2$ 上直角坐标 $x^1, x^2$ 的自然标架, 设联络 $1$--形式为
+        \[
+            \omega^{1}_{1} = \omega^{2}_{2} = 0, \quad \omega^{1}_{2} = \dif x^{2}, \quad \omega^{2}_{1} = \dif x^{1}.
+        \]
+        求挠率、曲率, 并求测地线微分方程.
+    \end{enumerate}
+\end{problem}
+\begin{solution}
+    \begin{enumerate}[label=(\roman*)]
+        \item 设某曲线 $\gamma(t)$ 的切向量为 $X(t)$. 则测地线方程说明
+        \[
+            \begin{aligned}
+            0 &= \Div{X}{X} = X(\omega^{i}(X))e_i + \omega^{i}(X)\Div{X}{e_i} \\
+            &= X(\omega^{k}(X))e_k + \omega^{i}(X)\omega^{k}_{i}e_k.
+            \end{aligned}
+        \]
+        所以如果将 $X$ 写作 $\dDif{}{t}$, 则测地线方程为
+        \[
+            \dDif{}{t}(\omega^{k}(\dDif{}{t})) + \omega^{i}(\dDif{}{t})\omega^{k}_{i}(\dDif{}{t}).
+        \]
+        \item 挠率张量
+    \end{enumerate}
+\end{solution}
+\end{document}
