@@ -55,7 +55,7 @@
     \begin{enumerate}[label=(\roman*)]
         \item 证明: 测地线的微分方程为
         \[
-            \dfrac{\dif}{\dif t}\left(\dfrac{\omega^{k}}{\dif t}\right)
+            \dfrac{\dif}{\dif t}\left(\dfrac{\omega^{k}}{\dif t}\right) + \dfrac{\omega^{i}}{\dif t}\dfrac{\omega^{k}_{i}}{\dif t} = 0
         \]
         \item 关于 $\mathbb{R}^2$ 上直角坐标 $x^1, x^2$ 的自然标架, 设联络 $1$--形式为
         \[
@@ -75,9 +75,48 @@
         \]
         所以如果将 $X$ 写作 $\dDif{}{t}$, 则测地线方程为
         \[
-            \dDif{}{t}(\omega^{k}(\dDif{}{t})) + \omega^{i}(\dDif{}{t})\omega^{k}_{i}(\dDif{}{t}).
+            \dDif{}{t}(\omega^{k}(\dDif{}{t})) + \omega^{i}(\dDif{}{t})\omega^{k}_{i}(\dDif{}{t}) = 0.
         \]
-        \item 挠率张量
+        \item 代入给出的联络 $1$--形式, 可得
+        \[
+            \begin{aligned}
+                \Div{e_1}{e_1} = e_2, \quad &\Div{e_1}{e_2} = 0, \\
+                \Div{e_2}{e_1} = 0, \quad &\Div{e_2}{e_2} = e_1.
+            \end{aligned}
+        \]
+        挠率: $T(e_1, e_2) = 0$, 故挠率张量 $T = 0$.
+        曲率: 截面曲率 $\Rm_{1212} = \Inner{\Rm{e_1}{e_2}e_2}{e_1} = g_{12} = 0.$
+        测地线方程: 设 $\gamma(t)\colon (0, 1) \rightarrow M$ 为一条曲线, $\gamma(t) = (u^1(t), u^2(t))$, 则若 $\gamma(t)$ 是测地线, 其将满足方程: 
+        \begin{align*}
+            \dDif{^2 x^1}{t^2} + \left(\dDif{x^2}{t}\right)^2 = 0, \\
+            \dDif{^2 x^2}{t^2} + \left(\dDif{x^1}{t}\right)^2 = 0.
+        \end{align*}
+    \end{enumerate}
+\end{solution}
+
+\subsection{131页 习题1}
+\begin{problem}
+    证明由
+    \[
+        2\Inner{\Div{X}{Y}}{Z} = X\Inner{Y}{Z} + Y\Inner{Z}{X} - Z\Inner{X}{Y} + \Inner{[X, Y]}{Z} - \Inner{[Y, Z]}{X} + \Inner{[Z, X]}{Y}
+    \]
+    定义的放射联络 $\Div{X}{Y}$ 是一个黎曼联络.
+\end{problem}
+\begin{solution}
+    需要验证
+    \begin{enumerate}
+        \item 这样定义的 $\Div{X}{Y}$ 关于 $X$ 是函数线性的, 而关于 $Y$ 是导数;
+        \item 联络是无挠的;
+        \item 联络和度量是相容的.
+    \end{enumerate}
+    接下来逐项验证:
+    \begin{enumerate}
+        \item 首先考虑
+        \[
+            \begin{aligned}
+                2\Inner{\Div{f_1X_1 + f_2X_2}{Y}}{Z}
+            \end{aligned}
+        \]
     \end{enumerate}
 \end{solution}
 \end{document}
