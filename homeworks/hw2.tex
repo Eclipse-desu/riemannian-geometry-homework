@@ -19,7 +19,7 @@
 
 \input{../command.tex}
 
-\title{第一次作业}
+\title{第二次作业}
 \author{洪艺中 12335025}
 
 \begin{document}
@@ -34,7 +34,7 @@
 \begin{solution}
     取 $p$ 点处的一组正交标架 $\{e_1, \cdots, e_n\}$, 且 $e_1(t) = \dot{C}(t)$. 将 $e_i, i \geqslant 2$ 沿 $C(t)$ 平行移动得到 $C(t)$ 上一组标架场 $\{e_1(t), \cdots, e_n(t)\}$. 在这组基下, $Y(C(t)) = Y^i(t)e_i(t)$. 记 $Z_t(s) = C^{-1}_{s} Y_{C(t)}$ 为 $Y_{C(t)}$ 沿 $C$ 平行移动得到的向量场, 则 $Z_t(s) = Z_t^{i}(s)$ 关于 $\dot{C}(s) = e_1(s)$ 的协变导数是 $0$. 即
     \[
-        \Div{e_1}{Z_t} = e_1(Z_t^{i}(s))e_i + Z_t^{i}(s)\Div{e_1}{e_i} = e_1(Z_t^{i}(s))e_i = 0
+        \Div{e_1}{Z_t} = e_1(Z_t^{i}(s))e_i + Z_t^{i}(s)\Div{e_1}{e_i} = e_1(Z_t^{i}(s))e_i = 0,
     \]
     所以 $Z_t^{i}(s)$ 都是常数, $Z_t^i(s) = Z_t^i(t) = Y^i(t)$. 因此不等式右边
     \[
@@ -55,7 +55,7 @@
     \begin{enumerate}[label=(\roman*)]
         \item 证明: 测地线的微分方程为
         \[
-            \dfrac{\dif}{\dif t}\left(\dfrac{\omega^{k}}{\dif t}\right) + \dfrac{\omega^{i}}{\dif t}\dfrac{\omega^{k}_{i}}{\dif t} = 0
+            \dfrac{\dif}{\dif t}\left(\dfrac{\omega^{k}}{\dif t}\right) + \dfrac{\omega^{i}}{\dif t}\dfrac{\omega^{k}_{i}}{\dif t} = 0.
         \]
         \item 关于 $\mathbb{R}^2$ 上直角坐标 $x^1, x^2$ 的自然标架, 设联络 $1$--形式为
         \[
@@ -75,7 +75,7 @@
         \]
         所以如果将 $X$ 写作 $\dDif{}{t}$, 则测地线方程为
         \[
-            \dDif{}{t}(\omega^{k}(\dDif{}{t})) + \omega^{i}(\dDif{}{t})\omega^{k}_{i}(\dDif{}{t}) = 0.
+            \dDif{}{t}(\omega^{k}(\dDif{}{t})) + \omega^{i}(\dDif{}{t})\omega^{k}_{i}(\dDif{}{t}) = \dfrac{\dif}{\dif t}\left(\dfrac{\omega^{k}}{\dif t}\right) + \dfrac{\omega^{i}}{\dif t}\dfrac{\omega^{k}_{i}}{\dif t} = 0.
         \]
         \item 代入给出的联络 $1$--形式, 可得
         \[
@@ -85,8 +85,10 @@
             \end{aligned}
         \]
         挠率: $T(e_1, e_2) = 0$, 故挠率张量 $T = 0$.
-        曲率: 截面曲率 $\Rm_{1212} = \Inner{\Rm{e_1}{e_2}e_2}{e_1} = g_{12} = 0.$
-        测地线方程: 设 $\gamma(t)\colon (0, 1) \rightarrow M$ 为一条曲线, $\gamma(t) = (u^1(t), u^2(t))$, 则若 $\gamma(t)$ 是测地线, 其将满足方程: 
+
+        曲率: 截面曲率 $\Rm_{1212} = \Inner{\Rm{e_1}{e_2}e_2}{e_1} = g_{12} = 0$.
+
+        测地线方程: 设 $\gamma(t)\colon (0, 1) \rightarrow M$ 为一条曲线, $\gamma(t) = (x^1(t), x^2(t))$, 则若 $\gamma(t)$ 是测地线, 其将满足方程: 
         \begin{align*}
             \dDif{^2 x^1}{t^2} + \left(\dDif{x^2}{t}\right)^2 = 0, \\
             \dDif{^2 x^2}{t^2} + \left(\dDif{x^1}{t}\right)^2 = 0.
@@ -98,25 +100,76 @@
 \begin{problem}
     证明由
     \[
-        2\Inner{\Div{X}{Y}}{Z} = X\Inner{Y}{Z} + Y\Inner{Z}{X} - Z\Inner{X}{Y} + \Inner{[X, Y]}{Z} - \Inner{[Y, Z]}{X} + \Inner{[Z, X]}{Y}
+        2\Inner{\Div{X}{Y}}{Z} = X\Inner{Y}{Z} + Y\Inner{Z}{X} - Z\Inner{X}{Y} + \Inner{[X, Y]}{Z} - \Inner{[Y, Z]}{X} + \Inner{[Z, X]}{Y} \tag{$\ast$}\label{eq::def-131-1}
     \]
-    定义的放射联络 $\Div{X}{Y}$ 是一个黎曼联络.
+    定义的仿射联络 $\Div{X}{Y}$ 是一个 Riemann 联络.
 \end{problem}
 \begin{solution}
     需要验证
     \begin{enumerate}
         \item 这样定义的 $\Div{X}{Y}$ 关于 $X$ 是函数线性的, 而关于 $Y$ 是导数;
         \item 联络是无挠的;
-        \item 联络和度量是相容的.
+        \item 联络和 Riemann 度量是相容的.
     \end{enumerate}
     接下来逐项验证:
     \begin{enumerate}
         \item 首先考虑
         \[
             \begin{aligned}
-                2\Inner{\Div{f_1X_1 + f_2X_2}{Y}}{Z}
+                2\Inner{\Div{fX_1 + X_2}{Y}}{Z} =& fX_1\Inner{Y}{Z} + X_2\Inner{Y}{Z} \\
+                +& \textcolor{red}{Y(f)\Inner{Z}{X_1}} + fY\Inner{Z}{X_1} + Y\Inner{Z}{X_2} \\
+                -& \textcolor{blue}{Z(f)\Inner{X_1}{Y}} - fZ\Inner{X_1}{Y} + Z\Inner{X_2}{Y} \\
+                +& f\Inner{[X_1, Y]}{Z} - \textcolor{red}{Y(f)\Inner{X_1}{Z}} + \Inner{[X_2, Y]}{Z} \\
+                -& f\Inner{[Y, Z]}{X_1} - \Inner{[Y, Z]}{X_2} \\
+                +& f\Inner{[Z, X_1]}{Y} + \textcolor{blue}{Z(f)\Inner{X_1}{Y}} + \Inner{[Z, X_2]}{Y} \\
+                =& 2\Inner{f\Div{X_1}{Y} + \Div{X_2}{Y}}{Z}.
             \end{aligned}
         \]
+        因此 $\Div{X}{Y}$ 关于 $X$ 是函数线性的. 再考虑 $Y$ 位置:
+        \[
+            \begin{aligned}
+                2\Inner{\Div{X}{fY_1 + Y_2}}{Z} =& \textcolor{red}{X(f)\Inner{Y_1}{Z}} + fX\Inner{Y_1}{Z} + X\Inner{Y_2}{Z} \\
+                +& fY_1\Inner{Z}{X} + Y_2\Inner{Z}{X} \\
+                -& \textcolor{blue}{Z(f)\Inner{X}{Y_1}} - fZ\Inner{X}{Y_1} - Z\Inner{X}{Y_2} \\
+                +& f\Inner{[X, Y_1]}{Z} + \textcolor{red}{X(f)\Inner{Y_1}{Z}} + \Inner{[X, Y_2]}{Z} \\
+                -& f\Inner{[Y_1, Z]}{X} + \textcolor{blue}{Z(f)\Inner{Y_1}{X}} - \Inner{[Y_2, Z]}{X} \\
+                +& f\Inner{[Z, X]}{Y_1} + \Inner{[Z, X]}{Y_2} \\
+                =& 2\Inner{f\Div{X}{Y_1} + X(f)Y_1 + \Div{X}{Y_2}}{Z}
+            \end{aligned}
+        \]
+        因此 $\Div{X}{Y}$ 关于 $Y$ 是导数. 即 $\nabla$ 确实是一个联络.
+        \item 无挠:
+        \[
+            \begin{aligned}
+                2\Inner{T(X, Y)}{Z} =& 2\Inner{\Div{X}{Y}}{Z} - 2\Inner{\Div{Y}{X}}{Z} - 2\Inner{[X, Y]}{Z} \\
+                =& X\Inner{Y}{Z} + Y\Inner{Z}{X} - Z\Inner{X}{Y} + \Inner{[X, Y]}{Z} - \Inner{[Y, Z]}{X} + \Inner{[Z, X]}{Y} \\
+                -& (Y\Inner{X}{Z} + X\Inner{Z}{Y} - Z\Inner{Y}{X} + \Inner{[Y, X]}{Z} - \Inner{[X, Z]}{Y} + \Inner{[Z, Y]}{X}) \\
+                -& 2\Inner{[X, Y]}{Z} \\
+                =& 2\Inner{[X, Y]}{Z} - 2\Inner{[X, Y]}{Z} = 0.
+            \end{aligned}
+        \]
+        \item 与 Riemann 度量相容:
+        \[
+            \begin{aligned}
+                2\Inner{\Div{X}{Y}}{Z} + 2\Inner{Y}{\Div{X}{Z}} 
+                =& X\Inner{Y}{Z} + Y\Inner{Z}{X} - Z\Inner{X}{Y} + \Inner{[X, Y]}{Z} - \Inner{[Y, Z]}{X} + \Inner{[Z, X]}{Y} \\
+                +& X\Inner{Z}{Y} + Z\Inner{Y}{X} - Y\Inner{X}{Z} + \Inner{[X, Z]}{Y} - \Inner{[Z, Y]}{X} + \Inner{[Y, X]}{Z} \\
+                =& 2X\Inner{Y}{Z}.
+            \end{aligned}
+        \]
+        综上, (\ref{eq::def-131-1}) 式定义的仿射联络的确是 Riemann 联络.
     \end{enumerate}
+\end{solution}
+
+\subsection{131页 习题2}
+\begin{problem}
+    设 $(M, g)$ 是 Riemann 流形. 在自然标架下, $\left\{i \atop jk\right\}$ 为 Christoffel 记号. $X = X^{i}\pdDif{}{x^{i}}$, $Y = Y^{j}\pdDif{}{x^{j}}$ 为任意向量场. 证明, 由
+    \[
+        \Div{X}{Y} = \Div{X^{i}\pdDif{}{x^{i}}}{Y^{j}\pdDif{}{x^{j}}} := \left(X^{i}\pdDif{Y^{k}}{x^i} + X^iY^j\left\{i \atop jk\right\}\right)\pdDif{}{x^{k}}
+    \]
+    定义的 $\nabla$ 是 Riemann 联络.
+\end{problem}
+\begin{solution}
+    根据书 120 页 (3.2.2) 式, Christoffel 记号通过 (3.2.1) 式和 $\Div{\frac{\partial}{\partial x^{k}}}{\pdDif{}{x^k}} = \Gamma^{i}_{jk}\pdDif{}{x^i}$ 得到, 所以 Christoffel 记号定义的联络满足 (3.2.1) 式, 也就是上一习题中的 (\ref{eq::def-131-1}) 式. 则利用上一习题的结论
 \end{solution}
 \end{document}
