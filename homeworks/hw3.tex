@@ -1,0 +1,81 @@
+\documentclass{ctexart}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+\usepackage{mathrsfs} % for \VecFld
+
+\usepackage{color, framed}
+\definecolor{shadecolor}{RGB}{241, 241, 255}
+\newcounter{problemname}
+\newenvironment{problem}{\begin{shaded}\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\end{shaded}\par}
+\newenvironment{solution}{\par\noindent\textbf{解答. }}{\par}
+
+% \usepackage{mathrsfs}
+
+\usepackage{geometry}
+\geometry{a4paper,scale=0.8}
+
+\input{../command.tex}
+
+\title{第三次作业}
+\author{洪艺中 12335025}
+
+\begin{document}
+\maketitle
+\subsection{132页 习题4}
+\begin{problem}
+    设 $M$ 为光滑流形, $\nabla$ 为对称仿射联络. 设 $\{e_i\}$ 是局部基向量场, $\{\omega^i\}$ 和 $\{\omega^{i}_{j}\}$ 分别是对偶基和联络 $1$--形式, 证明:
+    \[
+        \Div{X}{\omega^{i}} = -\omega^{i}_{j}(X)\omega^{j}, \quad \forall X \in \VecFld(M).
+    \]
+\end{problem}
+\begin{solution}
+    取向量场 $Y \in \VecFld(M)$, 设 $Y = Y^{i}e_i$.
+    \begin{align*}
+        (\Div{X}\omega^{i})(Y) 
+        =& X(\omega^{i}(Y)) - \omega^{i}(\Div{X}{Y}) \\
+        =& X(Y^{i}) - \omega^{i}(X(Y^{j})e_j + Y^j\omega^{k}_{j}(X)e_k) \\
+        =& X(Y^{i}) - X(Y^{i}) - Y^{j}\omega^{i}_{j}(X) \\
+        =& -\omega^{i}_{j}(X)\omega^j(Y).
+    \end{align*}
+    因此 $\Div{X}{\omega^{i}} = -\omega^{i}_{j}(X)\omega^{j}$.
+\end{solution}
+
+\subsection{132页 习题5}
+\begin{problem}
+    设 $(M^n, g)$ 为 Riemann 流形, $\omega = \omega_{i_1\cdots i_m}\dif x^{i_1} \wedge \cdots \wedge \dif x^{i_m}$ 为 $m$--形式, 其中
+    \[
+        \begin{aligned}
+            \omega_{i_1 \cdots i_m} =& \sqrt{G}\varepsilon_{i_1 \cdots i_m}, \\
+            \varepsilon_{i_1 \cdots i_m} =&
+            \begin{cases}
+                0 & (i_1, \cdots, i_m) \text{中有相同时}, \\
+                1 & (i_1, \cdots, i_m) \text{为偶置换}, \\
+                -1 & (i_1, \cdots, i_m) \text{为奇置换}.
+            \end{cases}
+        \end{aligned}
+    \]
+    证明: $\omega_{i_1 \cdots i_m, k} = 0$, 即 $\omega$ 是平行的.
+\end{problem}
+\begin{solution}
+    如果按照题目, $\omega \equiv 0$, 所以此题应该是说明体积元关于 Riemann 联络是平行的.
+
+    由于体积 $\vol = \sqrt{G}\dif x^1 \wedge \cdots \dif x^m$ 是张量, 其协变导数也是张量. 任取 $\{v_1, \cdots, v_n\} \subset \VecFld(M)$, $v_i = V^{j}_{i}e_j$, 则
+    \[
+        \Div{e_k}\vol(v_1, \cdots, v_m) = \sum_{\sigma \in S^{m}}\prod_{i = 1}^{m}V^{\sigma(i)}_{i}\Div{e_k}\vol(e_{\sigma{1}}, \cdots, e_{\sigma{m}}).
+    \]
+    因此可以仅考虑 $\{v_i\}$ 都是基向量场(即 $\pdDif{}{x^{i}}$) 的情况.
+
+    此时
+    \[
+        \begin{aligned}
+            \Div{e_k}\vol(v_1, \cdots, v_m)
+            =& e_k(\vol(v_1, \cdots, v_m)) - \sum_{i = 1}^{m}\vol(v_1 \cdots, \Div{e_k}{e_i}, \cdots, v_m).
+        \end{aligned}
+    \]
+\end{solution}
+\end{document}
