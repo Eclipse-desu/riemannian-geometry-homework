@@ -64,18 +64,57 @@
 \begin{solution}
     如果按照题目, $\omega \equiv 0$, 所以此题应该是说明体积元关于 Riemann 联络是平行的.
 
-    由于体积 $\vol = \sqrt{G}\dif x^1 \wedge \cdots \dif x^m$ 是张量, 其协变导数也是张量. 任取 $\{v_1, \cdots, v_n\} \subset \VecFld(M)$, $v_i = V^{j}_{i}e_j$, 则
-    \[
-        \Div{e_k}\vol(v_1, \cdots, v_m) = \sum_{\sigma \in S^{m}}\prod_{i = 1}^{m}V^{\sigma(i)}_{i}\Div{e_k}\vol(e_{\sigma{1}}, \cdots, e_{\sigma{m}}).
-    \]
-    因此可以仅考虑 $\{v_i\}$ 都是基向量场(即 $\pdDif{}{x^{i}}$) 的情况.
-
-    此时
+    由于体积 $\vol = \sqrt{G}\dif x^1 \wedge \cdots \dif x^m$ 是张量, 其协变导数也是张量. 任取 $\{v_1, \cdots, v_n\} \subset \VecFld(M)$, $v_i = \alpha^{j}_{i}e_j$, 则
+    % \[
+    %     \Div{e_k}\vol(v_1, \cdots, v_m) = \sum_{\sigma \in S^{m}}\left(\prod_{i = 1}^{m}V^{\sigma(i)}_{i}\right)\Div{e_k}\vol(e_{\sigma{1}}, \cdots, e_{\sigma{m}}).
+    % \]
+    % 因此可以仅考虑 $\{v_i\}$ 都是基向量场(即 $\pdDif{}{x^{i}}$) 的情况.
+    % 此时
     \[
         \begin{aligned}
             \Div{e_k}\vol(v_1, \cdots, v_m)
-            =& e_k(\vol(v_1, \cdots, v_m)) - \sum_{i = 1}^{m}\vol(v_1 \cdots, \Div{e_k}{e_i}, \cdots, v_m).
+            =& e_k(\vol(v_1, \cdots, v_m)) - \sum_{i = 1}^{m}\vol(v_1, \cdots, \Div{e_k}{v_i}, \cdots, v_m) \\
+            =& e_k(\vol(v_1, \cdots, v_m)) - \sum_{i = 1}^{m}\vol(v_1, \cdots, e_k(\alpha^{l}_{i})e_l + \alpha^{j}_{i}\omega^{l}_{j}(e_k)e_l, \cdots, v_m).
         \end{aligned}
     \]
+
+    记矩阵 $A = (\alpha^{j}_{i})$, 以及记其伴随阵为 $A^{\star} = (A^{j}_{i})$, 满足 $\sum_{i}\alpha^{i}_{l}A^{i}_{j} = \delta_{jl}\det A$, $\sum_{i}\alpha^{j}_{i}A^{l}_{i} = \delta_{jl}\det A$. 则利用这些记号, 以及
+    \[
+        e_k(\det A) = \sum_{i = 1}^{m}\sum_{j = 1}^{m}e_k(\alpha^{j}_{i})A^{j}_{i},
+    \]
+    和
+    \[
+        \begin{aligned}
+        e_k(\sqrt{G}) =& \frac{e_k(G)}{2\sqrt{G}} = \sqrt{G}\sum_{i, j = 1}^{m}\frac{1}{2}(\Inner{\Div{e_k}e_i}{e_j} + \Inner{e_i}{\Div{e_k}e_j})g^{ij}\\
+        =& \sqrt{G}\sum_{i, j, l = 1}^{n}\omega^{l}_{i}(e_k)g_{jl}g^{ij} \\
+        =& \sqrt{G}\sum_{i = 1}^{n}\omega^{i}_{i}(e_k).
+        \end{aligned}
+    \]
+    可以得到
+    \[
+        \begin{aligned}
+            \Div{e_k}\vol(v_1, \cdots, v_m)
+            =& e_k(\vol(v_1, \cdots, v_m)) - \sum_{i = 1}^{m}\vol(v_1, \cdots, \left(e_k(\alpha^{l}_{i}) + \alpha^{j}_{i}\omega^{l}_{j}(e_k)\right)e_l, \cdots, v_m) \\
+            =& e_k(\sqrt{G}\det A) - \sqrt{G}\sum_{i = 1}^{m}\sum_{l = 1}^{m}\left(e_k(\alpha^{l}_{i}) + \alpha^{j}_{i}\omega^{l}_{j}(e_k)\right) \cdot A^{l}_{i} \\
+            =& e_k(\sqrt{G}\det A) - \sqrt{G}\sum_{i = 1}^{m}\sum_{l = 1}^{m}e_k(\alpha^{l}_{i})A^{l}_{i} - \sqrt{G}\sum_{l = 1}^{m}\omega^{l}_{j}(e_k)\left(\sum_{i = 1}^{m}\alpha^{j}_{i}\cdot A^{l}_{i}\right) \\
+            =& e_k(\sqrt{G}\det A) - \sqrt{G}e_k(\det A) - \sqrt{G}\sum_{j, l = 1}^{m}\omega^{l}_{j}(e_k) \delta_{jl} \det A \\
+            =& e_k(\sqrt{G}\det A) - \sqrt{G}e_k(\det A) - \sqrt{G}\sum_{j = 1}^{m}\omega^{j}_{j}(e_k) \det A \\
+            =& e_k(\sqrt{G}\det A) - \sqrt{G}e_k(\det A) - e_k(\sqrt{G}) \det A \\
+            =& 0.
+        \end{aligned}
+    \]
+    所以 $\Div{e_k}\vol = 0$, 即体积元关于 Riemann 联络是平行的. 得证.
+\end{solution}
+
+\subsection{132页 习题8}
+\begin{problem}
+    设 $(M^m, g)$ 为连通的 Riemann 流形, $X_{(1)}, \cdots, X_{(r)}\ (r \leqslant m)$ 均为平行向量场. 证明:
+    \begin{enumerate}[label = (\arabic* )]
+        \item 如果其在 $M$ 的某一点线性无关, 则其在 $M$ 的各点均线性无关;
+        \item 如果 $r = m$ 且其在某一点线性无关, 则 $(M, g)$ 的曲率张量为零向量.
+    \end{enumerate}
+\end{problem}
+\begin{solution}
+    
 \end{solution}
 \end{document}
