@@ -62,7 +62,7 @@
     证明: $\omega_{i_1 \cdots i_m, k} = 0$, 即 $\omega$ 是平行的.
 \end{problem}
 \begin{solution}
-    如果按照题目, $\omega \equiv 0$, 所以此题应该是说明体积元关于 Riemann 联络是平行的.
+    按照题目, $\omega$ 是体积元的常数倍数, 所以此题等价于是说明体积元关于 Riemann 联络是平行的.
 
     由于体积 $\vol = \sqrt{G}\dif x^1 \wedge \cdots \dif x^m$ 是张量, 其协变导数也是张量. 任取 $\{v_1, \cdots, v_n\} \subset \VecFld(M)$, $v_i = \alpha^{j}_{i}e_j$, 则
     % \[
@@ -80,14 +80,16 @@
 
     记矩阵 $A = (\alpha^{j}_{i})$, 以及记其伴随阵为 $A^{\star} = (A^{j}_{i})$, 满足 $\sum_{i}\alpha^{i}_{l}A^{i}_{j} = \delta_{jl}\det A$, $\sum_{i}\alpha^{j}_{i}A^{l}_{i} = \delta_{jl}\det A$. 则利用这些记号, 以及
     \[
-        e_k(\det A) = \sum_{i = 1}^{m}\sum_{j = 1}^{m}e_k(\alpha^{j}_{i})A^{j}_{i},
+        e_k(\det A) = \sum_{i, l = 1}^{m}e_k(\alpha^{l}_{i})A^{l}_{i},
     \]
     和
     \[
         \begin{aligned}
-        e_k(\sqrt{G}) =& \frac{e_k(G)}{2\sqrt{G}} = \sqrt{G}\sum_{i, j = 1}^{m}\frac{1}{2}(\Inner{\Div{e_k}e_i}{e_j} + \Inner{e_i}{\Div{e_k}e_j})g^{ij}\\
-        =& \sqrt{G}\sum_{i, j, l = 1}^{n}\omega^{l}_{i}(e_k)g_{jl}g^{ij} \\
-        =& \sqrt{G}\sum_{i = 1}^{n}\omega^{i}_{i}(e_k).
+        e_k(\sqrt{G}) 
+        =& \frac{e_k(G)}{2\sqrt{G}} \\
+        =& \sqrt{G}\sum_{i, j = 1}^{m}\frac{1}{2}(\Inner{\Div{e_k}e_i}{e_j} + \Inner{e_i}{\Div{e_k}e_j})g^{ij}\\
+        =& \sqrt{G}\sum_{i, j, l = 1}^{m}\omega^{l}_{i}(e_k)g_{jl}g^{ij} \\
+        =& \sqrt{G}\sum_{i = 1}^{m}\omega^{i}_{i}(e_k).
         \end{aligned}
     \]
     可以得到
@@ -95,8 +97,8 @@
         \begin{aligned}
             \Div{e_k}\vol(v_1, \cdots, v_m)
             =& e_k(\vol(v_1, \cdots, v_m)) - \sum_{i = 1}^{m}\vol(v_1, \cdots, \left(e_k(\alpha^{l}_{i}) + \alpha^{j}_{i}\omega^{l}_{j}(e_k)\right)e_l, \cdots, v_m) \\
-            =& e_k(\sqrt{G}\det A) - \sqrt{G}\sum_{i = 1}^{m}\sum_{l = 1}^{m}\left(e_k(\alpha^{l}_{i}) + \alpha^{j}_{i}\omega^{l}_{j}(e_k)\right) \cdot A^{l}_{i} \\
-            =& e_k(\sqrt{G}\det A) - \sqrt{G}\sum_{i = 1}^{m}\sum_{l = 1}^{m}e_k(\alpha^{l}_{i})A^{l}_{i} - \sqrt{G}\sum_{l = 1}^{m}\omega^{l}_{j}(e_k)\left(\sum_{i = 1}^{m}\alpha^{j}_{i}\cdot A^{l}_{i}\right) \\
+            =& e_k(\sqrt{G}\det A) - \sqrt{G}\sum_{i, l = 1}^{m}\left(e_k(\alpha^{l}_{i}) + \alpha^{j}_{i}\omega^{l}_{j}(e_k)\right) \cdot A^{l}_{i} \\
+            =& e_k(\sqrt{G}\det A) - \sqrt{G}\sum_{i, l = 1}^{m}e_k(\alpha^{l}_{i})A^{l}_{i} - \sqrt{G}\sum_{l = 1}^{m}\omega^{l}_{j}(e_k)\left(\sum_{i = 1}^{m}\alpha^{j}_{i}\cdot A^{l}_{i}\right) \\
             =& e_k(\sqrt{G}\det A) - \sqrt{G}e_k(\det A) - \sqrt{G}\sum_{j, l = 1}^{m}\omega^{l}_{j}(e_k) \delta_{jl} \det A \\
             =& e_k(\sqrt{G}\det A) - \sqrt{G}e_k(\det A) - \sqrt{G}\sum_{j = 1}^{m}\omega^{j}_{j}(e_k) \det A \\
             =& e_k(\sqrt{G}\det A) - \sqrt{G}e_k(\det A) - e_k(\sqrt{G}) \det A \\
@@ -109,12 +111,61 @@
 \subsection{132页 习题8}
 \begin{problem}
     设 $(M^m, g)$ 为连通的 Riemann 流形, $X_{(1)}, \cdots, X_{(r)}\ (r \leqslant m)$ 均为平行向量场. 证明:
-    \begin{enumerate}[label = (\arabic* )]
-        \item 如果其在 $M$ 的某一点线性无关, 则其在 $M$ 的各点均线性无关;
-        \item 如果 $r = m$ 且其在某一点线性无关, 则 $(M, g)$ 的曲率张量为零向量.
+    \begin{enumerate}[label = (\arabic*)]
+        \item 如果这组向量在 $M$ 的某一点线性无关, 则其在 $M$ 的各点均线性无关;
+        \item 如果 $r = m$ 且这组向量在某一点线性无关, 则 $(M, g)$ 的曲率张量为零张量.
     \end{enumerate}
 \end{problem}
 \begin{solution}
-    
+    \begin{enumerate}[label=(\arabic*)]
+        \item\label{enum::1} $X_{(i)}$ 均是平行向量场, 说明任取向量场 $v$,
+        \[
+            \Div{v}{X_{(i)}} \equiv 0.
+        \]
+        那么, 反设 $\{X_{(i)}\}$ 在某点 $p$ 处线性相关, 即存在一组不全为零的系数 $c^i$,
+        \[
+            c^i X_{(i)}(p) = 0,
+        \]
+        则任取 $v \in \VecFld(M)$,
+        \[
+            \Div{v}{c^iX_{(i)}} = 0.
+        \]
+        因此在局部基表示下, $c^iX_{(i)}$ 是常向量, 而它在 $p$ 点是零向量, 所以 $c^iX_{(i)}$ 在 $M$ 上均为 $0$. 这说明 $\{X_{(i)}\}$ 在所有点线性相关. 这与条件矛盾. 结论得证.
+        \item 由 \ref{enum::1} 知这组向量在 $M$ 上都线性无关, 所以 $X_{(i)}$ 形成了 $M$ 上的一组标架.
+        则任取向量场 $v, w \in \VecFld(M)$, 对所有 $X_{(i)}$ 都有 $\Rm(v, w)X_{(i)} = 0$. 这相当于是说曲率张量关于某一个参数恒为 $0$, 所以曲率张量为 $0$.
+    \end{enumerate}
+\end{solution}
+
+\subsection{132页 习题10}
+\begin{problem}
+    设 $\nabla$ 为流形 $M$ 上的对称仿射联络, $\varphi \in \mathscr{C}(T^{r}_{s}(M))$, $\psi \in \mathscr{C}(T^{p}_{q}(M))$, 则对于任意向量场 $X$, 
+    \[
+        \Div{X}{(\varphi \otimes \psi)} = \Div{X}\varphi \otimes \psi + \varphi \otimes \Div{X}\psi,
+    \]
+    特别, 若 $\theta \in A^{s}(M)$, $\omega \in A^{r}(M)$, 则有
+    \[
+        \Div{X}(\theta \wedge \omega) = \Div{X}\theta \wedge \omega + \theta \wedge \Div{X}\omega.
+    \]
+\end{problem}
+\begin{solution}
+    取向量场 $u_i, v_j$, $1 \leqslant i \leqslant s, 1 \leqslant j \leqslant q$. $1$--形式 $\omega^{k}, \theta^{l}$, $1 \leqslant k \leqslant r, 1 \leqslant l \leqslant p$. 为了缩减篇幅, 记 $\mathbf{U}$ 为参数组 $u_1, \cdots, u_s$, 类似地采用符号 $\mathbf{V}, \Omega, \Theta$, 
+    \[
+        \begin{aligned}
+             &(\Div{X}{(\varphi \otimes \psi)})(\mathbf{U}, \Omega, \mathbf{V}, \Theta) \\
+            =& X(\varphi(\mathbf{U}, \Omega)\psi(\mathbf{V}, \Theta)) - \sum_{i}\varphi(u_1, \cdots, \Div{X}u_i, \cdots, u_s, \Omega)\psi(\mathbf{V}, \Theta) - \sum_{k}\varphi(\mathbf{U}, \omega^{1}, \cdots, \Div{X}\omega^k, \cdots, \omega^r)\psi(\mathbf{V}, \Theta) \\
+            -& \sum_{j}\varphi(\mathbf{U}, \Omega)\psi(\v_1, \cdots, \Div{X}v_j, \cdots, v_q, \Theta) - \sum_{l}\varphi(\mathbf{U}, \Omega)\psi(\mathbf{V}, \theta^1, \cdots, \Div{X}\theta^l, \cdots, \theta^p) \\
+            =& (\Div{X}\varphi)(\mathbf{U}, \Omega)\psi(\mathbf{V}, \Theta) + \varphi(\mathbf{U}, \Omega)(\Div{X}\psi)(\mathbf{V}, \Theta) \\
+            =& (\Div{X}\varphi \otimes \psi + \varphi \otimes \Div{X}\psi)(\mathbf{U}, \Omega, \mathbf{V}, \Theta).
+        \end{aligned}
+    \]
+    即
+    \[
+        \Div{X}{(\varphi \otimes \psi)} = \Div{X}\varphi \otimes \psi + \varphi \otimes \Div{X}\psi.
+    \]
+
+    对于外积的情况, 由于 $\wedge$ 相当于是对张量(关于置换)做反对称化, 而对反对称化中求和的每项都是张量积(只不过参数的顺序改变了). 所以由上面的结论, 在每一项上 $\Div{X}$ 都满足导数的运算法则, 所以求和后也满足, 即有
+    \[
+        \Div{X}(\theta \wedge \omega) = \Div{X}\theta \wedge \omega + \theta \wedge \Div{X}\omega.
+    \]
 \end{solution}
 \end{document}
