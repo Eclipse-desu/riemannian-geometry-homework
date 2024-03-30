@@ -1,0 +1,141 @@
+\documentclass{ctexart}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+\usepackage{mathrsfs} % for \VecFld
+
+\usepackage{color, framed}
+\definecolor{shadecolor}{RGB}{241, 241, 255}
+\newcounter{problemname}
+\newenvironment{problem}{\begin{shaded}\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\end{shaded}\par}
+\newenvironment{solution}{\par\noindent\textbf{解答. }}{\par}
+
+% \usepackage{mathrsfs}
+
+\usepackage{geometry}
+\geometry{a4paper,scale=0.8}
+
+\input{../command.tex}
+
+\title{第四次作业}
+\author{洪艺中 12335025}
+\begin{document}
+\maketitle
+\subsection{133页 习题11}
+\begin{problem}
+    设 $(M_1, g_1)$, $(M_2, g_2)$ 均为 Riemann 流形. $\nabla^{(1)}$, $\nabla^{(2)}$ 分别为它们的 Riemann 联络. $F \colon M_1 \rightarrow M_2$ 为等距微分同胚, 即 $g_1 = F^{\ast}g_2$. 证明 $F_{\ast}(\nabla^{(1)}_{X}{Y}) = \nabla^{(2)}_{F_{\ast}X}{F_{\ast}Y}$, $\forall X, Y \in \VecFld(M_1)$.
+\end{problem}
+\begin{solution}
+    因为 $F$ 是微分同胚, 所以 $M_1$ 和 $M_2$ 是同维数流形. 因此 $F^{\ast}_p$ 是切空间 $T_pM$ 到 $T_{F(p)}M$ 的同构. 故要证明 $F_{\ast}(\nabla^{(1)}_{X}{Y}) = \nabla^{(2)}_{F_{\ast}X}{F_{\ast}Y}$, $\forall X, Y \in \VecFld(M_1)$, 只需要证明任取 $Z \in \VecFld(M_1)$,
+    \[
+        g_1((\nabla^{(1)}_{X}{Y}), Z) = g_2(F_{\ast}(\nabla^{(1)}_{X}{Y}), F_{\ast}Z) = g_2(\nabla^{(2)}_{F_{\ast}X}{F_{\ast}Y}, \forall X, Y \in \VecFld(M_1), F_{\ast}Z). \tag{$\ast$}\label{eq::133-11-eq1}
+    \]
+    而利用 Riemann 联络的唯一性构造, 联络 $\nabla$ 和度量 $\Inner{\cdot}{\cdot}$ 满足
+    \[
+        2\Inner{\Div{X}{Y}}{Z} = X\Inner{Y}{Z} + Y\Inner{Z}{X} - Z\Inner{X}{Y} + \Inner{[X, Y]}{Z} - \Inner{[Y, Z]}{X} + \Inner{[Z, X]}{Y},
+    \]
+    要证明 (\ref{eq::133-11-eq1}) 式, 只需要证明: 任取 $X, Y, Z \in \VecFld(M_1)$,
+    \[
+        X(g_1(Y, Z)) = (F_{\ast}X)(g_2(F_{\ast}Y, F_{\ast}Z))
+    \]
+    和
+    \[
+        g_1([X, Y], Z) = g_2([F_{\ast}X, F_{\ast}Y], F_{\ast}Z).
+    \]
+    利用 $g_1 = F^{\ast}g_2$ 和 Lie 括号与切映射交换, 计算可得:
+    \[
+        (F_{\ast}X)(g_2(F_{\ast}Y, F_{\ast}Z))
+        = X\left(g_2(F_{\ast}Y, F_{\ast}Z) \circ F\right) 
+        = X((F^{\ast}g_2)(Y, Z)) 
+        = X(g_1(Y, Z)),
+    \]
+    以及
+    \[
+        g_2([F_{\ast}X, F_{\ast}Y], F_{\ast}Z)
+        = g_2(F_{\ast}[X, Y], F_{\ast}Z) 
+        = (F^{\ast}g_2)([X, Y], Z)
+        = g_1([X, Y], Z).
+    \]
+    所以题目得证.
+\end{solution}
+
+\subsection{113页 习题12}
+\begin{problem}
+    设 $(M^m, g)$ 为连通 Riemann 流形, $\nabla$ 为 Riemann 联络, $A$ 为二阶对称张量且 $\nabla A = 0$. 定义线性映射 $A^{\ast} \colon T_{p}M \rightarrow T_p{M}$, $\forall p \in M$ 如下: 对任意的 $X, Y \in T_p(M)$
+    \[
+        \Inner{A^{\ast}(X)}{Y}_p := A(X, Y)(p),
+    \]
+    设 $\rho_i$ 为 $A^{\ast}$ 的特征值, $\tilde{e_i}$ 为其相应的单位特征向量, 证明:
+    \begin{enumerate}
+        \item 所有特征值在 $M$ 上均为常数;
+        \item 若 $\rho_h \not= \rho_k$, 则 $\Inner{e_h}{e_k} = 0$. 设 $\{\tilde{e}_i\}$ 为 $A^{\star}$ 的特征向量标架, 使得 $\Inner{\tilde{e}_i}{\tilde{e}_j} = \delta_{ij}$, 则 $\rho_h \not= \rho_k$ 时, 有
+        \[
+            \Inner{\Div{\tilde{e}_i}\tilde{e}_h}{\tilde{e}_k} = 0, \quad h, i, k = 1, \cdots, m;
+        \]
+        \item 设 $\rho_i$ 为 $r$ 重根, 对应特征向量为 $\tilde{e}_1, \cdots, \tilde{e}_r$, 则 $\tilde{e}_{r + 1}, \cdots, \tilde{e}_{m}$ 生成的分布 $\mathscr{D}$ 是完全可积的.
+    \end{enumerate}
+\end{problem}
+\begin{solution}
+    \begin{enumerate}
+        \item 取 $X, Y \in \VecFld(M)$, 则根据 $\nabla A = 0$,
+        \[
+            X(A(\tilde{e}_i, Y))
+            = A\left(\Div{X}\tilde{e}_i, Y\right) + A\left(\tilde{e}_i, \Div{X}{Y}\right)
+        \]
+        利用 $g$ 也关于联络平行,
+        \[
+            X(A(\tilde{e}_i, Y)) = X(\rho_i\Inner{\tilde{e}_i}{Y})
+            = X(\rho_i)\Inner{\tilde{e}_i}{Y} + \rho_i\Inner{\Div{X}\tilde{e}_i}{Y} + \rho_i\Inner{\tilde{e}_i}{\Div{X}{Y}}.
+        \]
+        所以
+        \[
+            A\left(\Div{X}\tilde{e}_i, Y\right) = X(\rho_i)\Inner{\tilde{e}_i}{Y} + \rho_i\Inner{\Div{X}\tilde{e}_i}{Y},
+        \]
+        因为 $\tilde{e}_i$ 是单位向量, 所以 $\Inner{\Div{X}\tilde{e}_i}{\tilde{e}_i} = 0$, 因此在上式代入 $Y = \tilde{e}_i$, 得到
+        \[
+            \begin{aligned}
+            A\left(\Div{X}\tilde{e}_i, \tilde{e}_i\right) 
+            =& X(\rho_i)\Inner{\tilde{e}_i}{\tilde{e}_i} + \rho_i\Inner{\Div{X}\tilde{e}_i}{\tilde{e}_i} \\
+            =& X(\rho_i),
+            \end{aligned}
+        \]
+        而左边又有 $X(\rho_i) = X(A(\tilde{e}_i, \tilde{e}_i)) = 2A(\Div{X}\tilde{e}_i, \tilde{e}_i)$, 于是
+        \[
+            \frac{1}{2}X(\rho_i) = A\left(\Div{X}\tilde{e}_i, \tilde{e}_i\right) = X(\rho_i).
+        \]
+        所以 $X(\rho_i) \equiv 0$. 由 $X$ 任意性, $\rho_i$ 在 $M$ 上均为常数.
+        
+        \item 正交性: $\rho_h\Inner{\tilde{e}_h}{\tilde{e}_k} = A(\tilde{e}_h, \tilde{e}_k) = \rho_k\Inner{\tilde{e}_h}{\tilde{e}_k}$, 因为 $\rho_h \not= \rho_k$, 所以 $\Inner{\tilde{e}_h}{\tilde{e}_k} = 0$. 
+        
+        $\Inner{\Div{\tilde{e}_i}\tilde{e}_h}{\tilde{e}_k} = 0$ 利用内积为 $0$ 和 $\nabla A = 0$, 不妨设 $\rho_h \not= 0$:
+        \[
+            \begin{aligned}
+            \Inner{\Div{\tilde{e}_i}\tilde{e}_h}{\tilde{e}_k} 
+            =& -\Inner{\tilde{e}_h}{\Div{\tilde{e}_i}\tilde{e}_k}\\
+            =& -\frac{1}{\rho_h}A(\tilde{e}_h, \Div{\tilde{e}_i}\tilde{e}_k)\\
+            =& -\frac{1}{\rho_h}\tilde{e}_i(A(\tilde{e}_h, \tilde{e}_k)) + \frac{1}{\rho_h}A(\Div{\tilde{e}_i}\tilde{e}_h, \tilde{e}_k)\\
+            =& \frac{1}{\rho_h}A(\Div{\tilde{e}_i}\tilde{e}_h, \tilde{e}_k) \\
+            =& \frac{\rho_k}{\rho_h}\Inner{\Div{\tilde{e}_i}\tilde{e}_h}{\tilde{e}_k},
+            \end{aligned}
+        \]
+        由于系数不为 $1$, 所以 $\Inner{\Div{\tilde{e}_i}\tilde{e}_h}{\tilde{e}_k} = 0$.
+        \item 我们依然取 $\{\tilde{e}_i\}$ 为单位正交的, 因为这不影响分布的生成. 利用分布 Frobenius 定理, 分布完全可积当且仅当其对合, 即 $s, t > r$ 时 $[\tilde{e}_s, \tilde{e}_t]$ 可由 $\tilde{e}_{r + 1}, \cdots, \tilde{e}_{m}$ 表示. 
+        
+        设 $[\tilde{e}_s, \tilde{e}_t] = a^{p}\tilde{e}_{p}$. 则与 $\tilde{e}_1, \cdots, \tilde{e}_r$ 内积得
+        \[
+            \Inner{[\tilde{e}_s, \tilde{e}_t]}{\tilde{e}_i} = \sum_{p = 1}^{r}a^p\delta_{ip} = a^i.
+        \]
+        而根据第二问的结论
+        \[
+            \Inner{[\tilde{e}_s, \tilde{e}_t]}{\tilde{e}_i} = \Inner{\Div{\tilde{e}_s}\tilde{e}_t}{\tilde{e}_i} - \Inner{\Div{\tilde{e}_t}\tilde{e}_s}{\tilde{e}_i} = 0.
+        \]
+        所以 $a^i = 0$, 即分布是对合的. 因此 $\mathscr{D}$ 是完全可积的.
+    \end{enumerate}
+\end{solution}
+
+
+\end{document}
