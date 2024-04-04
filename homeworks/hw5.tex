@@ -1,0 +1,43 @@
+\documentclass{ctexart}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+\usepackage{mathrsfs} % for \VecFld
+
+\usepackage{color, framed}
+\definecolor{shadecolor}{RGB}{241, 241, 255}
+\newcounter{problemname}
+\newenvironment{problem}{\begin{shaded}\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\end{shaded}\par}
+\newenvironment{solution}{\par\noindent\textbf{解答. }}{\par}
+
+\newcommand{\cred}{\textcolor{red}}
+\newcommand{\cblue}{\textcolor{blue}}
+\newcommand{\ccyan}{\textcolor{cyan}}
+\newcommand{\cmag}{\textcolor{magenta}}
+
+% \usepackage{mathrsfs}
+
+\usepackage{geometry}
+\geometry{a4paper,scale=0.8}
+
+\input{../command.tex}
+
+\title{第五次作业}
+\author{洪艺中 12335025}
+\begin{document}
+\maketitle
+\subsection{148页 习题4}
+\newcommand{\K}{\mathrm{K}}
+\begin{problem}
+    证明:
+    \[
+        \begin{aligned}
+            \R(X, Y, Z, W) = K()
+        \end{aligned}
+    \]
+\end{problem}
+\end{document}
