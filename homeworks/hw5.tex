@@ -36,8 +36,152 @@
     证明:
     \[
         \begin{aligned}
-            \R(X, Y, Z, W) = K()
+            \R(X, Y, Z, W) =& \dfrac{1}{6}[\K(X + Z, Y + W) - \K(Y + Z, X + W) - \\
+            \K(X, Y + W) -& \K(Z, Y + W) - \K(X + Z, Y) - \K(X + Z, W) + \\
+            \K(Y, X + W) +& \K(Z, X + W) + \K(Y + Z, W) + \K(X, W) + \\
+            \K(Y + Z, W) +& \K(Z, Y) - \K(Y, W) - \K(Z, X)],
         \end{aligned}
     \]
+    其中, $\K(X, Y) := \R(X, Y, X, Y)$.
 \end{problem}
+\begin{solution}
+    将 $\K(X + Z, Y + W)$ 展开,
+    \[
+        \begin{aligned}
+             & \K(X + Z, Y + W) \\
+            =& \R(X + Z, Y + W, X + Z, Y + W) \\
+            =& \R(X, Y, X, Y) + \R(X, Y, X, W) + \R(X, Y, Z, Y) + \R(X, Y, Z, W) \\
+            +& \R(X, W, X, Y) + \R(X, W, X, W) + \R(X, W, Z, Y) + \R(X, W, Z, W) \\
+            +& \R(Z, Y, X, Y) + \R(Z, Y, X, W) + \R(Z, Y, Z, Y) + \R(Z, Y, Z, W) \\
+            +& \R(Z, W, X, Y) + \R(Z, W, X, W) + \R(Z, W, Z, Y) + \R(Z, W, Z, W) \\
+            =& \K(X, Y) + \K(X, W) + \K(Z, Y) + \K(Z, W) + 2\R(X, Y, Z, W) + 2\R(X, W, Z, Y) \\
+            +& 2\R(X, Y, X, W) + 2\R(X, Y, Z, Y) +2\R(X, W, Z, W) + 2\R(Z, Y, Z, W), 
+        \end{aligned}
+    \]
+    利用
+    \[
+        2\R(X, Y, X, W) = \K(X, Y + W) - \K(X, Y) - \K(X, W),
+    \]
+    得
+    \[
+        \begin{aligned}
+             & \K(X + Z, Y + W) \\
+            =& \K(X, Y) + \K(X, W) + \K(Z, Y) + \K(Z, W) \\
+            +& \K(X, Y + W) - \K(X, Y) - \K(X, W) + \K(X + Z, Y) - \K(X, Y) - \K(Z, Y) \\
+            +& \K(X + Z, W) - \K(X, W) - \K(Z, W) + \K(Z, Y + W) - \K(Z, Y) - \K(Z, W) \\
+            +& 2\R(X, Y, Z, W) + 2\R(X, W, Z, Y) \\
+            =& \K(X, Y + W) + \K(X + Z, Y) + \K(X + Z, W) + \K(Z, Y + W) \\
+            -& \K(X, Y) - \K(X, W) - \K(Z, Y) - \K(Z, W) + 2\R(X, Y, Z, W) + 2\R(X, W, Z, Y)
+       \end{aligned}
+    \]
+    借助此式
+    \[
+        \begin{aligned}
+             & \K(X + W, Z + Y) \\
+            =& \K(X, Z + Y) + \K(X + W, Z) + \K(X + W, Y) + \K(W, Z + Y) \\
+            -& \K(X, Z) - \K(X, Y) - \K(W, Z) - \K(W, Y) + 2\R(X, Z, W, Y) + 2\R(X, Y, W, Z),
+        \end{aligned}
+    \]
+    做差, 得
+    \[
+        \begin{aligned}
+             & \K(X + Z, Y + W) - \K(X + W, Z + Y) \\
+            =& \K(X, Y + W) + \K(X + Z, Y) + \K(X + Z, W) + \K(Z, Y + W) \\
+            -& \K(X, Z + Y) + \K(X + W, Z) + \K(X + W, Y) + \K(W, Z + Y) \\
+            -& \K(X, W) - \K(Z, Y) + \K(X, Z) + \K(W, Y) \\
+            +& 4\R(X, Y, Z, W) + 2\R(X, W, Z, Y) - 2\R(X, Z, W, Y),
+        \end{aligned}
+    \]
+    利用第一 Bianchi 恒等式,
+    \[
+        \R(X, W, Z, Y) - \R(X, Z, W, Y) = -\R(X, W, Y, Z) - \R(X, Z, W, Y)  = \R(X, Y, Z, W).
+    \]
+    所以
+    \[
+        4\R(X, Y, Z, W) + 2\R(X, W, Z, Y) - 2\R(X, Z, W, Y) = 6\R(X, Y, Z, W),
+    \]
+    代入整理, 得
+    \[
+        \begin{aligned}
+             & \R(X, Y, Z, W) \\
+            =& \dfrac{1}{6}[\K(X + Z, Y + W) - \K(X + W, Z + Y) \\
+            -& \K(X, Y + W) - \K(X + Z, Y) - \K(X + Z, W) - \K(Z, Y + W) \\
+            +& \K(X, Z + Y) + \K(X + W, Z) + \K(X + W, Y) + \K(W, Z + Y) \\
+            +& \K(X, W) + \K(Z, Y) - \K(X, Z) - \K(W, Y)], \\
+       \end{aligned}
+    \]
+    得证.
+\end{solution}
+
+\subsection{148页 习题5}
+\begin{problem}
+    设 Riemann 流形 $(M^m, g)$ 的 Riemann 曲率张量 $R$ 满足下式
+    \[
+        \R(X, Y, Z, W) = \dfrac{1}{m - 1}\left\{\Ric{Y, Z}g(X, W) - \Ric(Y, W)g(X, Z)\right\},
+    \]
+    且 $m \geqslant 3$, 则 $(M^m, g)$ 为常曲率流形.
+\end{problem}
+\begin{solution}
+    考虑 $p$ 点互相正交的单位向量 $X, Y \in T_pM$ 确定的截面 $\pi_{X, Y}$ 的截面曲率
+    \[
+        K(\pi_{X, Y}) = \R(X, Y, X, Y) = -\dfrac{1}{m - 1}\Ric(Y, Y),
+    \]
+    同时还有
+    \[
+        K(\pi_{X, Y}) = \R(Y, X, Y, X) = -\dfrac{1}{m - 1}\Ric(X, X),
+    \]
+    所以 $\Ric(X, X) = \Ric(Y, Y)$. 任取截面上的另一个单位向量 $Z \in \pi_{X, Y}$ 并取与其正交的 $W \in \pi_{X, Y}$, 由于截面曲率和取的向量无关, 所以 $K(\pi_{X, Y}) = -\dfrac{1}{m - 1}\Ric(Z, Z) = -\dfrac{1}{m - 1}\Ric(W, W)$. 因此在 $T_pM$ 上, 只要两个单位向量 $X, Y$ 是共面的, 那么 $\Ric(X, X) = \Ric(Y, Y)$. 而两个向量必然共面, 所以 $M$ 在 $p$ 为 Ricci 迷向的, 进而 $p$ 还为迷向点, 所以 $M$ 为迷向流形. 由 Schur 定理, 不低于三维的迷向流形是常曲率流形. 因此 $(M^m, g)$ 为常曲率流形.
+\end{solution}
+
+\subsection{148页 习题6}
+\begin{problem}
+    设 $(M^3, g)$ 是三维 Riemann 流形. 在任一点 $p \in M^3$, 取坐标系 $\{x^i\}$ 使得在 $p$ 点有 $g_{ij} = \Inner{\pdDif{}{x^i}}{\pdDif{}{x^j}} = 0, i \not= j$. 证明: 对互不相同的 $i, j, k$, 在 $p$ 点成立
+    \begin{multline*}
+        \Ric_{ij} = \dfrac{1}{g_{kk}}\R_{ikjk},
+        \Ric_{ii} = \dfrac{1}{g_{jj}}\R_{ijij} + \dfrac{1}{g_{kk}}\R_{ikjk},
+        \R_{ijij} - g_{ii}\Ric_{jj} - g_{jj}\Ric_{ii} + \dfrac{1}{2}\rho g_{ii}g_{jj} = 0.
+    \end{multline*}
+    其中 $\rho$ 是 $M^3$ 的数量曲率, 即 $\rho = g^{ij}\Ric_{ij}$.
+\end{problem}
+\begin{solution}
+    $g^{ij} = 0, i \not= j$, 所以 $g^{ii} = \dfrac{1}{g_{ii}}$.
+
+    对第一式, 
+    \[
+        \Ric_{ij} = \sum_{s, t}g^{st}\R_{isjt} = \sum_{l}g^{ll}\R_{iljl} = \dfrac{1}{g_{kk}}\R_{ikjk}.
+    \]
+    最后一个等号去掉求和, 是因为 $\R_{iljl}$ 只有在 $l \not= i$ 且 $l \not= j$ 时才非零, 而 $M$ 是三维的, 所以 $l$ 只能取 $k$.
+
+    对于 $\Ric_{ii}$ 同样有 $\Ric_{ii} = \sum_{l}g^{ll}\R_{ilil} = \dfrac{1}{jj}\R_{ijij} + \dfrac{1}{k}\R_{ikik}$.
+
+    最后一个式子, 左边为
+    \[
+        \begin{aligned}
+             & \R_{ijij} - g_{ii}\Ric_{jj} - g_{jj}\Ric_{ii} + \dfrac{1}{2}\rho g_{ii}g_{jj} \\
+            =& \R_{ijij} - g_{ii}\Ric_{jj} - g_{jj}\Ric_{ii} + \dfrac{1}{2}g_{ii}g_{jj}\sum_{l}\dfrac{\Ric_{ll}}{g_{ll}} \\
+            =& \R_{ijij} - g_{ii}\Ric_{jj} - g_{jj}\Ric_{ii} + \dfrac{1}{2}g_{jj}\Ric_{ii} + \dfrac{1}{2}g_{ii}\Ric_{jj} + \dfrac{1}{2}g_{ii}g_{jj}\dfrac{\Ric_{kk}}{g_{kk}} \\
+            =& \R_{ijij} - \dfrac{1}{2}g_{ii}\Ric_{jj} - \dfrac{1}{2}g_{jj}\Ric_{ii} + \dfrac{1}{2}g_{ii}g_{jj}\dfrac{\Ric_{kk}}{g_{kk}} \\
+            =& \cred{\R_{ijij}} - \cred{\dfrac{1}{2}\dfrac{g_{ii}}{g_{ii}}\R_{ijij}} - \ccyan{\dfrac{1}{2}\dfrac{g_{ii}}{g_{kk}}\R_{jkjk}} - \cred{\dfrac{1}{2}\dfrac{g_{jj}}{g_{jj}}\R_{ijij}} - \cmag{\dfrac{1}{2}\dfrac{g_{jj}}{g_{kk}}\R_{ikik}} + \cmag{\dfrac{1}{2}\dfrac{g_{ii}g_{jj}}{g_{ii}g_{kk}}\R_{ikik}} + \ccyan{\dfrac{1}{2}\dfrac{g_{ii}g_{jj}}{g_{jj}g_{kk}}\R_{jkjk}} \\
+            =& 0
+        \end{aligned}
+    \]
+\end{solution}
+
+\subsection{148页 习题8}
+\begin{problem}
+    设 $M \subset \mathbb{R}^3$ 为浸入曲面, 且具有由 $\mathbb{R}^3$ 的欧氏度量诱导的 Riemann 度量, 证明 $M$ 的截面曲率即为 Gauss 曲率.
+\end{problem}
+\begin{solution}
+    
+\end{solution}
+
+\subsection{148页 习题9}
+\begin{problem}
+    计算球面 $S^m(r) := \left\{ x \in \mathbb{R}^{m + 1} | \sum_{i}(x^i)^2 = r^2 \right\}$ 的截面曲率, Ricci 曲率与数量曲率. $S^m(r)$ 上的 Riemann 度量是由 $\mathbb{R}^{m + 1}$ 的欧氏度量所诱导的.
+\end{problem}
+\begin{solution}
+    在某点 $p$ 处, 两个切向量张成的截面是一个切平面 $\pi_p$. $\pi_p$ 上的截面曲率即是二维曲面 $\exp_p(\pi_p)$ 的 Gauss 曲率, 而 $\exp_p(\pi_p)$ 是半径为 $r$ 的球面. 所以 $K(\pi_p) = \dfrac{1}{r^2}$.
+
+    故截面曲率是 $\dfrac{1}{r^2}$, Ricci 曲率是 $\dfrac{m - 1}{r^2}$, 数量曲率是 $\dfrac{m(m - 1)}{r^2}$.
+\end{solution}
 \end{document}
