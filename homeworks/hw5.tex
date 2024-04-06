@@ -82,24 +82,27 @@
             -& \K(X, Z) - \K(X, Y) - \K(W, Z) - \K(W, Y) + 2\R(X, Z, W, Y) + 2\R(X, Y, W, Z),
         \end{aligned}
     \]
-    做差, 得
+    作差, 得
     \[
         \begin{aligned}
              & \K(X + Z, Y + W) - \K(X + W, Z + Y) \\
             =& \K(X, Y + W) + \K(X + Z, Y) + \K(X + Z, W) + \K(Z, Y + W) \\
             -& \K(X, Z + Y) + \K(X + W, Z) + \K(X + W, Y) + \K(W, Z + Y) \\
             -& \K(X, W) - \K(Z, Y) + \K(X, Z) + \K(W, Y) \\
-            +& 4\R(X, Y, Z, W) + 2\R(X, W, Z, Y) - 2\R(X, Z, W, Y),
+            +& 4\R(X, Y, Z, W) + 2\R(X, W, Z, Y) - 2\R(X, Z, W, Y).
         \end{aligned}
     \]
+    
     利用第一 Bianchi 恒等式,
     \[
         \R(X, W, Z, Y) - \R(X, Z, W, Y) = -\R(X, W, Y, Z) - \R(X, Z, W, Y)  = \R(X, Y, Z, W).
     \]
+
     所以
     \[
-        4\R(X, Y, Z, W) + 2\R(X, W, Z, Y) - 2\R(X, Z, W, Y) = 6\R(X, Y, Z, W),
+        4\R(X, Y, Z, W) + 2\R(X, W, Z, Y) - 2\R(X, Z, W, Y) = 6\R(X, Y, Z, W).
     \]
+
     代入整理, 得
     \[
         \begin{aligned}
@@ -171,8 +174,61 @@
 \begin{problem}
     设 $M \subset \mathbb{R}^3$ 为浸入曲面, 且具有由 $\mathbb{R}^3$ 的欧氏度量诱导的 Riemann 度量, 证明 $M$ 的截面曲率即为 Gauss 曲率.
 \end{problem}
+\newcommand{\rvec}{\mathbf{r}}
 \begin{solution}
+    设 $M = \rvec(u, v)$, $u$, $v$ 是正则参数. 第一基本形式
+    \[
+        \dif s^2 = E(\dif u)^2 + 2F(\dif u\dif v) + G(\dif v)^2,
+    \]
+    其中 $E = |\rvec_u|^2$, $F = \Inner{\rvec_u}{\rvec_v}$, $G = |\rvec_v|^2$.
     
+    记单位法向为 $\nu$, 第二基本形式
+    \[
+        -\dif \nu \cdot \dif s = L(\dif u)^2 + 2M(\dif u\dif v) + N(\dif v)^2,
+    \]
+    其中 $L = \Inner{\rvec_{uu}}{\nu}$, $M = \Inner{\rvec_{uv}}{\nu} = \Inner{\rvec_{vu}}{\nu}$, $N = \Inner{\rvec_{vv}}{\nu}$.
+
+    则 Gauss 曲率为
+    \[
+        \kappa = \dfrac{LN - M^2}{EG - F^2}.
+    \]
+
+    接下来计算截面曲率. 记 $\mathbb{R}^3$ 上的欧氏度量为 $\overline{g}$, Riemann 联络为 $\bnabla$. $M$ 上的联络为 $\nabla$, 并记 $M \rightarrow \mathbb{R}^3$ 的浸入映射为 $\iota$. 任取 $M$ 上的切向量场 $X, Y$, 则 $g(X, Y) = \overline{g}(\iota_{\ast}X, \iota_{\ast}Y)$. 故在 $\rvec_u, \rvec_v, \nu$ 这组标架下,
+    \[
+        \overline{g} = \begin{pmatrix}
+            E & F & \\
+            F & G & \\
+              &   & 1 
+        \end{pmatrix}
+    \]
+    由于 $g$ 继承自 $\overline{g}$, 所以可以验证 $\bDiv{X}Y = \Div{X}Y + h(X, Y)\nu$, 其中 $h$ 是对称双线性映射.
+
+    则截面曲率为
+    \[
+        K(\pi_{\rvec_u, \rvec_v}) = \dfrac{\R(\rvec_u, \rvec_v, \rvec_u, \rvec_v)}{\Inner{\rvec_u}{\rvec_u}\Inner{\rvec_v}{\rvec_v} - \Inner{\rvec_u}{\rvec_v}^2} = \dfrac{\R(\rvec_u, \rvec_v, \rvec_u, \rvec_v)}{EG - F^2}.
+    \]
+    借助 $[\rvec_u, \rvec_v] = 0$
+    \[
+        \R(\rvec_u, \rvec_v, \rvec_u, \rvec_v) = \Inner{\R(\rvec_u, \rvec_v)\rvec_v}{\rvec_u} = \Inner{\Div{\rvec_u}\Div{\rvec_v}\rvec_v - \Div{\rvec_v}\Div{\rvec_u}\rvec_v}{\rvec_u}.
+    \]
+
+    接下来我们要利用 $\bDiv{X}Y = \Div{X}Y + h(X, Y)\nu$, 把上式转移到 $\mathbb{R}^3$ 上去. 这也是因为在 $\bnabla$ 下, $\bDiv{\rvec_u}(X) = X_u$, $\bDiv{\rvec_v}(X) = X_v$, 便于计算. 并且由于 $g$ 是 $\overline{g}$ 的限制, 所以用 $\Inner{\cdot}{\cdot}$ 统一表示两个内积.
+    \[
+        \begin{aligned}
+             & \R(\rvec_u, \rvec_v, \rvec_u, \rvec_v) \\
+            =& \Inner{\Div{\rvec_u}\Div{\rvec_v}\rvec_v - \Div{\rvec_v}\Div{\rvec_u}\rvec_v}{\rvec_u} \\
+            =& \Inner{\bDiv{\rvec_u}\Div{\rvec_v}\rvec_v - \bDiv{\rvec_v}\Div{\rvec_u}\rvec_v}{\rvec_u} \\
+            =& \rvec_u\left( \Inner{\Div{\rvec_v}\rvec_v}{\rvec_u} \right) - \Inner{\Div{\rvec_v}\rvec_v}{\bDiv{\rvec_u}\rvec_u} - \rvec_v\left( \Inner{\Div{\rvec_u}\rvec_v}{\rvec_u} \right) + \Inner{\Div{\rvec_u}\rvec_v}{\bDiv{\rvec_v}\rvec_u} \\
+            =& \rvec_u\left( \Inner{\bDiv{\rvec_v}\rvec_v}{\rvec_u} \right) - \rvec_v\left( \Inner{\bDiv{\rvec_u}\rvec_v}{\rvec_u} \right) + \Inner{\Div{\rvec_u}\rvec_v}{\bDiv{\rvec_v}\rvec_u} - \Inner{\Div{\rvec_v}\rvec_v}{\bDiv{\rvec_u}\rvec_u} \\
+            =& \cred{\Inner{\rvec_{vvu}}{\rvec_u}} + \ccyan{\Inner{\rvec_{vv}}{\rvec_{uu}}} - \cred{\Inner{\rvec_{uvv}}{\rvec_u}} - \cblue{\Inner{\rvec_{uv}}{\rvec_{uv}}} \\
+            +& \cblue{\Inner{\bDiv{\rvec_u}\rvec_v}{\bDiv{\rvec_v}\rvec_u}} - \Inner{\Inner{\bDiv{\rvec_u}\rvec_v}{\nu}\nu}{\bDiv{\rvec_v}\rvec_u} - \ccyan{\Inner{\bDiv{\rvec_v}\rvec_v}{\bDiv{\rvec_u}\rvec_u}} + \Inner{\Inner{\bDiv{\rvec_v}\rvec_v}{\nu}\nu}{\bDiv{\rvec_u}\rvec_u} \\
+            =& \Inner{\Inner{\bDiv{\rvec_v}\rvec_v}{\nu}\nu}{\Inner{\bDiv{\rvec_u}\rvec_u}{\nu}\nu} - \Inner{\Inner{\bDiv{\rvec_u}\rvec_v}{\nu}\nu}{\Inner{\bDiv{\rvec_v}\rvec_u}{\nu}\nu} \\
+            =& \Inner{\rvec_{vv}}{\nu}\Inner{\rvec_{uu}}{\nu} - \Inner{\rvec_{uv}}{\nu}\Inner{\rvec_{vu}}{\nu} \\
+            =& LN - M^2.
+        \end{aligned}
+    \]
+
+    即截面曲率 $K(\pi_{\rvec_u, \rvec_v}) = \dfrac{LN - M^2}{EG - F^2} = \kappa$ 等于 Gauss 曲率.
 \end{solution}
 
 \subsection{148页 习题9}
