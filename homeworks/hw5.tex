@@ -92,7 +92,7 @@
             +& 4\R(X, Y, Z, W) + 2\R(X, W, Z, Y) - 2\R(X, Z, W, Y).
         \end{aligned}
     \]
-    
+
     利用第一 Bianchi 恒等式,
     \[
         \R(X, W, Z, Y) - \R(X, Z, W, Y) = -\R(X, W, Y, Z) - \R(X, Z, W, Y)  = \R(X, Y, Z, W).
@@ -170,6 +170,7 @@
     \]
 \end{solution}
 
+\newpage
 \subsection{148页 习题8}
 \begin{problem}
     设 $M \subset \mathbb{R}^3$ 为浸入曲面, 且具有由 $\mathbb{R}^3$ 的欧氏度量诱导的 Riemann 度量, 证明 $M$ 的截面曲率即为 Gauss 曲率.
@@ -216,8 +217,7 @@
     \[
         \begin{aligned}
              & \R(\rvec_u, \rvec_v, \rvec_u, \rvec_v) \\
-            =& \Inner{\Div{\rvec_u}\Div{\rvec_v}\rvec_v - \Div{\rvec_v}\Div{\rvec_u}\rvec_v}{\rvec_u} \\
-            =& \Inner{\bDiv{\rvec_u}\Div{\rvec_v}\rvec_v - \bDiv{\rvec_v}\Div{\rvec_u}\rvec_v}{\rvec_u} \\
+            =& \Inner{\Div{\rvec_u}\Div{\rvec_v}\rvec_v - \Div{\rvec_v}\Div{\rvec_u}\rvec_v}{\rvec_u} = \Inner{\bDiv{\rvec_u}\Div{\rvec_v}\rvec_v - \bDiv{\rvec_v}\Div{\rvec_u}\rvec_v}{\rvec_u} \\
             =& \rvec_u\left( \Inner{\Div{\rvec_v}\rvec_v}{\rvec_u} \right) - \Inner{\Div{\rvec_v}\rvec_v}{\bDiv{\rvec_u}\rvec_u} - \rvec_v\left( \Inner{\Div{\rvec_u}\rvec_v}{\rvec_u} \right) + \Inner{\Div{\rvec_u}\rvec_v}{\bDiv{\rvec_v}\rvec_u} \\
             =& \rvec_u\left( \Inner{\bDiv{\rvec_v}\rvec_v}{\rvec_u} \right) - \rvec_v\left( \Inner{\bDiv{\rvec_u}\rvec_v}{\rvec_u} \right) + \Inner{\Div{\rvec_u}\rvec_v}{\bDiv{\rvec_v}\rvec_u} - \Inner{\Div{\rvec_v}\rvec_v}{\bDiv{\rvec_u}\rvec_u} \\
             =& \cred{\Inner{\rvec_{vvu}}{\rvec_u}} + \ccyan{\Inner{\rvec_{vv}}{\rvec_{uu}}} - \cred{\Inner{\rvec_{uvv}}{\rvec_u}} - \cblue{\Inner{\rvec_{uv}}{\rvec_{uv}}} \\
