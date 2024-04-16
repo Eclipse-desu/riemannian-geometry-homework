@@ -1,0 +1,62 @@
+\documentclass{ctexart}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+\usepackage{mathrsfs} % for \VecFld
+
+\usepackage{color, framed}
+\definecolor{shadecolor}{RGB}{241, 241, 255}
+\newcounter{problemname}
+\newenvironment{problem}{\begin{shaded}\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\end{shaded}\par}
+\newenvironment{solution}{\par\noindent\textbf{解答. }}{\par}
+
+\newcommand{\cred}{\textcolor{red}}
+\newcommand{\cblue}{\textcolor{blue}}
+\newcommand{\ccyan}{\textcolor{cyan}}
+\newcommand{\cmag}{\textcolor{magenta}}
+
+% \usepackage{mathrsfs}
+
+\usepackage{geometry}
+\geometry{a4paper,scale=0.8}
+
+\input{../command.tex}
+
+\title{第六次作业}
+\author{洪艺中 12335025}
+\begin{document}
+\maketitle
+\subsection{148页 习题 7}
+\begin{problem}
+    设 $(M^m, g)$ 为连通的 Einstein 流形, $m \geqslant 3$.
+    \begin{enumerate}[label = (\roman)]
+        \item 若 $m = 3$, 则 $(M^m, g)$ 为常曲率 Riemann 流形;
+        \item 若 $(M^m, g)$ 的数量曲率 $\rho \not= 0$, 则 $(M^m, g)$ 上不存在平行向量场.
+    \end{enumerate}
+\end{problem}
+\begin{solution}
+\end{solution}
+
+\subsection{149页 习题10}
+\begin{problem}
+    从球面 $S^2(a) = \bigl\{ x \in \real^3 | \sum_{i}(x^i)^2 = a^2 \bigr\}$ 去掉点 $(0, 0, \pm a)$ 得到 Riemann 流形 $M$, 在 $M$ 与直线 $L$ 的直积空间 $K \times L$ 中引入 Riemann 度量 
+    \[
+        \dif s^2 = (\dif x^1)^2 + (\dif x^2)^2 + (\dif x^3)^2 + \biggl( \dif t - \dfrac{tx^3(x^1 \dif x^2 - x^2 \dif x^1)^2}{a((x^1)^2 + (x^2)^2)} \biggr)^2,
+    \]
+    在 $M$ 上取球坐标 $(\theta, \phi)$, 则 Riemann 度量成为
+    \[
+        \dif s^2 = a^2 (\dif \theta^2 + \sin^2 \theta \dif \phi^2) + (\dif t - K \cos \theta \dif \phi)^2, \quad K = \mathrm{const.},
+    \]
+
+    \begin{enumerate}[label = (\roman)]
+        \item 证明: 对应于球面绕原点的任何旋转, 在 $M \times L$ 中有局部等距映射;
+        \item 证明: 关于对偶空间的基向量 $\omega^1 = a \dif \theta$, $\omega^2 = a \sin \theta \dif \phi$, $\omega^3 = \dif t - K \cos \theta \dif \phi$, Riemann 联络 $1$-形式为
+    \end{enumerate}
+\end{problem}
+
+
+\end{document}

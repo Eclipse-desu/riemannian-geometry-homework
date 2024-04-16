@@ -139,11 +139,11 @@
 \subsection{148页 习题6}
 \begin{problem}
     设 $(M^3, g)$ 是三维 Riemann 流形. 在任一点 $p \in M^3$, 取坐标系 $\{x^i\}$ 使得在 $p$ 点有 $g_{ij} = \Inner{\pdDif{}{x^i}}{\pdDif{}{x^j}} = 0, i \not= j$. 证明: 对互不相同的 $i, j, k$, 在 $p$ 点成立
-    \begin{multline*}
-        \Ric_{ij} = \dfrac{1}{g_{kk}}\R_{ikjk},
-        \Ric_{ii} = \dfrac{1}{g_{jj}}\R_{ijij} + \dfrac{1}{g_{kk}}\R_{ikjk},
-        \R_{ijij} - g_{ii}\Ric_{jj} - g_{jj}\Ric_{ii} + \dfrac{1}{2}\rho g_{ii}g_{jj} = 0.
-    \end{multline*}
+    \begin{align*}
+        \Ric_{ij} ={} & \dfrac{1}{g_{kk}}\R_{ikjk}, \\
+        \Ric_{ii} ={} & \dfrac{1}{g_{jj}}\R_{ijij} + \dfrac{1}{g_{kk}}\R_{ikjk}, \\
+        \R_{ijij} -{} & g_{ii}\Ric_{jj} - g_{jj}\Ric_{ii} + \dfrac{1}{2}\rho g_{ii}g_{jj} = 0.
+    \end{align*}
     其中 $\rho$ 是 $M^3$ 的数量曲率, 即 $\rho = g^{ij}\Ric_{ij}$.
 \end{problem}
 \begin{solution}
@@ -155,7 +155,7 @@
     \]
     最后一个等号去掉求和, 是因为 $\R_{iljl}$ 只有在 $l \not= i$ 且 $l \not= j$ 时才非零, 而 $M$ 是三维的, 所以 $l$ 只能取 $k$.
 
-    对于 $\Ric_{ii}$ 同样有 $\Ric_{ii} = \sum_{l}g^{ll}\R_{ilil} = \dfrac{1}{jj}\R_{ijij} + \dfrac{1}{k}\R_{ikik}$.
+    对于 $\Ric_{ii}$ 同样有 $\Ric_{ii} = \sum_{l}g^{ll}\R_{ilil} = \dfrac{1}{g_{jj}}\R_{ijij} + \dfrac{1}{g_{kk}}\R_{ikik}$.
 
     最后一个式子, 左边为
     \[
