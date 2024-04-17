@@ -7,6 +7,7 @@
 \usepackage{hyperref}
 
 \usepackage{mathrsfs} % for \VecFld
+\usepackage{stmaryrd}
 
 \usepackage{color, framed}
 \definecolor{shadecolor}{RGB}{241, 241, 255}
@@ -30,20 +31,43 @@
 \author{洪艺中 12335025}
 \begin{document}
 \maketitle
-\subsection{148页 习题 7}
+\subsection{148页 习题 7}\label{subsec::1}
 \begin{problem}
     设 $(M^m, g)$ 为连通的 Einstein 流形, $m \geqslant 3$.
-    \begin{enumerate}[label = (\roman)]
+    \begin{enumerate}[label = (\roman*)]
         \item 若 $m = 3$, 则 $(M^m, g)$ 为常曲率 Riemann 流形;
         \item 若 $(M^m, g)$ 的数量曲率 $\rho \not= 0$, 则 $(M^m, g)$ 上不存在平行向量场.
     \end{enumerate}
 \end{problem}
 \begin{solution}
+    \begin{enumerate}[label = (\roman*)]
+        \item $m \geqslant 3$, 所以 $M$ 的 Ricci 曲率满足
+        \[
+            \Ric = \dfrac{\rho}{m}g,
+        \]
+        其中 $\rho$ 是数量曲率. 那么取局部单位正交基 $\{e_1, e_2, e_3\}$, 即有 $\Ric_{ii} = \dfrac{\rho}{m}$.
+
+        在这组基下, 可得
+        \[
+            \begin{aligned}
+                \Ric_{11} ={}& \R_{1212} + \R_{1313} \\
+                \Ric_{22} ={}& \R_{1212} + \R_{2323} \\
+                \Ric_{33} ={}& \R_{1313} + \R_{2323}
+            \end{aligned}
+        \]
+        给定 $\Ric_{ii}$, 这是关于 $\R_{1212}, \R_{1313}, \R_{2323}$ 的线性方程组, 可以解出
+        \[
+            \R_{1212} = \R_{1313} = \R_{2323} = \dfrac{\rho}{2m}.
+        \]
+        又因为 $e_i$ 都是单位向量, 所以 $\R_{ijij}$ 等于截面曲率 $K(e_i, e_j)$. 利用 $e_i$ 的任意性, $M$ 的截面曲率为常数 $\dfrac{\rho}{2m}$. 即, $M$ 是常曲率流形.
+
+        \item 若 $(M^m, g)$ 的数量曲率 $\rho \not= 0$, 则 $\Ric \not= 0$. 用反证法, 假如存在平行向量场 $X$, $\nabla X = 0$. 则任取 $Y \in \VecFld(M)$, $\R(X, Y, X, Y) = 0$. 则 $\Ric(X, X) = 0$. 但是又有 $\Ric(X, X) = \dfrac{\rho}{m}g(X, X)$, 所以 $|X| \equiv 0$. 这说明 $M$ 上不存在平行向量场.
+    \end{enumerate}
 \end{solution}
 
 \subsection{149页 习题10}
 \begin{problem}
-    从球面 $S^2(a) = \bigl\{ x \in \real^3 | \sum_{i}(x^i)^2 = a^2 \bigr\}$ 去掉点 $(0, 0, \pm a)$ 得到 Riemann 流形 $M$, 在 $M$ 与直线 $L$ 的直积空间 $K \times L$ 中引入 Riemann 度量 
+    从球面 $S^2(a) = \bigl\{ x \in \real^3 | \sum_{i}(x^i)^2 = a^2 \bigr\}$ 去掉点 $(0, 0, \pm a)$ 得到 Riemann 流形 $M$, 在 $M$ 与直线 $L$ 的直积空间 $M \times L$ 中引入 Riemann 度量 
     \[
         \dif s^2 = (\dif x^1)^2 + (\dif x^2)^2 + (\dif x^3)^2 + \biggl( \dif t - \dfrac{tx^3(x^1 \dif x^2 - x^2 \dif x^1)^2}{a((x^1)^2 + (x^2)^2)} \biggr)^2,
     \]
@@ -52,11 +76,215 @@
         \dif s^2 = a^2 (\dif \theta^2 + \sin^2 \theta \dif \phi^2) + (\dif t - K \cos \theta \dif \phi)^2, \quad K = \mathrm{const.},
     \]
 
-    \begin{enumerate}[label = (\roman)]
+    \begin{enumerate}[label = (\roman*)]
         \item 证明: 对应于球面绕原点的任何旋转, 在 $M \times L$ 中有局部等距映射;
         \item 证明: 关于对偶空间的基向量 $\omega^1 = a \dif \theta$, $\omega^2 = a \sin \theta \dif \phi$, $\omega^3 = \dif t - K \cos \theta \dif \phi$, Riemann 联络 $1$-形式为
+        \[
+            \omega^2_1 = -\omega^1_2 = \dfrac{K}{2a^2}(\dif t - K \cos \theta \dif \phi),
+        \]
+        \[
+            \omega^3_1 = -\omega^1_3 = \dfrac{K}{2a} \sin \theta \dif \phi, \quad \omega^3_2 = -\omega^2_3 = -\dfrac{K}{2a}\dif \theta;
+        \]
+        \item 什么条件下, $M \times L$ 是常曲率 Riemann 流形?
     \end{enumerate}
 \end{problem}
+\begin{solution}
+    \begin{enumerate}[label = (\roman*)]
+        \item 对某个球面绕原点的旋转 $\varphi$, 存在两个不动点 $N$, $S$. 若以 $N$, $S$ 为北极、南极点取球坐标 $(\theta, \phi)$, 其中 $\theta$ 表示点与球心连线和直线 $NS$ 的夹角, $\phi$ 表示点投影在赤道面后, 与``子午线''的夹角. 则如果 $N = (0, 0, a)$, $S = (0, 0, -a)$, 球面上的点可以表示为 $(a\sin \theta \cos \phi, a\sin \theta \sin \phi, a\cos \theta)$, 其上的 Riemann 度量可以表示为 $\dif s^2 = a^2 (\dif \theta^2 + \sin^2 \theta \dif \phi^2) $. 此时 $M \times L$ 的度量形式与题目中相同.
+        
+        在这一坐标下, $\varphi$ 可以简单地表示为 $(\theta, \phi) \mapsto (\theta, \phi + \phi_0)$. 故定义 $\bar{\varphi} \colon M \times L \mapsto M \times L$, $(\theta, \phi, t) \mapsto (\varphi(\theta, \phi), y) = (\theta, \phi + \phi_0, t)$, 则可验证 $\bar{\varphi}$ 是局部等距映射: 
+        
+        因为 $(\bar{\varphi}_{\ast})_{(\theta, \phi, t)}(k_1 \partial_{\theta} + k_2 \partial_{\phi} + k_3 \partial_t) = (k_1 \partial_{\theta} + k_2 \partial_{\phi} + k_3 \partial_t)|_{(\theta, \phi + \phi_0, t)}$, 由于 $\theta$ 不变, 所以代入 Riemann 度量结果一致, 所以 $(\bar{\varphi})_{\ast}(\dif s^2) = \dif s^2$, 是等距映射.  
+        \item 利用结构方程.
+        \[
+            \begin{aligned}
+                0 ={}& \dif \omega^1 ={}& -\omega^1_1 \wedge \omega^1 - \omega^1_2 \wedge \omega^2 - \omega^1_3 \wedge \omega^3; \\
+                a \cos \theta \dif \theta \wedge \dif \phi ={}& \dif \omega^2 ={}& -\omega^2_1 \wedge \omega^1 - \omega^2_2 \wedge \omega^2 - \omega^2_3 \wedge \omega^3; \\
+                K \sin \theta \dif \theta \wedge \dif \phi ={}& \dif \omega^3 ={}& -\omega^3_1 \wedge \omega^1 - \omega^3_2 \wedge \omega^2 - \omega^3_3 \wedge \omega^3; \\
+                \omega^{i}_{j} + \omega^{j}_{i} ={}& \dif g_{ij} ={}& 0,
+            \end{aligned}
+        \]
+        由此
+        \[
+            \begin{aligned}
+                \omega^i_i ={}& 0, \\
+                -\omega^1_2 ={}& \omega^2_1. 
+            \end{aligned}
+        \]
+        \newcommand{\A}{\mathrm{A}}
+        \newcommand{\B}{\mathrm{B}}
+        \newcommand{\C}{\mathrm{C}}
+        记 $j > i$ 时, $\omega^{j}_{i} = \A^{ji}\omega^1 + \B^{ji}\omega^2 + \C^{ji}\omega^3$, 那么
 
+        \begin{enumerate}
+            \item 首先观察 $\dif \theta \wedge \dif \theta$ 的系数, 用第二, 第三个方程可得
+            \[
+                \begin{aligned}
+                    \A^{21} ={}& 0, \\
+                    \A^{31} ={}& 0.
+                \end{aligned}
+            \]
+            \item 再观察 $\dif t \wedge \dif t$ 的系数, 由第一, 第二个方程可得
+            \[
+                \begin{aligned}
+                    \C^{31} ={}& 0, \\
+                    \C^{32} ={}& 0.
+                \end{aligned}
+            \]
+            \item 观察 $\dif \phi \wedge \dif \phi$ 的系数, 由第一, 第二个方程可得
+            \[
+                \begin{aligned}
+                    \B^{21} a^2 \sin^2 \theta - \C^{21} a K \sin \theta \cos \theta + \B^{31} a K \sin \theta \cos \theta = 0, \\
+                    \B^{32} = 0.
+                \end{aligned}
+            \]
+            再利用 $\dif \phi \wedge \dif t$ 的系数, 由第一个方程可得
+            \[
+                \C^{21} a \sin \theta - \B^{31} a \sin \theta = 0.
+            \]
+            所以 $\C^{21} = \B^{31}$, 进而 $\B^{21} = 0$.
+            \item 此时已有 $\omega^2_1 = \C^{21}\omega^3$, $\omega^3_1 = \B^{31}\omega^2 = \C^{21}\omega^2$, $\omega^3_2 = \A^{32}\omega^1$. 
+            
+            用 $\dif \omega \wedge \dif \phi$ 的系数列方程, 由第三个方程可得
+            \[
+                \C^{21} a^2 \sin \theta - \A^{32} a^2 \sin \theta = K \sin \theta.
+            \]
+            再用 $\dif \theta \wedge \dif t$ 的系数列方程, 由第二个方程可得
+            \[
+                \C^{21} a + \A^{32} a = 0
+            \]
+            所以
+            \[
+                -\A^{32} = \B^{31} = \C^{21} = \dfrac{K }{2a^2}.
+            \]
+        \end{enumerate}
+        综上, 有联络 $1$-形式为
+        \[
+            \omega^2_1 = -\omega^1_2 = \dfrac{K }{2a^2}\omega^3 = \dfrac{K }{2a^2}(\dif t - K \cos \theta \dif \phi);
+        \]
+        \[
+            \omega^3_1 = -\omega^1_3 = \dfrac{K }{2a^2}\omega^2 = \dfrac{K}{2a}\sin \theta \dif \phi; \quad \omega^3_2 = -\omega^2_3 = -\dfrac{K }{2a^2}\omega^1 = -\dfrac{K} {2a}\dif \theta.
+        \]
+        \item 用结构方程, 计算截面曲率如下
+        \[
+            \begin{aligned}
+            \R_{1212} = \Omega^1_2(e_1, e_2) = \dif \omega^1_2(e_1, e_2) - \omega^1_3 \wedge \omega^3_2(e_1, e_2), \\
+            \R_{1313} = \Omega^1_3(e_1, e_3) = \dif \omega^1_3(e_1, e_3) - \omega^1_2 \wedge \omega^2_3(e_1, e_3), \\
+            \R_{2323} = \Omega^2_3(e_2, e_3) = \dif \omega^2_3(e_2, e_3) - \omega^2_1 \wedge \omega^1_3(e_2, e_3).
+            \end{aligned}
+        \]
+        计算得
+        \[
+            \begin{aligned}
+                \R_{1212} ={}& -\dfrac{K^2}{4a^4}, \\
+                \R_{1313} ={}& \dfrac{K^2}{4a^4}, \\
+                \R_{2323} ={}& \dfrac{K^2}{4a^4}.
+            \end{aligned}
+        \]
+        因此 $K = 0$ 时是常曲率 Riemann 流形.
+    \end{enumerate}
+\end{solution}
 
+\subsection{问题  1.2}
+\begin{problem}
+    设 $(M^m, g)$ 是 $m$ 维 Riemann 流形. 若 $T$ 是对称 $(0, 2)$ 型张量, 定义 $C(T) := T \owedge g$. 其中 $\owedge$ 为 \textit{Kulkarni-Nomizu} 积: 对任意两个对称 $(0, 2)$ 型张量 $T_1, T_2$,
+    \[
+        T_1 \owedge T_2(X, Y, Z, W) := T_1(X, Z)T_2(Y, W) - T_1(X, W)T_2(Y, Z) + T_2(X, Z)T_1(Y, W) - T_2(X, W)T_1(Y, Z).
+    \]
+    对曲率型张量 $S$, 定义其 Ricci 缩并为
+    \[
+        c(S)(X, Y) := \sum_{i = 1}^{m}S(X, e_i, Y, e_i),
+    \]
+    其中 $\{e_i\}$ 为幺正标架. 
+    \begin{enumerate}[label = (\roman*)]
+        \item 证明对任意对称 $(0, 2)$ 型张量 $T$, $c(C(T)) = (m - 2)T + (\tr_g T)g$.
+        \item 证明 $c(W) = 0$, 其中 $W$ 是 Weyl 张量. 
+    \end{enumerate}
+\end{problem}
+\begin{solution}
+    \begin{enumerate}[label = (\roman*)]
+        \item\label{enum::1} 计算得
+        \[
+            \begin{aligned}
+                c(C(T))(X, Y) 
+                ={}& \sum_{i = 1}^{m} (T \owedge g)(X, e_i, Y, e_i) \\
+                ={}& \sum_{i = 1}^{m} T(X, Y)g(e_i, e_i) - T(X, e_i)g(e_i, Y) + g(X, Y)T(e_i, e_i) - g(X, e_i)T(e_i, Y) \\
+                ={}& mT(X, Y) - T(X, Y) + \tr_gTg(X, Y) - T(X, Y) \\
+                ={}& (m - 2)T(X, Y) + \tr_gTg(X, Y).
+            \end{aligned}
+        \]
+        \item $W = \Rm - A \owedge g$, 其中,
+        \[
+            A = \dfrac{1}{m - 2}\biggl( \Ric - \dfrac{\scal}{2(m - 1)}g \biggr).
+        \]
+        用 \ref{enum::1} 的结论,
+        \[
+            c(W) = c(\Rm) - c(C(A)) = \Ric - \Ric + \dfrac{\scal}{2(m - 1)}g + \dfrac{1}{m - 2}\biggl(\scal - \dfrac{m\scal}{2(m - 1)}\biggr) = 0.
+        \]
+    \end{enumerate}
+\end{solution}
+
+\subsection{问题 1.3}
+\begin{problem}
+    假设 $(M, g)$ 是 $3$ 维 Riemann 流形.
+    \begin{enumerate}[label = (\roman*)]
+        \item\label{enum::2} 证明 $M$ 是 Ricci 平坦的当且仅当 $M$ 是平坦的.
+        \item\label{enum::3} 证明 Weyl 张量 $W = 0$.
+    \end{enumerate}
+\end{problem}
+\begin{solution}
+    对于 \ref{enum::2}, 如果 $M$ 平坦显然 Ricci 平坦. 而反过来, \ref{enum::2} 和 \ref*{enum::3} 都是说 $\dim M = 3$ 时, 如果一个曲率型张量的迹为 $0$, 则其本身为 $0$. 而这和 \ref*{subsec::1} 中的证明类似, 即曲率型张量由截面上的值唯一确定, 而三维的情况下, Ricci 缩并和截面值恰好都是三个, 且其形成的方程组有唯一解, 所以迹为 $0$ 可以推出本身为 $0$.
+\end{solution}
+
+\subsection{问题 1.4}
+\begin{problem}
+    设 $(M^m, g)$ 是 $m$ 维 Riemann 流形, $m \geqslant 3$. 证明 $M$ 是常曲率流形当且仅当 $M$ 是 Einstein 流形且 $W = 0$.
+\end{problem}
+\begin{solution}
+    \begin{enumerate}
+        \item[``$\Rightarrow$''] 如果 $M$ 是常曲率流形, 那么其显然是 Einstein 流形. 并且 Schouten 张量
+        \[
+            \begin{aligned}
+            A ={}& \dfrac{1}{m - 2}\biggl( \Ric - \dfrac{\scal}{2(m - 1)}g \biggr) \\
+            ={}& \dfrac{1}{m - 2} \biggl( (m - 1)Kg - \dfrac{m(m - 1)K}{2(m - 1)}g\biggr) \\
+            ={}& \dfrac{K}{2}g,
+            \end{aligned}
+        \]
+        其中 $K$ 是截面曲率. 所以 $W = \Rm - \dfrac{K}{2}g \owedge g = 0$, 这是因为 $K = \dfrac{2\Rm}{g \owedge g}$. 
+        \item[``$\Leftarrow$''] 如果 $M$ 是 Einstein 流形, 那么
+        \[
+            \Ric = \dfrac{\scal}{m}g.
+        \]
+        于是 Schouten 张量为
+        \[
+            A = \dfrac{1}{m - 2}\biggl( \dfrac{\scal}{m}g - \dfrac{\scal}{2(m - 1)}g \biggr)
+            = \dfrac{\scal}{2m(m - 1)}g.
+        \]
+        因此 $W = \Rm - \dfrac{\scal}{2m(m - 1)}g \owedge g$. 如果 $W = 0$, 则截面曲率为
+        \[
+            \begin{aligned}
+                K(e_1, e_2) ={}& \dfrac{\Rm(e_1, e_2, e_1, e_2)}{g(e_1, e_1)g(e_2, e_2) - g(e_1, e_2)g(e_2, e_1)} \\
+                ={}& \dfrac{\scal}{2m(m - 1)}\dfrac{2g(e_1, e_1)g(e_2, e_2) - 2g(e_1, e_2)g(e_2, e_1)}{g(e_1, e_1)g(e_2, e_2) - g(e_1, e_2)g(e_2, e_1)} \\
+                ={}& \dfrac{\scal}{m(m - 1)}.
+            \end{aligned}
+        \]
+        因此 $M$ 是常曲率流形, 截面曲率是 $\dfrac{\scal}{m(m - 1)}$.
+    \end{enumerate}
+\end{solution}
+
+\subsection{问题 1.5}
+\begin{problem}
+    设 $(M^m, g)$ 是 $m$ 维闭 Riemann 流形(即紧致、连通、无边界), 我们称 $u \in C^{\infty}(M)$ 是 $M$ 上的次调和函数, 如果
+    \[
+        \Delta u(x) \geqslant 0, \quad \forall x \in M.
+    \]
+    
+    闭流形上的次调和函数是否一定是常数? 若是, 请说明理由; 若不是, 请举出例子.
+\end{problem}
+\begin{solution}
+    \[
+        \int_M u\Delta u = -\int_M |\nabla u|^2 \leqslant 0,
+    \]
+    因此 $u$ 必须有负值, 或者 $u = 0$. 假设 $u$ 不是常数, 那么由于 $u$ 光滑, $u$ 有最小值 $u_0$. 则 $w = u - u_0 \geqslant 0$ 且 $\Delta w \geqslant 0$. 因此 $w = 0$, 即 $u$ 是常数. 所以闭流形上的次调和函数一定是常数.
+\end{solution}
 \end{document}
