@@ -1,0 +1,83 @@
+\documentclass{ctexart}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+\usepackage{mathrsfs} % for \VecFld
+\usepackage{stmaryrd}
+
+\usepackage{color, framed}
+\definecolor{shadecolor}{RGB}{241, 241, 255}
+\newcounter{problemname}
+\newenvironment{problem}{\begin{shaded}\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\end{shaded}\par}
+\newenvironment{solution}{\par\noindent\textbf{解答. }}{\par}
+
+\newcommand{\cred}{\textcolor{red}}
+\newcommand{\cblue}{\textcolor{blue}}
+\newcommand{\ccyan}{\textcolor{cyan}}
+\newcommand{\cmag}{\textcolor{magenta}}
+
+% \usepackage{mathrsfs}
+
+\usepackage{geometry}
+\geometry{a4paper,scale=0.8}
+
+\input{../command.tex}
+
+\title{第七次作业}
+\author{洪艺中 12335025}
+\begin{document}
+\maketitle
+\subsection{149 页 问题 15}
+\begin{problem}
+    设 $ \sphere^m = \bigl\{ x \in \real^{m + 1} : \sum_{i} (x^i)^2 = r^2, r > 0 \bigr\} $. 作球极投影
+    \[
+        \phi \colon \sphere^m(r) \setminus \{(0, \cdots, 0, r)\} \rightarrow \real^m.
+    \]
+    证明: $\phi$ 为共形映射, 即对于 Riemann 流形 $(\sphere^m(r), \tilde{g}$ 和 $(\real^m, g)$, 有 $\tilde{g} = \phi^{\ast}g$, 这里 $\tilde{g}$ 是 $\sphere^m(r) \subset \real^{m + 1}$ 的诱导度量, $g$ 为 $\real^m$ 上的欧氏度量.
+\end{problem}
+\begin{solution}
+    设 $\phi$ 将 $\sphere^{m}$ 投影到 $\real^{m + 1}$ 的 $x^{n + 1} = 0$ 平面, 也就是 $\real^m$. 设 $\real^m$ 的坐标是 $(y_1, \cdots, y_m)$, 那么 $\phi$ 可以表达为
+    \[
+        \phi(y_1, \cdots, y_n) = \biggl( \dfrac{2r^2y_1}{|y|^2 + r^2}, \cdots, \dfrac{2r^2y_m}{|y|^2 + r^2}, r\dfrac{|y|^2 - r^2}{|y|^2 + r^2} \biggr),
+    \]
+    计算切映射,
+    \newcommand{\rightpart}[1]{#1}
+    \[
+        \phi^{\ast} = \dfrac{2r^2}{|y|^2 + r^2}
+        \begin{bmatrix}
+            \mathrm{I}_{m} & 0
+        \end{bmatrix}
+        - \dfrac{4 r^2}{(|y|^2 + r^2)^2}
+        \begin{bmatrix}
+            \rightpart{y_1^2} & \rightpart{y_1y_2} & \cdots & \rightpart{y_1y_m} & -ry_1 \\
+            \rightpart{y_2y_1} & \rightpart{y_2^2} & \cdots & \rightpart{y_2y_m} & -ry_2 \\
+            \cdots & \cdots & \ddots & \cdots & \vdots \\
+            \rightpart{y_my_1} & \rightpart{y_my_2} & \cdots & \rightpart{y_m^2} & -ry_m
+        \end{bmatrix}.
+    \]
+    容易发现, 若 $i \not= j$, 那么 $\Inner{\partial_{y_i}}{\partial_{y_j}}_{\tilde{g}} = 0$, 这是因为内积为
+    \[
+        \begin{aligned}
+             {} & \Inner{\partial_{y_i}}{\partial_{y_j}}_{\tilde{g}} \\
+            ={} & -\dfrac{2r^2}{|y|^2 + r^2} \cdot \dfrac{4 r^2}{(|y|^2 + r^2)^2} (y_iy_j + y_jy_i) + \biggl(\dfrac{4 r^2}{(|y|^2 + r^2)^2} \biggr)^2 \sum_{k = 1}^{m} \left( y_k y_i \cdot y_k y_j \right) + r^2 y_i y_j \\
+            ={} & \dfrac{2r^2}{|y|^2 + r^2} \cdot \dfrac{4 r^2}{(|y|^2 + r^2)^2}(-2y_i y_j + 2y_i y_j) \\
+            ={} & 0.
+        \end{aligned}
+    \]
+    因此 $\tilde{g}$ 是对角的. 
+    \[
+        \begin{aligned}
+             {} & \Inner{\partial_{y_i}}{\partial_{y_i}}_{\tilde{g}} \\
+            ={} & \biggl( \dfrac{2r^2}{|y|^2 + r^2} \biggr)^2 - \dfrac{2r^2}{|y|^2 + r^2} \cdot \dfrac{4 r^2}{(|y|^2 + r^2)^2} 2y_i^2
+            + \biggl( \dfrac{4 r^2}{(|y|^2 + r^2)^2} \biggr)^2 (\sum_{k = 1}^{m} \left( (y_k)^2 (y_i)^2 \right) - r^2 (y_i)^2) \\
+            ={} & \dfrac{2r^2}{|y|^2 + r^2} \cdot \dfrac{4 r^2}{(|y|^2 + r^2)^2} \biggl( \dfrac{1}{2}(|y|^2 + r^2) - 2(y^i)^2 + 2(y^i)^2 \biggr) \\
+            ={} & \dfrac{4r^4}{(|y|^2 + r^2)^2}.
+        \end{aligned}
+    \]
+    即 $\tilde{g} = \dfrac{4r^4}{(|y|^2 + r^2)^2}g$, 所以 $\tilde{g}$ 是共形变换.
+\end{solution}
+\end{document}
