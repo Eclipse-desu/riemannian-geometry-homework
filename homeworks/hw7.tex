@@ -9,7 +9,7 @@
 \usepackage{mathrsfs} % for \VecFld
 \usepackage{stmaryrd} % for \owedge
 
-\usepackage{color, framed}
+\usepackage{xcolor, framed}
 \definecolor{shadecolor}{RGB}{241, 241, 255}
 \newcounter{problemname}
 \newenvironment{problem}{\begin{shaded}\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\end{shaded}\par}
@@ -19,8 +19,9 @@
 \newcommand{\cblue}{\textcolor{blue}}
 \newcommand{\ccyan}{\textcolor{cyan}}
 \newcommand{\cmag}{\textcolor{magenta}}
+\newcommand{\cpink}{\textcolor{pink}}
 
-% \usepackage{mathrsfs}
+\usepackage{bbm}
 
 \usepackage{geometry}
 \geometry{a4paper,scale=0.8}
@@ -82,8 +83,9 @@
 \end{solution}
 
 \subsection{问题 1.2}
+\newcommand{\coeff}{\biggl( 1 + \dfrac{m}{2 \rho}\biggr)}
 \begin{problem}
-    在 $M = \real^{n} \setminus \{0\}$ 上配上度量 $g = (1 + \frac{m}{2\rho})^4\delta$, 其中 $m > 0$ 为一给定常数, $\rho(x) = \sqrt{(x_1)^2 + (x_2)^2 + (x_3)^2}$ 为点 $x = (x_1, x_2, x_3)$ 到原点的欧氏距离, $\delta$ 是三维欧氏空间 $\real^3$ 上的标准欧氏度量.
+    在 $M = \real^{3} \setminus \{0\}$ 上配上度量 $g = \coeff^4\delta$, 其中 $m > 0$ 为一给定常数, $\rho(x) = \sqrt{(x_1)^2 + (x_2)^2 + (x_3)^2}$ 为点 $x = (x_1, x_2, x_3)$ 到原点的欧氏距离, $\delta$ 是三维欧氏空间 $\real^3$ 上的标准欧氏度量.
     \begin{enumerate}
         \item 计算 $(M, g)$ 的数量曲率;
         \item 令 $S_r = \{ x \in \real^3 : (x_1)^2 + (x_2)^2 + (x_3)^2 = r^2 \}$, $r > 0$. 计算 $S_r$ 在 Riemann 流形 $(M, g)$ 中的面积 $|S_r|$. 并指出 $r$ 取何值时, $|S_r|$ 最小, 最小值为何?
@@ -92,13 +94,71 @@
 \end{problem}
 \begin{solution}
     \begin{enumerate}
-        \item 利用共形变换的公式, $ \phi = (1 + \dfrac{m}{2\rho})^2 $,
+        \item 利用共形变换的公式, $ \phi = \coeff^2 $,
         \[
-            \partial_i(\log \phi) = \dfrac{2}{1 + \dfrac{m}{2\rho}} \dfrac{mx_i}{2\rho^3} = \dfrac{mx_i}{(\rho^2 + \dfrac{m}{2})\rho }.
+            \partial_i(\log \phi) = \dfrac{2}{1 + \dfrac{m}{2\rho}} \cdot -\dfrac{mx_i}{2\rho^3} = -\dfrac{mx_i}{\rho^2 (\rho + \dfrac{m}{2})},
+        \]
+        所以
+        \[
+            V = \nabla \log \phi = -\dfrac{m}{\rho^2 (\rho + \dfrac{m}{2})}\mathbf{x}, \quad \omega = -\dfrac{m}{\rho^2 (\rho + \dfrac{m}{2})}\dif (\dfrac{\rho^2}{2}).
+        \]
+        其中 $\mathbf{x}$ 是位置向量, $\omega(X) = \Inner{X}{V}_{g}$.
+
+        故
+        \[
+            \psi(X, Y) = (\Div{X}\omega)(Y) - \omega(X)\omega(Y) + \dfrac{1}{2}\omega(V)\Inner{X}{Y}_{g},
+        \]
+        其迹为
+        \[
+            \tr \psi = \Delta \log \phi - \Inner{V}{V}^2_{g} + \Inner{V}{V}^2_{g} = -\dfrac{ -3\rho - \frac{5m}{2} }{ \rho^2 (\rho + \dfrac{ m }{ 2 })^2 }.
+        \]
+        所以
+        \[
+            \coeff^4 \scal_g = \scal_{\delta} - 2(3 - 1) \tr \psi,
+        \]
+        \[
+            \scal_{g} = \dfrac{ (12 \rho + 10 m) \rho^2 }{ (\rho + \dfrac{ m }{ 2 })^6 }.
+        \]
+        \item 设 $\real^m$ 上的极坐标为 $(r, \theta_i)$, 对应的度量为 $\dif s^2 = \dif r^2 + k_{ij}\dif \theta_i \dif \theta_j$. 那么在 $S_r$ 上, 取 $\theta_i$ 构成的坐标, 那么
+        \[
+            (\dif s^2)_{S_r} = (1 + \frac{m}{2r})^4 k_{ij} \dif \theta_i \dif \theta_j.
+        \]
+        所以
+        \[
+            \vol(S_r)_{g} = (1 + \frac{m}{2r})^4 \vol(S_r)_{\delta} = 4 \pi r^2 (1 + \frac{m}{2r})^4 \geqslant 4\pi m^2 .
+        \]
+        其中, $r = \dfrac{m}{2}$ 时取等, 也就是取得最小值 $4\pi m^2 $.
+        \item 设 $\mathbf{x} = (x^1, x^2, x^3) \in \real^3 \setminus \{0\}$ 处外法向量 $\mathbf{n} = n^j\partial_j$, 因为 $\mathbf{n}$ 和 $\mathbf{x}$ 平行, 所以可以设 $n^j = kx^j$. 则
+        \[
+            \sum_{j = 1}^{3} (n^j)^2\coeff^4 = k^2|\mathbf{x}|^2\coeff^4 = 1,
+        \]
+        所以
+        \[
+            k = -\dfrac{1}{\rho \coeff^2}.
+        \]
+
+        对题目中的式子, $j = i$ 时, $\partial_j g_{ii} = \partial_i g_{ij})$, 其余情况下, $g_{ij} = 0$, 所以
+        \[
+            (\partial_j g_{ii} - \partial_i g_{ij})n^j = \sum_{j \not= i} \partial_j g_{ii} n^j.
+        \]
+        因此
+        \[
+            (\partial_j g_{ii} - \partial_i g_{ij})n^j = 2 \coeff \dfrac{m}{\rho^4}(\rho^2 - (x^i)^2).
+        \]
+        在 $S_r$ 上, $\rho = r$, 代入积分得
+        \[
+            \begin{aligned}
+            \frac{1}{16}\int_{S_r} (\partial_j g_{ii} - \partial_i g_{ij})n^j \dif x 
+            ={} & \dfrac{1}{16}\dfrac{2m}{r^4}\biggl( 1 + \dfrac{m}{2 r}\biggr) \int_{S_r} (r^2 - (x^i) ^2) \dif x \\
+            ={} & \dfrac{1}{16} \dfrac{2m}{r^4}\biggl( 1 + \dfrac{m}{2 r}\biggr)^5 \int_{-r}^{r}\int_{\{(x^j, x^k) : (x^j)^2 + (x^k)^2 = r^2 - (x^i)^2\}}(r^2 - (x^i) ^2) \dif x^j \dif x^k \dif x^i \\
+            ={} & \dfrac{1}{16} \dfrac{2m}{r^4}\biggl( 1 + \dfrac{m}{2 r}\biggr)^5 \int_{-r}^{r} 2\pi\sqrt{r^2 - (x^i)^2}(r^2 - (x^i)^2) \dif x^i \\
+            ={} & \dfrac{\pi^2}{32} \dfrac{2m}{r^4}\biggl( 1 + \dfrac{m}{2 r}\biggr)^5
+            \end{aligned}
         \]
     \end{enumerate}
 \end{solution}
 
+\newpage
 \subsection{问题 1.3}
 \begin{problem}
     给定 $m$ 维 Riemann 流形 $(M, g)$.
@@ -110,9 +170,143 @@
         其中 $V = \nabla \log \phi$, $\owedge$ 为 Kulkarni-Nomizu 乘积.
         \item 假设 $m \geqslant 3$, 证明: 任取 $X, Y, Z \in \VecFld(M)$,
         \[
-            \tilde{C}(X, Y, Z) = C(X, Y, Z) + W(V, X, Y, Z),
+            \tilde{C}(X, Y, Z) = C(X, Y, Z) + W(V, X, Z, Y),
         \]
         其中 $\tilde{C}$ 和 $C$ 分别是度量 $\tilde{g} = \phi^2g$ 和 $g$ 确定的 Cotton 张量, $W$ 是 Weyl 张量, $V = \nabla \log \phi$.
     \end{enumerate}
 \end{problem}
+\begin{solution}
+    \begin{enumerate}
+        \item\label{enum::1} 利用
+        \[
+            \tDiv{X}Y - \Div{Y}X = \omega(X)Y + \omega(Y)X - g(X, Y)V,
+        \]
+        其中 $\omega(v) = g(v, V), \forall v \in \VecFld(M)$. 得到
+        \[
+            \begin{aligned}
+                 {} & \tDiv{Z}T(X, Y) - \Div{Z}T(X, Y) \\
+                ={} & -T(\tDiv{Z}X - \Div{Z}X, Y) - T(X, \tDiv{Z}Y - \Div{Z}Y) \\
+                ={} & -\omega(Z)T(X, Y) - \omega(X)T(Z, Y) + g(X, Z)T(V, Y) - \omega(Z)T(X, Y) - \omega(Y)T(X, Z) + g(Z, Y)T(X, V).
+            \end{aligned}
+        \]
+        所以
+        \[
+            \begin{aligned}
+                  & \tDiv{Z}T(X, Y) - \tDiv{Y}T(X, Z) - \Div{Z}T(X, Y) + \Div{Y}T(X, Z) \\
+                ={} & \cblue{\omega(Y)T(X, Z)} + \cred{\omega(X)T(Y, Z)} - g(X, Y)T(V, Z) + \cblue{\omega(Y)T(X, Z)} + \ccyan{\omega(Z)T(X, Y)} - \cmag{g(Y, Z)T(X, V)} \\
+                -{\ } & \ccyan{\omega(Z)T(X, Y)} - \cred{\omega(X)T(Y, Z)} + g(X, Z)T(V, Y) - \ccyan{\omega(Z)T(X, Y)} - \cblue{\omega(Y)T(X, Z)} + \cmag{g(Y, Z)T(X, V)} \\
+                ={} & \omega(Y)T(X, Z) - g(X, Y)T(V, Z) - \omega(Z)T(X, Y) + g(X, Z)T(V, Y) \\
+                ={} & T \owedge g (V, X, Y, Z).
+           \end{aligned}
+        \]
+        \item 记 $A$ 为 Schouten 张量, 则
+        \[
+            W = \Rm - A \owedge g, \quad C(X, Y, Z) = \Div{Z}A(X, Y) - \Div{Y}A(X, Z),
+        \]
+        以及 % \phi(X, Y) = g(X, V)Y + g(Y, V)X - g(X, Y)V
+        \[
+            \tilde{A}(X, Y) = A(X, Y) - \psi(X, Y), \quad \psi(X, Y) = \nabla^2 \log \phi (X, Y) - \omega(X)\omega(Y) + \dfrac{1}{2}\omega(V)g(X, Y),
+        \]
+        利用 \ref{enum::1}, 
+        \[
+            \tilde{C}(X, Y, Z) - C(X, Y, Z) = A \owedge g(V, X, Y, Z) - \tDiv{Z}\psi(X, Y) + \tDiv{Y}\psi(X, Z). \tag{$\ast$}\label{eq::1}
+        \]
+        我没发现有什么特别好的计算方法, 只能展开了\ldots{}
+
+        首先
+        \[
+            % model
+            % coefg(\Div{second}V, first) - coefg(first, V)g(second, V) + \dfrac{1}{2}g(V, V)coefg(first, second)
+            % negative model
+            % -coefg(\Div{second}V, first) + coefg(first, V)g(second, V) - \dfrac{1}{2}g(V, V)coefg(first, second)
+            \begin{aligned}
+                 {  } & \tDiv{Z}\psi(X, Y) \\
+                ={  } & Z(\psi(X, Y)) - \psi(\tDiv{Z}X, Y) - \psi(X, \tDiv{Z}Y) \\
+                ={  } & Z\bigl(g(\Div{Y}V, X) - g(X, V)g(Y, V) + \dfrac{1}{2}g(V, V)g(X, Y)\bigr) \\
+                -{\ } & g(\Div{Y}V, \Div{Z}X) + g(\Div{Z}X, V)g(Y, V) - \dfrac{1}{2}g(V, V)g(\Div{Z}{X}, Y) \\
+                -{\ } & g(Z, V)g(\Div{Y}V, X) + \cred{g(X, V)g(Y, V)g(Z, V)} - \dfrac{1}{2}\cpink{g(V, V)g(X, Y)g(Z, V)} \\
+                -{\ } & {g(X, V)g(\Div{Y}V, Z)} + \cred{g(X, V)g(Y, V)g(Z, V)} - \dfrac{1}{2}\cblue{g(V, V)g(X, V)g(Y, Z)} \\
+                +{\ } & g(X, Z)g(\Div{Y}V, V) - \ccyan{g(V, V)g(X, Z)g(Y, V)} + \dfrac{1}{2}\ccyan{g(V, V)g(X, Z)g(Y, V)} \\
+                -{\ } & g(\Div{\Div{Z}Y}V, X) + g(X, V)g(\Div{Z}Y, V) - \dfrac{1}{2}g(V, V)g(X, \Div{Z}Y) \\
+                -{\ } & g(Z, V)g(\Div{Y}V, X) + \cred{g(X, V)g(Y, V)g(Z, V)} - \dfrac{1}{2}\cpink{g(V, V)g(X, Y)g(Z, V)} \\
+                -{\ } & g(Y, V)g(\Div{Z}V, X) + \cred{g(X, V)g(Y, V)g(Z, V)} - \dfrac{1}{2}\ccyan{g(V, V)g(X, Z)g(Y, V)} \\
+                +{\ } & g(Y, Z)g(\Div{X}V, V) - \cblue{g(V, V)g(X, V)g(Y, Z)} + \dfrac{1}{2}\cblue{g(V, V)g(X, V)g(Y, Z)},
+            \end{aligned}
+        \]
+        由于接下来要计算的是 $-\tDiv{Z}\psi(X, Y) + \tDiv{Y}\psi(X, Z)$, 因此如果上面的某项关于 $Y$ 和 $Z$ 是对称的, 那么在作差中就会消去. \textbf{注意到}, 这样的项有\cred{红}、\cblue{蓝}、``\ccyan{青} $+$ \cpink{粉}''三种. 所以 在接下来的求和中, 可以忽略这些项.
+        \[
+            \begin{aligned}
+                {  } & \tDiv{Z}\psi(X, Y) \\
+               ={  } & g(\Div{Z}\Div{Y}V, X) + \cmag{g(\Div{Y}V, \Div{Z}X)} - \ccyan{g(\Div{Z}X, V)g(Y, V)} \\
+               -{\ } & \textcolor{brown}{g(X, \Div{Z}V)g(Y, V)} - \cpink{g(X, V)g(\Div{Z}Y, V)} - \textcolor{purple}{g(X, V)g(Y, \Div{Z}V)} \\
+               +{\ } & g(\Div{Z}V, V)g(X, Y) + \cblue{\dfrac{1}{2}g(V, V)g(\Div{Z}X, Y)} + \cred{\dfrac{1}{2}g(V, V)g(X, \Div{Z}Y)} \\
+               -{\ } & \cmag{g(\Div{Y}V, \Div{Z}X)} + \ccyan{g(\Div{Z}X, V)g(Y, V)} - \cblue{\dfrac{1}{2}g(V, V)g(\Div{Z}X, Y)} \\
+               -{\ } & g(\Div{\Div{Z}Y}V, X) + \cpink{g(X, V)g(\Div{Z}Y, V)} - \cred{\dfrac{1}{2}g(V, V)g(X, \Div{Z}Y)} \\
+               +{\ } & g(X, Z)g(\Div{Y}V, V) + g(Y, Z)g(\Div{X}V, V) - 2g(Z, V)g(\Div{Y}V, X)  \\
+               -{\ } & \textcolor{purple}{g(X, V)g(\Div{Y}V, Z)} - \textcolor{brown}{g(Y, V)g(\Div{Z}V, X)} \\
+               ={  } & g(\Div{Z}\Div{Y}V, X) - 2\textcolor{brown}{g(Y, V)g(X, \Div{Z}V)} - \textcolor{purple}{2g(X, V)g(Y, \Div{Z}V)} \\
+               +{\ } & g(\Div{Z}V, V)g(X, Y) - g(\Div{\Div{Z}Y}V, X) + g(X, Z)g(\Div{Y}V, V) \\
+               +{\ } & g(Y, Z)g(\Div{X}V, V) - 2g(Z, V)g(\Div{Y}V, X) \\
+               ={  } & g(\Div{Z}\Div{Y}V, X) - g(\Div{\Div{Z}Y}V, X) \\
+               +{\ } & \bigl[ g(Y, Z)g(\Div{X}V, V) \bigr] + \bigl[ g(\Div{Z}V, V)g(X, Y) + g(X, Z)g(\Div{Y}V, V) \bigr] \\
+               -{\ } & 2\bigl[ g(Z, V)g(\Div{Y}V, X) + g(Y, V)g(\Div{Z}V, X) \bigr] - 2\bigl[ g(X, V)g(Y, \Div{Z}V) \bigr],
+           \end{aligned}
+        \]
+        最后两行用中括号括起的部分关于 $Y$, $Z$ 是对称的. 所以终于得到
+        \[
+            \begin{aligned}
+            -\tDiv{Z}\psi(X, Y) + \tDiv{Y}\psi(X, Z) ={}& g(\Div{Y}\Div{Z}V, X) - g(\Div{\Div{Y}Z}V, X) - g(\Div{Z}\Div{Y}V, X) + g(\Div{\Div{Z}Y}V, X) \\
+            ={}& \Rm(X, V, Y, Z) = -\Rm(V, X, Y, Z).
+            \end{aligned}
+        \]
+
+        代入 (\ref{eq::1}) 式, 得到
+        \[
+            \tilde{C}(X, Y, Z) - C(X, Y, Z) = A \owedge g(V, X, Y, Z) - \Rm(V, X, Y, Z) = -W(V, X, Y, Z) = W(V, X, Z, Y).
+        \]
+        得证.
+    \end{enumerate}
+\end{solution}
+
+\subsection{问题 1.4}
+\begin{problem}
+    考虑如下 Riemann 流形 $(\real^2, \dif s^2)$,
+    \[
+        \dif s^2 = \dfrac{\dif x^2 + \dif y^2}{1 + x^2 + y^2}.
+    \]
+    \begin{enumerate}
+        \item 证明: 在无穷远处 $(\real^2, \dif s^2)$ 渐进于半径为 $1$ 的圆柱面, 即: $r \rightarrow \infty$ 时, $\gamma_r(t) = (r \cos t, r \sin t)$ 关于 $\dif s^2$ 的弧长趋向于 $2\pi$.
+        \item 证明: $\Ric + \nabla^2 f = 0$, 其中 $f = -\log(1 + x^2 + y^2)$.
+    \end{enumerate}
+\end{problem}
+\begin{solution}
+    \begin{enumerate}
+        \item 切向量长度为
+        \[
+            |\dot{\gamma_r}(t)|^2 = \dfrac{r^2}{1 + x^2 + y^2} = \dfrac{r^2}{1 + r^2}, 
+        \]
+        所以
+        \[
+            L(\gamma_r) = \int_{0}^{2\pi}\sqrt{\dfrac{r^2}{1 + r^2}} \dif t = 2\pi \sqrt{\dfrac{r^2}{1 + r^2}},
+        \]
+        所以 $r \rightarrow \infty$ 时弧长趋向于 $2\pi$.
+        \item 利用共形变换的公式, 有
+        \[
+            \Ric = -\Delta (\dfrac{1}{2}f)g.
+        \]
+        显然有 $f_{,xx} = f_{,yy}$, 所以只要 $f_{,xy} = 0$, 就有 $\nabla^2 f = \dfrac{1}{2}\Delta f g$, 即 $\Ric + \nabla^2 f = 0$. 而
+        \[
+            \nabla^2 f(\partial_x, \partial_y) = \partial_y \partial_x f - \Div{\partial_y}\partial_x f.
+        \]
+        以及
+        \[
+            \Div{\partial_y}\partial_x = \partial_x(\dfrac{f}{2})\partial_y + \partial_y(\dfrac{f}{2})\partial_x = -\dfrac{x\partial_y + y\partial_x}{1 + x^2 + y^2}.
+        \]
+        得到
+        \[
+            \nabla^2 f(\partial_x, \partial_y) = \partial_y\bigl( \dfrac{-2x}{1 + x^2 + y^2} \bigr) + \dfrac{x\dfrac{-2y}{1 + x^2 + y^2} + y\dfrac{-2x}{1 + x^2 + y^2}}{1 + x^2 + y^2} = \dfrac{4xy}{(1 + x^2 + y^2)^2} - \dfrac{4xy}{(1 + x^2 + y^2)^2} = 0.
+        \]
+        因此 $\Ric + \nabla^2 f = 0$.
+    \end{enumerate}
+\end{solution}
 \end{document}
