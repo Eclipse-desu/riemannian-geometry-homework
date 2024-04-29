@@ -7,6 +7,6 @@ if "%1" == "" (
     move /y ./%1.pdf ../pdf/%1.pdf
     del *.aux *.log *.out
     cd ../pdf
-    code %1.pdf
+    @REM code %1.pdf
     cd ..
 )

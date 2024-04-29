@@ -1,0 +1,256 @@
+\documentclass{ctexart}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+\usepackage{mathrsfs} % for \VecFld
+\usepackage{stmaryrd} % for \owedge
+
+\usepackage{xcolor, framed}
+\definecolor{shadecolor}{RGB}{241, 241, 255}
+\newcounter{problemname}
+\newenvironment{problem}{\begin{shaded}\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\end{shaded}\par}
+\newenvironment{solution}{\par\noindent\textbf{解答. }}{\par}
+
+\newcommand{\cred}{\textcolor{red}}
+\newcommand{\cblue}{\textcolor{blue}}
+\newcommand{\ccyan}{\textcolor{cyan}}
+\newcommand{\cmag}{\textcolor{magenta}}
+\newcommand{\cpink}{\textcolor{pink}}
+
+\usepackage{bbm}
+
+\usepackage{geometry}
+\geometry{a4paper,scale=0.8}
+
+\input{../command.tex}
+
+\title{第八次作业}
+\author{洪艺中 12335025}
+\begin{document}
+\maketitle
+
+\subsection{问题 1: 177页 习题1}
+\begin{problem}
+    设 $(M, g)$ 是 Riemann 流形, $C \colon (a, b) \rightarrow M$, $r \mapsto C(t)$ 为光滑曲线, 则参数变换 $t = t(s)$ 后, $C$ 为测地线的充要条件是: 曲线 $C$ 在局部坐标下的方程 $x^i = x^i(t)$ 满足微分方程
+    \[
+        \dfrac{\dif^2 x^i}{\dif t^2} + \Gamma^{i}_{jk}\dfrac{\dif x^j}{\dif t}\dfrac{\dif x^k}{\dif t} = f(t) \dfrac{\dif x^i}{\dif t},
+    \]
+    其中 $f$ 是 $C$ 上的函数, $t$ 为任意参数.
+\end{problem}
+\begin{solution}
+    如果变换后是测地线, 则
+    \[
+        \dfrac{\dif^2 x^i}{\dif s^2} + \Gamma^{i}_{jk}\dfrac{\dif x^j}{\dif s}\dfrac{\dif x^k}{\dif s} = 0.
+    \]
+    而
+    \[
+        \dfrac{\dif x^j}{\dif s} = t^{\prime}(s)\dfrac{\dif x^j}{\dif t}, \quad \dfrac{\dif^2 x^i}{\dif s^2} = (t^{\prime}(s))^2 \dfrac{\dif^2 x^i}{\dif t^2} + t^{\prime\prime}(s)\dfrac{\dif x^j}{\dif t}.
+    \]
+    所以代入
+    \[
+        (t^{\prime}(s))^2 \dfrac{\dif^2 x^i}{\dif t^2} + t^{\prime\prime}(s)\dfrac{\dif x^j}{\dif t} +  (t^{\prime}(s))^2\Gamma^{i}_{jk}\dfrac{\dif x^j}{\dif s}\dfrac{\dif x^k}{\dif s} = 0,
+    \]
+    因此
+    \[
+        \dfrac{\dif^2 x^i}{\dif t^2} + \Gamma^{i}_{jk}\dfrac{\dif x^j}{\dif t}\dfrac{\dif x^k}{\dif t} = -\dfrac{t^{\prime\prime}(s)}{(t^{\prime}(s))^2} \dfrac{\dif x^i}{\dif t}.
+    \]
+\end{solution}
+
+\subsection{问题 2}
+\begin{problem}
+    给定 $(M, g)$ 上的两个点 $p$ 和 $q$. 令 $\Omega_{p, q} = \{\text{光滑曲线} \sigma \colon [a, b] \rightarrow M : \sigma(a) = p, \sigma(b) = q, \dot{\sigma} \not= 0\}$. 记 $|\dot{\sigma}|^2(t) = \Inner{\dot{\sigma}(t)}{\dot{\sigma}(t)}_{g|_{\sigma(t)}}$. 曲线的能量泛函定义为
+    \[
+        E(\sigma) := \int_{a}^{b} |\dot{\sigma}|^2(t) \dif t.
+    \]
+    \begin{enumerate}
+        \item\label{enum::1} 证明: 如果曲线 $\gamma \in \Omega_{p, q}$ 使得 $E(\gamma) = \inf\{E(\sigma) : \sigma \in \Omega_{p, q}\}$. 则 $\gamma$ 是测地线;
+        \item\label{enum::2} 证明: 曲线 $\sigma$ 的长度 $L(\sigma) = \int_{a}^{b}|\dot{\sigma}| \dif t$ 与其能量 $E(\sigma)$ 之间满足关系:
+        \[
+            L(\sigma) \leqslant (b - a)^{\frac{1}{2}}\bigl[E(\sigma)\bigr]^{\frac{1}{2}},
+        \]
+        且等号成立当且仅当 $|\dot{\sigma}| = $ 常数;
+        \item 不像课堂上那样去计算弧长泛函 $L(\sigma)$ 的一阶变分, 而是利用 (\ref{enum::1}) 和 (\ref{enum::2}) 的结论, 证明: 如果 $L(\gamma) = \inf\{L(\sigma) \colon \sigma \in \Omega_{p, q}\}$, 则 $\gamma$ 是测地线.
+    \end{enumerate}
+\end{problem}
+\begin{solution}
+    \newcommand{\dgam}{\dot{\gamma}}
+    \begin{enumerate}
+        \item 考虑 $\gamma$ 上固定端点的变分 $\alpha(t, s) \colon M \times (-\varepsilon, \varepsilon) \rightarrow M$, $\alpha(\cdot, 0) = \gamma(t)$, $\alpha(a, \cdot) = p$, $\alpha(b, \cdot) = q$. 那么
+        \[
+            \dfrac{\dif }{\dif s}E(\alpha_s(t))|_{s = 0} = 0.
+        \]
+        记 $V = \alpha_{\ast}\bigl( \dfrac{\partial}{\partial s} \bigr)$, $T = \alpha_{\ast}\bigl( \dfrac{\partial}{\partial t} \bigr)$. 因为 $\bigl[\dfrac{\partial}{\partial t} , \dfrac{\partial}{\partial s}\bigr] = 0$, 所以 $[T, V] = 0$. 因此有
+        \[
+            \begin{aligned}
+                \left. \dfrac{\dif }{\dif s}E(\alpha_s(t)) \right|_{s = 0} ={} & 
+                \int_{a}^{b} V\Inner{T}{T}|_{s = 0} \dif t \\
+                ={} & \int_{a}^{b} 2\Inner{\Div{V}T }{T}|_{s = 0} \dif t \\
+                ={} & 2\int_{a}^{b} \Inner{\Div{T}V}{T}|_{s = 0} \dif t \\
+                ={} & 2\int_{a}^{b} T\Inner{V}{T}|_{s = 0} - \Inner{V}{\Div{T}T}|_{s = 0} \dif t \\
+                ={} & \left.2\Inner{V}{T}\right|^{b}_{a} - 2\int_{a}^{b}\Inner{V}{\Div{T}T}|_{s = 0} \dif t \\
+                ={} & - 2\int_{a}^{b}\Inner{V}{\Div{T}T}|_{s = 0} \dif t = 0.
+            \end{aligned}
+        \]
+        由 $V$ 的任意性, $\Div{T}T|_{s = 0} = \Div{\dgam}\dgam = 0$. 即 $\gamma$ 是测地线.
+        \item 用 H\"older 不等式, 在 $\cont{\infty}([a, b])$ 上,
+        \[
+            \norm{|\dot{\sigma}(t)|}_{1} \leqslant \norm{1}_{2} \norm{|\dot{\sigma}(t)|^2}_{2} = (b - a)^{\frac{1}{2}}\bigl(\int_{a}^{b}\Inner{\dot{\sigma}(t)}{\dot{\sigma}(t)}_{g|_{\sigma(t)}} \dif t\bigr)^{\frac{1}{2}} = (b - a)^{\frac{1}{2}}\bigl[E(\sigma)\bigr]^{\frac{1}{2}},
+        \]
+        取等时, $|\dot{\sigma}(t)|$ 是 $1$ 的常数倍. 得证.
+        \item 注意到若 $L(\gamma) = \inf\{L(\sigma) \colon \sigma \in \Omega_{p, q}\}$, 则对任意同起讫点的 $\sigma$
+        \[
+            L(\gamma) \leqslant L(\sigma) \leqslant (b - a)^{\frac{1}{2}}\bigl[E(\sigma)\bigr]^{\frac{1}{2}}.
+        \]
+        此外, 我们可以取 $\gamma(t)$ 为匀速测地线, $|\dgam| = L(\gamma)$, 这时 $b - a = 1$. 此时由 (\ref{enum::2}), $L(\gamma) = E(\gamma)^{\frac{1}{2}}$. 所以对任意 $\sigma \in \Omega_{p, q}$,
+        \[
+            E(\gamma) \leqslant E(\sigma).
+        \]
+        由 (\ref{enum::1}), $\gamma$ 是测地线.
+    \end{enumerate}
+\end{solution}
+
+\subsection{问题 3}
+\begin{problem}
+    考虑 $\real^{n}$ 的上半平面 $\half^n = \{(x_1, \cdots, x_{n - 1}, x_n) \in \real^n \colon x_n > 0\}$. 并赋予 $\half^n$ 如下 Riemann 度量
+    \[
+        \dif s^2 = \dfrac{1}{x_n^2}(\dif x_1^2 + \cdots + \dif x_{n - 1}^2 + \dif x_n^2).
+    \]
+    \begin{enumerate}
+        \item 证明 $(\half^n, \dif s^2)$ 的截面曲率是常数 $-1$;
+        \item 证明 $\ell_1 = \{(0, t) \in \real^n \colon t > 0\}$ 与 $\ell_2 = \{(0, \cos t, \sin t) \in \real^n \colon t \in (0, \pi)\}$ 均为 $(\half^n, \dif s^2)$ 的测地线(作为集合, 未考虑参数化).
+    \end{enumerate}
+\end{problem}
+\begin{solution}
+    \begin{enumerate}
+        \item 取 $\varphi = \log (\dfrac{1}{x_n}) = -\log x_n$. $V := \nabla \varphi = -\dfrac{1}{x_n} \partial_{n}$.
+        \[
+            \psi(X, Y) := \Div{X}\omega(Y) - \omega(X)\omega(Y) + \dfrac{1}{2}\omega(V)g_0(X, Y) = \dfrac{1}{x_n^2}\omega^n\omega^n - \dfrac{1}{x_n^2}\omega^n\omega^n + \dfrac{1}{2x_n^2}g_0(X, Y) = \dfrac{1}{2x_n^2}g_0(X, Y),
+        \]
+        所以
+        \[
+            \Rm(X, Y, Z, W) = \Rm_0(X, Y, Z, W) - \psi \owedge g_0(X, Y, Z, W) = -\dfrac{1}{2x_n^2}g_0 \owedge g_0.
+        \]
+        所以, 截面曲率为
+        \[
+            K(e_i, e_j) = \dfrac{\Rm(e_i, e_j, e_i, e_j)}{g(e_i, e_i)g(e_j, e_j) - g(e_i, e_j)^2} = \dfrac{-\dfrac{1}{2x_n^2}g_0 \owedge g_0}{\dfrac{1}{2x_n^2}g_0 \owedge g_0} = -1.
+        \]
+        \item 首先计算联络导数
+        \[
+            \Div{e_n}e_n = 2g_0(e_n, V)e_n - g_0(e_n, e_n)V = -\dfrac{1}{x_n}e_n,
+        \]
+        当 $ i \not= n$ 时,
+        \[
+            \Div{e_i}e_n = \Div{e_n}e_i = g_0(e_n, V)e_i = -\dfrac{1}{x_n}e_i,
+        \]
+        以及 $ i \not= n$ 时,
+        \[
+            \Div{e_i}e_i = -g_0(e_i, e_i)V = \dfrac{1}{x_n}e_n.
+        \]
+        其他联络导数为 $0$.
+
+        \newcommand{\dell}{\dot{\ell}}
+        对 $\ell_1$, 取参数 $\ell_1(t) = (0, f(t))$, 则 $\dell_1(t) = (0, f^\prime(t))$, $(\ell_1)_{\ast}(\frac{\dif}{\dif t}) = f^{\prime}(t)e_n$
+        \[
+            \begin{aligned}
+            \Div{\dell_1(t)}\dell_1(t) ={} & f^{\prime}(t)e_n(f^{\prime}(t))e_n + (f^{\prime})^2(t)\Div{e_n}{e_n} \\
+            ={} & f^{\prime}(t)\biggl(\dfrac{f^{\prime\prime}(t)}{f^{\prime}(t)} - \dfrac{f^{\prime}(t)}{f(t)}\biggr)e_n,
+            \end{aligned}
+        \]
+        所以取参数 $f(t) = e^t$, 则 $\ell_1$ 成为测地线.
+
+        对 $\ell_2$, $\dell(t) = (0, -\sin t, \cos t)$. 这里 $x_{n - 1} = \cos t$, $x_{n} = \sin t$, 因为协变导数和延拓是无关的, 所以计算 $\Div{\dell_2(t)}\dell_2(t)$ 时, 可以考虑延拓的向量场 $-x_{n}e_{n - 1} + x_{n - 1}e_{n}$,
+        \[
+            \begin{aligned}
+                \Div{\dell_2(t)}\dell_2(t) ={} & -x_n \Div{e_{n - 1}}(-x_n e_{n - 1} + x_{n - 1} e_n) + x_{n - 1} \Div{e_{n}}(-x_{n} e_{n - 1} + x_{n - 1} e_n) \\
+                ={} & -x_n \bigl(-\dfrac{x_n}{x_n}e_{n} + e_n - \dfrac{x_{n - 1}}{x_n}e_{n - 1} \bigr) + x_{n - 1} \biggl( -e_{n - 1} + \dfrac{x_n}{x_n}e_{n - 1} - \dfrac{x_{n - 1}}{x_n}e_n  \biggr) \\
+                ={} & \cos t e_{n - 1} - \dfrac{\cos^2 t }{\sin t}e_n \\
+                ={} & -\cot t(-\sin t e_{n - 1} + \cos t e_n).
+            \end{aligned}
+        \]
+        所以由问题 1, $\ell_2$ 是测地线.
+    \end{enumerate}
+\end{solution}
+
+\subsection{问题 4}
+\begin{problem}
+    设 $(M, g)$ 是一个闭 Riemann 流形(即连通, 紧致, 没有边界). 假设存在光滑函数 $f \in \cont{\infty}(M)$ 以及常数 $\lambda < 0$ 使得
+    \[
+        \Ric + \nabla^2 f = \lambda g.
+    \]
+    请按如下步骤证明 $M$ 是 Einstein 流形.
+    \begin{enumerate}
+        \item 利用 Ricci 恒等式证明: $\Div{i}\Ric_{jk} - \Div{j}\Ric_{ik} = \R^{l}_{kij}f^l$;
+        \item 利用第二 Bianchi 恒等式证明: $\Div{i}\scal = 2\Ric_{ij}g^{jk}\Div{k}f$;
+        \item 证明 $f$ 满足这样的方程: $\Delta f - |\nabla f|^2 + 2\lambda f = \text{常数}$;
+        \item 证明 $f = \text{常数}$, 从而 $\Ric = \lambda g$.
+    \end{enumerate}
+\end{problem}
+\begin{solution}
+    \begin{enumerate}
+        \item\label{enum::3} 直接计算得到
+        \[
+            \begin{aligned}
+                \Div{i}\Ric_{jk} - \Div{j}\Ric_{ik} ={} & \Div{i}(\lambda g - \nabla^2 f)_{jk} - \Div{j}(\lambda g - \nabla^2 f)_{ik} \\
+                ={} & f_{,ikj} - f_{,jki} \\
+                ={} & f_{,l}\R^{l}_{kij}.
+            \end{aligned}
+        \]
+        \item 直接计算得到
+        \[
+            \begin{aligned}
+                \Div{i}\scal ={} & \tr_{jk}\Div{i}\Ric_{jk} \\
+                ={} & \tr_{lm} \tr_{jk} \R_{jlkm, i} \\
+                ={} & \tr_{lm} \tr_{jk} (-\R_{jlmi, k} - \R_{jlik, m}) \\
+                ={} & \tr_{jk}\Ric_{ji, k} + \tr_{lm} \Ric_{li, m} \\
+                ={} & 2g^{jk}\Ric_{ji, k}
+            \end{aligned}
+        \]
+        所以对 \ref{enum::3} 中的式子关于 $j$, $k$ 取迹, 得
+        \[
+            g^{jk}\Div{i}\Ric_{jk} - g^{jk}\Div{j}\Ric_{ik} = g^{jk}\R^{l}_{kij}\Div{l}f,
+        \]
+        即
+        \[
+            \Div{i}\scal - \dfrac{1}{2}\Div{i}\scal = \dfrac{1}{2}\Div{i}\scal = \Ric^{j}_{i}\Div{l}f = \Ric_{ij}g^{jk}\Div{k}f.
+        \]
+        得证.
+        \item 直接计算得到
+        \[
+            \begin{aligned}
+                \Div{i}|\nabla^2 f| ={} & 2\Inner{\Div{i}\nabla f}{\nabla f} \\
+                ={} & 2g^{jk} f_{,ij} f_{,k} \\
+                ={} & 2g^{jk} (\lambda g_{ij} - \Ric_{ij}) f_{,k} \\
+                ={} & 2\lambda \delta^{k}_{i}f_{, k} - 2g^{jk}\Ric_{ij}f_{,k} \\
+                ={} & 2\lambda f_{, i} - \Div{i}\scal.
+            \end{aligned}
+        \]
+        所以 $\Div{i}(|\nabla^2 f| - \lambda f + \frac{1}{2}\scal) = 0$. 即存在常数 $C$,
+        \[
+            |\nabla^2 f| - 2\lambda f + \scal = C^\prime.
+        \]
+        此外, 直接对 $\Ric + \nabla^2 f = \lambda g$ 取迹, 得到
+        \[
+            \scal + \Delta f = \lambda n.
+        \]
+        上两式作差, 得
+        \[
+            \Delta f - |\nabla f |^2 + 2 \lambda f = C^\prime - \lambda n = C.
+        \]
+        得证.
+        \item 考虑 $f$ 的最大值点 $p$ 和最小值点 $q$.
+        \item 
+        在最大值点处, $\Delta f \leqslant 0$, $\nabla f = 0$, 所以 $f(p) = \dfrac{1}{2\lambda}(C - \Delta f) \leqslant \dfrac{1}{2\lambda}C$.\
+
+        在最小值点处, $\Delta f \geqslant 0$, $\nabla f = 0$, 所以 $f(q) = \dfrac{1}{2\lambda}(C - \Delta f) \geqslant \dfrac{1}{2\lambda}C$.
+
+        所以 $f(q) \geqslant f(p)$, 即 $f$ 是常数. 所以
+        \[
+            \Ric = \lambda g.
+        \]
+    \end{enumerate}
+\end{solution}
+\end{document}
