@@ -1,0 +1,158 @@
+\documentclass{ctexart}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+\usepackage{mathrsfs} % for \VecFld
+\usepackage{stmaryrd} % for \owedge
+
+\usepackage{xcolor, framed}
+\definecolor{shadecolor}{RGB}{241, 241, 255}
+\newcounter{problemname}
+\newenvironment{problem}{\begin{shaded}\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\end{shaded}\par}
+\newenvironment{solution}{\par\noindent\textbf{解答. }}{\par}
+
+\newcommand{\cred}{\textcolor{red}}
+\newcommand{\cblue}{\textcolor{blue}}
+\newcommand{\ccyan}{\textcolor{cyan}}
+\newcommand{\cmag}{\textcolor{magenta}}
+\newcommand{\cpink}{\textcolor{pink}}
+
+\usepackage{bbm}
+
+\usepackage{geometry}
+\geometry{a4paper,scale=0.8}
+
+\input{../command.tex}
+
+\title{第九次作业}
+\author{洪艺中 12335025}
+\begin{document}
+\maketitle
+
+\subsection{174页 习题4}
+
+\newcommand{\dx}[1]{ \pdDif{}{x^{#1}}}
+\begin{problem}
+    设 $(M, g)$ 为 Riemann 流形. $(U, \varphi, x^i)$ 是以 $q$ 为原点的法坐标图.
+    \[
+        X_0 = \xi^i \bigl( \dx{i} \bigr)_{q}, \quad Y_0 = \eta^i \bigl( \dx{i} \bigr)_{q}
+    \]
+    均为单位向量. $C \colon [0, r) \rightarrow C(s)$ 为在 $q = C(0)$ 点以 $X_0$ 为切向量的测地线, $Y(s)$ 是将 $Y_0$ 沿 $C$ 平行移动而得的切向量. 证明:
+    \begin{enumerate}[label = (\roman*)]
+        \item 在法坐标系的原点
+        \[
+            \pdDif{\Gamma^k_{ij}}{x^l} =  -\dfrac{1}{3}(\R^k_{ijl} + \R^{k}_{jil}),
+        \]
+        \item 设 $Y(s) = \zeta^i \bigl( \dx{i} \bigr)_{C(s)}$, 则
+        \[
+            \zeta^i(s) = \eta^i + \dfrac{1}{6}(\R^i_{jkl})_q \xi^j \eta^k \xi^l s^2 + o(s^3),
+        \]
+        \item 若 $\Inner{X_0}{Y_0} = 0$, 且令 $||Y(s)||_q^2 = g_{ij}(q)\xi^i(s) \xi^j(s)$, 则
+        \[
+            ||Y(s)||_q = 1 + \dfrac{s^2}{6}\R(X_0, Y_0, X_0, Y_0) + o(s^3).
+        \]
+    \end{enumerate}
+\end{problem}
+
+\begin{solution}
+    记 $e_i = \dx{i}$.
+    \begin{enumerate}[label = (\roman*)]
+        \item\label{enum::1} 记 $M$ 的维数为 $n$. 任取 $\mathbf{u} = (u^1, \cdots, u^n) \in T_q M$, 因为 $\exp_q(t\mathbf{u}) = (tu^1, \cdots, tu^n)$ 是测地线, 所以由测地线方程,
+        \[
+            \Gamma^{k}_{ij}(\exp_q(t\mathbf{u})) u^i u^j = 0.
+        \]
+        因此在这一点, Riemann 曲率张量为
+        \[
+            \begin{aligned}
+            \R^{i}_{jkl}(q) ={}& g^{im}\Inner{\Rm(e_k, e_l)e_j}{e_m} \\
+            ={}& \pdDif{\Gamma^{i}_{jl}}{x^k} + \Gamma^{i}_{ks}\Gamma^{s}_{jl} - \pdDif{\Gamma^{i}_{jk}}{x^l} - \Gamma^{i}_{ls}\Gamma^{s}_{jk} \\
+            ={}& \pdDif{\Gamma^{i}_{jl}}{x^k}- \pdDif{\Gamma^{i}_{jk}}{x^l}.
+            \end{aligned}
+        \]
+        由 $\mathrm{u}$ 的任意性, $\Gamma^{k}_{ij}(q) = 0$. 对测地线方程关于 $t$ 微分, 得到
+        \[
+            \mathbf{u}(\Gamma^{k}_{ij}) u^i u^j = \pdDif{\Gamma^k_{ij}}{x^l}u^i u^j u^l = 0.
+        \]
+        取 $\mathbf{u} = u^i e_i$, 那么
+        \[
+            \pdDif{\Gamma^k_{ii}}{x^i}u^i u^i u^i = 0,
+        \]
+        取 $\mathbf{u} = e_i + e_j$ 和 $\mathbf{u} = e_i - e_j$, 那么
+        \[
+            \pdDif{\Gamma^{k}_{ii}}{x^j} + 2\pdDif{\Gamma^{k}_{ij}}{x^i} + 2\pdDif{\Gamma^{k}_{ij}}{x^j} + \pdDif{\Gamma^{k}_{jj}}{x^i} = 0,
+        \]
+        \[
+            -\pdDif{\Gamma^{k}_{ii}}{x^j} - 2\pdDif{\Gamma^{k}_{ij}}{x^i} + 2\pdDif{\Gamma^{k}_{ij}}{x^j} + \pdDif{\Gamma^{k}_{jj}}{x^i} = 0,
+        \]
+        所以 
+        \[
+            \begin{aligned}
+                0 ={} & \pdDif{\Gamma^{k}_{ii}}{x^j} + 2\pdDif{\Gamma^{k}_{ij}}{x^i} \\
+                ={} & 3\pdDif{\Gamma^{k}_{ij}}{x^i} + \R^k_{iji} \\
+                ={} & 3\pdDif{\Gamma^{k}_{ii}}{x^j} + 2\R^k_{iij}
+            \end{aligned}
+        \]
+        因此 
+        \[
+            \pdDif{\Gamma^{k}_{ij}}{x^i} = -\dfrac{1}{3}\R^k_{iji} = -\dfrac{1}{3}(\R^k_{iji} + \R^{jii}),
+        \]
+        \[
+            \pdDif{\Gamma^{k}_{ii}}{x^j} = -\dfrac{2}{3}\R^k_{iij}.
+        \]
+
+        取 $\mathbf{u} = u^i e_i + u^j e_j + u^k e_k$, 由上面的计算, 如果求和中 $i, j, k$ 只选到一个或两个下标, 那么这部分求和项为 $0$. 所以
+        \[
+            \begin{aligned}
+                0 ={} & \pdDif{\Gamma^{k}_{ij}}{x^l} + \pdDif{\Gamma^{k}_{jl}}{x^i} + \pdDif{\Gamma^{k}_{il}}{x^j} \\
+                ={} & 3\pdDif{\Gamma^{k}_{ij}}{x^l} + \bigl( \pdDif{\Gamma^{k}_{jl}}{x^i} - \pdDif{\Gamma^{k}_{ij}}{x^l} \bigr) + \bigl( \pdDif{\Gamma^{k}_{il}}{x^j} - \pdDif{\Gamma^{k}_{ij}}{x^l} \bigr) \\
+                ={} & 3\pdDif{\Gamma^{k}_{ij}}{x^l} + \R^{k}_{jil} + \R^{k}_{ijl}.
+            \end{aligned}
+        \]
+        因此
+        \[
+            \pdDif{\Gamma^{k}_{ij}}{x^l} = -\dfrac{1}{3}(\R^{k}_{jil} + \R^{k}_{ijl}).
+        \]
+        \item $Y(s)$ 满足平行移动方程
+        \[
+            \pdDif{\zeta^i(s)}{s} + \Gamma^{i}_{jk} \zeta^j(s) \xi^k(s) = 0,
+        \]
+        所以在 $q$ 点
+        \[
+            \pdDif{\zeta^i(s)}{s} = -\Gamma^{i}_{jk} \eta^j \xi^k = 0,
+        \]
+        并且利用 $\Gamma^i_{jk}(q) = 0$, 在 $q$ 点二阶导数为
+        \[
+            \pdDif{^2 \zeta^i(s)}{s^2} = -\pdDif{\Gamma^{i}_{jk}}{s}(q) \eta^j \xi^k.
+        \]
+        利用 \ref{enum::1} 的结论,
+        \[
+            \pdDif{\Gamma^{k}_{ij}}{s}(q) = -\dfrac{1}{3}(\R^{k}_{jil} + \R^{k}_{ijl})\xi^l,
+        \]
+        所以
+        \[
+            \begin{aligned}
+                \zeta^i(s) ={} & \eta^i + \pdDif{\zeta^i(s)}{s} s + \dfrac{1}{2}\pdDif{^2 \zeta^i(s)}{s^2} s^2 + O(s^3) \\
+                ={} & \eta^i + \dfrac{1}{6}(\R^i_{jkl} + \R^i_{kjl}) \eta^j \xi^k \xi^l s^2 + O(s^3).
+            \end{aligned}
+        \]
+        因为 $\R^i_{jkl}$ 交换 $kl$ 会变号, 所以 $\R^i_{jkl}\eta^j \xi^k \xi^l = 0$. 因此
+        \[
+            \zeta^i(s) = \eta^i + \dfrac{1}{6}\R^i_{kjl} \xi^j \eta^k \xi^l s^2 + O(s^3).
+        \]
+        \item $\Inner{X_0}{Y_0} = 0$, 则 $\sum_{i} \eta^i \xi^i = 0$.
+        所以
+        \[
+            \begin{aligned}
+                ||Y(s)||^2_q ={} & g_{ij}(q)\xi^i(s) \xi^j(s) \\
+                ={} & |\eta^i|^2 + \sum_{i}\dfrac{1}{6}\R_{ijkl} \eta^i \xi^j \eta^k \xi^l s^2 + O(s^3) \\
+                ={} & 1 + \dfrac{1}{6}R(X_0, Y_0, X_0, Y_0)s^2 + O(s^3).
+            \end{aligned}
+        \]
+    \end{enumerate}
+\end{solution}
+
+\end{document}
