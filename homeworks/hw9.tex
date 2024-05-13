@@ -155,4 +155,158 @@
     \end{enumerate}
 \end{solution}
 
+\subsection{179页 习题9}
+\begin{problem}
+    设 $m$ 维 Riemann 流形 $(M, g)$ 在测地极坐标系 $(r, \theta^1, \cdots, \theta^{m - 1})$ 下具有度量形式
+    \[
+        \dif s^2 = (\dif r)^2 + (f(r))^2 h_{ij}(\theta) \dif \theta^i \theta^j,
+    \]
+    其中 $m - 1$ 维度量 $\dif \sigma^2 = h_{ij}(\theta)\dif \theta^i \theta^j$ 具有常数截面曲率 $1$. 求证 $\dif s^2$ 具有常数截面曲率 $c$ 的充要条件是
+    \[
+        f(r) = \left\{
+            \begin{array}{ll}
+                \sin \bigl( \sqrt{c r^2} \bigr) / \sqrt{c} & c > 0, \\
+                r & c = 0, \\
+                \sinh \bigl( \sqrt{-c r^2} \bigr) / \sqrt{-c} & c < 0.
+            \end{array}
+        \right.
+    \]
+\end{problem}
+
+\begin{solution}
+    第一步要计算 Christoffel 记号.,
+    \[
+        \Gamma^{i}_{jk} = \dfrac{1}{2}g^{il}\left(\pdDif{g_{jl}}{x^k} + \pdDif{g_{lk}}{x^j} - \pdDif{g_{jk}}{x^l}\right).
+    \]
+    \begin{enumerate}
+        \item 若三个指标都是 $r$:
+        \[
+            \Gamma^{r}_{rr} = 0.
+        \]
+        \item 若两个指标是 $r$, 一个是 $\theta^i$:
+        \[
+            \begin{aligned}
+                \Gamma^{r}_{r i} ={} & \dfrac{1}{2}g^{rr}\left(\pdDif{g_{rr}}{\theta^i} + \pdDif{g_{ri}}{r} - \pdDif{g_{ri}}{r}\right) = 0,
+            \end{aligned}
+        \]
+        \[
+            \begin{aligned}
+                \Gamma^{i}_{rr} ={} & \dfrac{1}{2}g^{ij}\left(\pdDif{g_{rj}}{r} + \pdDif{g_{jr}}{r} - \pdDif{g_{rr}}{\theta^j}\right) = 0.
+            \end{aligned}
+        \]
+        \item 若一个指标是 $r$, 其余两个是 $\theta^i, \theta^j$:
+        \[
+            \begin{aligned}
+                \Gamma^{r}_{ij} ={} & \dfrac{1}{2}g^{rr}\left(\pdDif{g_{ir}}{\theta^j} + \pdDif{g_{rj}}{\theta^i} - \pdDif{g_{ij}}{r}\right) = -f(r) f^{\prime}(r) h_{ij}(\theta), \\
+                \Gamma^{i}_{rj} ={} & \dfrac{1}{2}g^{ik}\left(\pdDif{g_{rk}}{\theta^j} + \pdDif{g_{jk}}{r} - \pdDif{g_{rj}}{\theta^k}\right) = \dfrac{f^{\prime}(r)}{f(r)} \delta^i_{j}.
+            \end{aligned}
+        \]
+        \item 若所有指标都不为 $r$: 设 $\bar{\Gamma}$ 表示 $\dif \sigma^2$ 的 Christoffel 记号,
+        \[
+            \Gamma^{i}_{jk} = \bar{\Gamma}^{i}_{jk}.
+        \]
+    \end{enumerate}
+    那么 Riemann 曲率张量
+    \[
+        \R^{\alpha}_{\beta \delta \eta} = \pdDif{\Gamma^{\alpha}_{\beta \eta}}{x^\delta } + \Gamma^{\alpha}_{\delta \xi}\Gamma^{\xi}_{\beta \eta} - \pdDif{\Gamma^{\alpha}_{\beta \delta }}{x^\eta} - \Gamma^{\alpha}_{\eta \xi}\Gamma^{\xi}_{\beta \delta},
+    \]
+    所以,
+    \[
+        \begin{aligned}
+            \R_{riri} ={} & g_{rr}\R^{r}_{iri} = \R^{r}_{i r i} \\
+            ={} & \pdDif{\Gamma^{r}_{i i}}{r} + \Gamma^{r}_{r \xi}\Gamma^{\xi}_{i i} - \pdDif{\Gamma^{r}_{i r }}{\theta^i} - \Gamma^{r}_{i \xi}\Gamma^{\xi}_{i r} \\
+            ={} & -(f(r))^2 h_{ii}(\theta) - f(r)f^{\prime\prime}(r) h_{ii}(\theta) - \sum_{j}\left(-f(r)f^\prime h_{ij}(\theta) \cdot \dfrac{f^\prime(r)}{f(r)}\delta^i_j\right) \\
+            ={} & -f(r)f^{\prime\prime}(r) h_{ii}(\theta). \\
+            \R_{ijij} = {} & g_{ik}\R^{k}_{jij} \\
+            ={} & g_{ik}\left(\pdDif{\Gamma^{k}_{j j}}{\theta^i } + \Gamma^{k}_{i \xi}\Gamma^{\xi}_{j j} - \pdDif{\Gamma^{k}_{j i }}{\theta^j} - \Gamma^{k}_{j \xi}\Gamma^{\xi}_{j i}\right) \\
+            ={} & g_{ik}\left(\pdDif{\Gamma^{k}_{j j}}{\theta^i } + \Gamma^{k}_{i l}\Gamma^{l}_{j j} - \pdDif{\Gamma^{k}_{j i }}{\theta^j} - \Gamma^{k}_{j l}\Gamma^{l}_{j i}\right) + g_{ik}\left( \Gamma^{k}_{i r}\Gamma^{r}_{j j} - \Gamma^{k}_{j r}\Gamma^{r}_{j i}\right)
+        \end{aligned}
+    \]
+    设 $\dif \sigma^2$ 的曲率张量为 $\bar{R}$, 则有
+    \[
+        \begin{aligned}
+            \bar{\R}^{i}_{j i j} ={} & \pdDif{\Gamma^{i}_{j j}}{\theta^i } + \Gamma^{i}_{i k}\Gamma^{k}_{j j} - \pdDif{\Gamma^{i}_{j i }}{\theta^j} - \Gamma^{i}_{j k}\Gamma^{k}_{j i}
+        \end{aligned}
+    \]
+    所以
+    \[
+        \begin{aligned}
+            \R_{ijij} ={} & (f(r))^2\bar{\R}_{ijij} + g_{ik}\left( \dfrac{f^{\prime}(r)}{f(r)} \delta^k_{i} \cdot -f(r) f^{\prime}(r) h_{jj}(\theta) - \dfrac{f^{\prime}(r)}{f(r)} \delta^k_{j} \cdot -f(r) f^{\prime}(r) h_{ij}(\theta) \right) \\
+            ={} & (f(r))^2\bar{\R}_{ijij} - (f(r))^2 f^{\prime}(r)^2 \bigl(h_{ii}(\theta) h_{jj}(\theta) - h_{ij}(\theta)^2\bigr).
+        \end{aligned}
+    \]
+    因此截面曲率为
+    \begin{equation}\label{eq::sectional-curvature}
+        \begin{aligned}
+        \K(\partial r, \partial \theta^i) ={} & \dfrac{\R_{riri}}{g_{rr} g_{ii} - g_{ri}^2} = -\dfrac{f^{\prime\prime}(r)}{f(r)}, \\
+        \K(\partial \theta^i, \partial \theta^j) ={} & \dfrac{\R_{ijij}}{g_{ii} g_{jj} - g{ij}^2} = \dfrac{1}{(f(r))^2} - \dfrac{(f(r))^2 (f^{\prime}(r))^2 \bigl(h_{ii}(\theta) h_{jj}(\theta) - h_{ij}(\theta)^2\bigr)}{f(r)^4 \bigl(h_{ii}(\theta) h_{jj}(\theta) - h_{ij}(\theta)^2\bigr)} \\
+        ={} & \dfrac{1}{(f(r))^2} - \dfrac{(f^{\prime}(r))^2}{(f(r))^2}.
+        \end{aligned}
+    \end{equation}
+    因此如果是常截面曲率流形, 那么
+    \[
+        -\dfrac{f^{\prime\prime}(r)}{f(r)} = \dfrac{1}{(f(r))^2} - \dfrac{(f^{\prime}(r))^2}{(f(r))^2} = c.
+    \]
+    即
+    \[
+        f^{\prime\prime}(r) = -cf(r), \qquad 1 - (f^{\prime}(r))^2 = c(f(r))^2.
+    \]
+    所以
+    \begin{enumerate}
+        \item 如果 $c > 0$, 那么 $f(r) = A \sin (\sqrt{c}r) + B \cos (\sqrt{c}r)$, 利用第二个方程,
+        \[
+            1 = c(f(r))^2 + (f^\prime (r))^2 = c B^2 + c A^2,
+        \]
+        此外, 计算 $|\partial B(r)|$ 的面积为
+        \[
+            A(r) = \int_{\partial B(r)} (f(r))^{2(m - 1)} \det (h_{ij}(\theta)) \dif \theta,
+        \]
+        当 $r \rightarrow 0$ 时, $A(r)$ 应当趋向于 $0$. 所以 $\lim_{r \rightarrow 0} f(r) = 0$. 所以 $A = \dfrac{1}{\sqrt{c}}$, $B = 0$. 即
+        \[
+            f(r) = \sin \bigl( r\sqrt{c} \bigr) / \sqrt{c}.
+        \]
+        \item 如果 $c = 0$, 那么 $f(r) = Ax + B$. 结合上面所说, 有
+        \[
+            1 = c(Ax + B)^2 + A^2, \qquad \lim_{r \rightarrow 0} f(r) = 0,
+        \]
+        所以 $A = 1$, $B = 0$. 即
+        \[
+            f(r) = r.
+        \] 
+        \item 如果 $c < 0$, 那么 $f(r) = A e^{r \sqrt{-c}} + B e^{-r \sqrt{-c}}$. 所以有
+        \[
+            1 = c(f(r))^2 + (f^\prime (r))^2 = 4c AB, \qquad \lim_{r \rightarrow 0} f(r) = A + B = 0.
+        \]
+        所以
+        \[
+            f(r) = e^{r \sqrt{-c}} / (2 \sqrt{-c}) + e^{-r \sqrt{-c}} / (2 \sqrt{-c}) = \sinh \bigl( r \sqrt{-c} \bigr)/ \sqrt{-c}.
+        \]
+    \end{enumerate}
+    综上, 如果 $M$ 是常截面曲率流形, 且截面曲率为 $c$, 则 
+    \[
+        f(r) = \left\{
+            \begin{array}{ll}
+                \sin \bigl( r\sqrt{c} \bigr) / \sqrt{c} & c > 0, \\
+                r & c = 0, \\
+                \sinh \bigl( r \sqrt{-c} \bigr)/ \sqrt{-c} & c < 0.
+            \end{array}
+        \right.
+    \]
+    反过来, 如果 $f$ 表现如上, 那么根据 (\ref{eq::sectional-curvature}) 式, 可以计算截面曲率为 $c$. 因此题目得证.
+\end{solution}
+
+\subsection{问题 1.2}
+
+\begin{problem}
+    假设 $(M, g)$ 是 $m$ 维 Riemann 流形, $p \in M$ 是流形上任意一点. 在 $p$ 的法坐标 $(\mathcal{U}_p , x_i )$ 中证明:
+    \begin{enumerate}[label = (\roman*)]
+        \item $g_{ij} (x) = \delta_{ij} - \frac{1}{3} \R_{ikjl}(0) x_k x_l + O(|x|^3)$;
+        \item $\det (g_{ij}) = 1 - \frac{1}{3} \Ric_{kl}(0) x_k x_l + O(|x|^3 )$.
+    \end{enumerate}
+\end{problem}
+
+\begin{solution}
+    
+\end{solution}
+
 \end{document}
