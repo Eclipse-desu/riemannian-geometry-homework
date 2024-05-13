@@ -306,7 +306,12 @@
 \end{problem}
 
 \begin{solution}
-    
+    \begin{enumerate}
+        \item 核心是计算 $g_{ij}$ 沿由 $p$ 出发到 $x$ 的测地线的导数. 设 $x = su$, 其中 $u = (u^1, \cdots, u^n) \in T_p \mathcal{U}_p$ 是 $p$ 点的单位切向量, 同时其也对应 $p$ 到 $x$ 测地线上某点的法坐标. 设 $\gamma(t) = \exp_p(tu)$, 那么 $x = \gamma(s)$.
+        \[
+            \dDif{}{t}g_{ij}(\gamma(t)) = u^i \partial_i\bigl( g_{ij}(\gamma(t)) \bigr).
+        \]
+    \end{enumerate}
 \end{solution}
 
 \end{document}
