@@ -15,6 +15,8 @@
 \newenvironment{problem}{\begin{shaded}\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\end{shaded}\par}
 \newenvironment{solution}{\par\noindent\textbf{解答. }}{\par}
 
+\newtheorem*{lemma*}{引理}
+
 \newcommand{\cred}{\textcolor{red}}
 \newcommand{\cblue}{\textcolor{blue}}
 \newcommand{\ccyan}{\textcolor{cyan}}
@@ -33,7 +35,7 @@
 \begin{document}
 \maketitle
 
-\subsection{174页 习题4}
+\subsection{174页 习题4}\label{sec::1}
 
 \newcommand{\dx}[1]{ \pdDif{}{x^{#1}}}
 \begin{problem}
@@ -298,7 +300,7 @@
 \subsection{问题 1.2}
 
 \begin{problem}
-    假设 $(M, g)$ 是 $m$ 维 Riemann 流形, $p \in M$ 是流形上任意一点. 在 $p$ 的法坐标 $(\mathcal{U}_p , x_i )$ 中证明:
+    假设 $(\mfd, g)$ 是 $m$ 维 Riemann 流形, $p \in \mfd$ 是流形上任意一点. 在 $p$ 的法坐标 $(\mathcal{U}_p , x_i )$ 中证明:
     \begin{enumerate}[label = (\roman*)]
         \item $g_{ij} (x) = \delta_{ij} - \frac{1}{3} \R_{ikjl}(0) x_k x_l + O(|x|^3)$;
         \item $\det (g_{ij}) = 1 - \frac{1}{3} \Ric_{kl}(0) x_k x_l + O(|x|^3 )$.
@@ -307,11 +309,148 @@
 
 \begin{solution}
     \begin{enumerate}
-        \item 核心是计算 $g_{ij}$ 沿由 $p$ 出发到 $x$ 的测地线的导数. 设 $x = su$, 其中 $u = (u^1, \cdots, u^n) \in T_p \mathcal{U}_p$ 是 $p$ 点的单位切向量, 同时其也对应 $p$ 到 $x$ 测地线上某点的法坐标. 设 $\gamma(t) = \exp_p(tu)$, 那么 $x = \gamma(s)$.
+        \item\label{enum::2} 核心是计算 $g_{ij}$ 沿由 $p$ 出发到 $x$ 的测地线的导数. 设 $x = (x^1, \cdots, x^n)$, 同时其也 $p$ 到 $x$ 指数映射的切向量. 设 $\gamma(t) = \exp_p(tx)$, 那么 $x = \gamma(1)$. 所以一阶导数为
         \[
-            \dDif{}{t}g_{ij}(\gamma(t)) = u^i \partial_i\bigl( g_{ij}(\gamma(t)) \bigr).
+            \dDif{}{t}g_{ij}(\gamma(t)) = x^k \partial_k\bigl( g_{ij}(\gamma(t)) \bigr).
+        \]
+        而 $\partial_k\left(g_{ij}\right) = \Inner{\Div{\partial_k}\partial_i}{\partial_j} + \Inner{\partial_i}{\Div{\partial_k}\partial_j} = g_{jl}\Gamma^{l}_{ik} + g_{il}\Gamma^{l}_{jk}$. 因为在法坐标的原点, Christoffel 记号为 $0$, 所以
+        \[
+            \dDif{}{t}g_{ij}(\gamma(t)) = 0.
+        \]
+        
+        二阶导数为
+        \[
+            \begin{aligned}
+            \dDif{^2}{t^2}g_{ij}(\gamma(t)) ={} & \dDif{}{t} \left[x^k \bigl( g_{jl}\Gamma^{l}_{ik} + g_{il}\Gamma^{l}_{jk} \bigr) \right] \\
+            ={} & x^k\left( g_{jl}\dDif{\Gamma^l_{ik}}{t} + g_{il}\dDif{\Gamma^l_{jk}}{t} \right) \\
+            ={} & x^k\left( g_{jl}x^m\pdDif{\Gamma^l_{ik}}{x^m} + g_{il}x^m\pdDif{\Gamma^l_{jk}}{x^m} \right).
+            \end{aligned}
+        \]
+        在 $0$ 点, 利用第 \ref{sec::1} 节的 (\ref{enum::1}), 遂有
+        \[
+            \begin{aligned}
+                \dDif{^2}{t^2}g_{ij}(0) ={} & x^k\left(x^m g_{jl} \pdDif{\Gamma^l_{ik}}{x^m}(0) + x^m g_{il} \pdDif{\Gamma^i_{jk}}{x^m}(0)\right) \\
+                ={} & -\dfrac{1}{3}x^k x^m g_{jl}(0)(\R^l_{i k m}(0) + \R^{l}_{k i m}(0)) - \dfrac{1}{3}x^k x^m g_{il}(0)(\R^l_{j k m}(0) + \R^{l}_{k j m}(0)) \\
+                ={} & -\dfrac{1}{3}x^k x^m (\R_{jikm}(0) + \R_{jkim}(0) + \R_{ijkm}(0) + \R_{ikjm}(0)) \\
+                ={} & -\dfrac{2}{3}x^k x^l \R_{ijkl}(0),
+            \end{aligned}
+        \]
+        代入 Taylor 展式, 得到
+        \[
+            g_{ij}(x) = \delta_{ij} - \dfrac{1}{3}\R_{ijkl}(0)x^k x^l + O(|x|^3).
+        \]
+        \item 依然要计算导数. 记 $G = (g_{ij})_{n \times n}$,
+        \[
+            \dDif{}{t}\det (g_{ij})(\gamma(t)) = \det G \tr G^{-1}G^{\prime} = \det (g_{ij})(\gamma(t))(g^{ki}g_{ik}^{\prime})(\gamma(t)),
+        \]
+        所以 $\dDif{}{t}\det (g_{ij})(0) = 0$. 继续计算, 二阶导数为
+        \[
+            \dDif{^2}{t^2}\det (g_{ij})(\gamma(t)) = \dDif{}{t}\sum_{j, k} \bigl[g^{jk} (g^{ki}g_{ij}^{\prime})\bigr](\gamma(t)),
+        \]
+        因为 $0 = (g^{ij}g_{jk})^{\prime} = (g^{ij})^{\prime}g_{jk} + g^{ij}(g_{jk})^{\prime}$, 在 $0$ 点处, $0 = (g^{ij})^{\prime}g_{jk}$. 所以 $(g^{ij})^{\prime}(0) = 0$. 因此上式中求导只会求在 $g^{\prime}$ 上. 于是利用 (\ref{enum::2}) 的结果,
+        \[
+            \dDif{^2}{t^2}\det (g_{ij})(0) = -\dfrac{2}{3}\sum_{j, k} \bigl[g^{jk} (g^{ki}x^k x^l \R_{ijkl}(0))\bigr] = -\dfrac{2}{3}x^k x^l \Ric_{kl}(0),
+        \]
+        代入 Taylor 展式, 得到
+        \[
+            \det (g_{ij})(x) = 1 - \dfrac{1}{3}\Ric_{kl}(0)x^k x^l + O(|x|^3).
         \]
     \end{enumerate}
 \end{solution}
+
+\newpage
+\subsection{问题 1.3}
+
+\begin{problem}
+    假设 $(\mfd, g)$ 是 $m$ 维 Riemann 流形. 假设 $r > 0$ 足够小使得 $\exp_p \colon D_r (0) \rightarrow B_r (p)$ 是微分同胚, 其中 $D_r (0) = {v \in T_p \mfd : |v| < \varepsilon}$, $B_r (p) = \exp_p D_r (0)$. 记 $S_r (p) = \partial B_r (p)$. 证明:
+    \begin{enumerate}
+        \item $\vol (B_r (p)) = \omega_m r^m \left(1 - \dfrac{\scal(p)}{6(m + 2)}r^2 + O(r^3)\right)$, 其中 $\omega_m$ 是 $\real^m$ 的单位球的欧氏体积; 
+        \item $\area (S_r (p)) = m \omega_m r^{m - 1} - \dfrac{1}{6} \scal(p) \omega_m r^{m + 1} + O(r^{m + 2})$.
+    \end{enumerate}
+\end{problem}
+
+\begin{solution}
+    \begin{enumerate}
+        \item $\vol (B_r (p))$ 相当于在欧氏空间 $\bar{B}_r$ 上对 $\mfd$ 的体积元 $\dif \vol$ 积分. 而 $\dif \vol = \sqrt{\det (g_{ij})} \dif m_{\real^m}$. 设 
+        \[
+            \sqrt{\det (g_{ij})}(x) = 1 + a_k x^k + b_{kl}x^k x^l + O(|x|^3),
+        \]
+        那么平方可得
+        \[
+            a_k = 0, \qquad 2b_{kl} = - \dfrac{1}{3}\Ric_{kl}(p),
+        \]
+        所以
+        \[
+            \sqrt{\det (g_{ij})}(x) = 1 - \dfrac{1}{6}\Ric_{kl}(p)x^k x^l + O(|x|^3).
+        \]
+        
+        因此积分得
+        \[
+            \begin{aligned}
+                \vol (B_r (p)) ={} & \int_{\bar{B}_r} 1 - \dfrac{1}{6}\Ric_{kl}(p)x^k x^l + O(|x|^3) \dif x \\
+                ={} & \vol(\bar{B}_r) - \dfrac{1}{6}\int_{\bar{B}_r}\Ric_{kl}(p)x^k x^l \dif x + \vol(\bar{B}_r)O(r^3) \\
+            \end{aligned}
+        \]
+        考虑 $p$ 点附近的测地极坐标 $(r, \theta_1, \cdots, \theta_{m - 1})$. 则
+        \[
+            \left\{
+            \begin{aligned}
+                x_1 ={} & r \cos \theta_1 \\
+                x_2 ={} & r \sin \theta_1 \cos \theta_2 \\
+                \vdots{} & \\
+                x_{m - 1} ={} & r \sin \theta_1 \cdots \sin \theta_{m - 2} \cos \theta_{m - 1} \\
+                x_m ={} & r \sin \theta_1 \cdots \sin \theta_{m - 2} \sin \theta_{m - 1} 
+            \end{aligned}
+            \right.
+        \]
+        其中 $1 \leqslant i \leqslant m - 2$ 时, $\theta_i \in [0, \pi]$; 而 $\theta_{m - 1} \in [0, 2\pi]$. 观察对 $\theta_{m - 1}$ 的积分, 有以下结论:
+        \begin{lemma*}
+            若 $k \not= l$, 则
+            \[
+                \int_{\bar{B}_r}x^k x^l \dif x = 0.
+            \]
+        \end{lemma*}
+        \begin{proof}[引理的证明]
+            由于 $k \not= l$, 所以 $\theta_{m - 1}$ 的项只可能有三种情况: $\cos \theta_{m - 1}$, $\sin \theta_{m - 1}$, $\sin \theta_{m - 1}\cos \theta_{m - 1} = \sin (2\theta_{m - 1}) / 2$. 而这三者在 $[0, 2\pi]$ 上的积分都是 $0$. 因此引理成立.
+        \end{proof}
+        有此结论, 则 
+        \[
+            \int_{\bar{B}_r}\Ric_{kl}(p)x^k x^l \dif x = \int_{\bar{B}_r}\sum_{k}\Ric_{kk}(p)(x^k)^2 \dif x.
+        \]
+        由对称性, 不同 $k$ 的 $\int_{\bar{B}_r}(x^k)^2 \dif x$ 都相等, 并且其均等于
+        \[
+            \dfrac{1}{m}\int_{\bar{B}_r} \sum_{k = 1}^{m}(x^k)^2 \dif x = \dfrac{1}{m}\int_{\bar{B}_r} |x|^2 \dif x = \omega_m \dfrac{r^{m + 2}}{m + 2},
+        \]
+        故
+        \[
+            \int_{\bar{B}_r}\Ric_{kl}(p)x^k x^l \dif x = m\omega_m \dfrac{\scal(p)}{m + 2}r^{m + 2}.
+        \]
+
+        因此
+        \[
+            \vol (B_r (p)) = \omega_m r^m - \dfrac{1}{6}m\omega_m \dfrac{\scal(p)}{m + 2}r^{m + 2} + \omega_m r^mO(r^3) = \omega_m r^m(1 - \dfrac{\scal(p)}{6(m + 2)}r^2 + O(r^3)).
+        \]
+        \item 计算 $\area(S_r(p))$, 只需要对 $\vol(B_r(p))$ 关于 $r$ 求导即可.
+    \end{enumerate}
+\end{solution}
+
+\subsection{问题 1.4}
+\begin{problem}
+    假设 $(\mfd, g)$ 是 $m$ 维 Riemann 流形, $p \in M$, $\Pi_p \subset T_p \mfd$ 是 2 维截面. 令 $C_r^0 = \{v \in \Pi_p : |v| = r\}$, $C_r = \exp_p C_r^0$. 用 $L_r$ 记曲线 $C_r$ 的长度. 证明:
+    \[
+        \K(\Pi_p) = \dfrac{3}{\pi}\lim_{r \rightarrow 0}\dfrac{2\pi r - L_r}{r^3},
+    \]
+    其中 $\K(\Pi_p)$ 表示 $p$ 点处关于 $\Pi_p$ 的截面曲率.
+\end{problem}
+
+
+\subsection{问题 1.5}
+
+\begin{problem}
+    假设 $(\mfd, g)$ 是 $m$ 维 Riemann 流形, $\gamma_k \colon [0, 1] \rightarrow \mfd$, $k = 1, 2$ 是两条正规测地线 (速度为 $1$ 的测地线), 且满足 $\gamma_1 (0) = \gamma_2 (0) = p$. 用 $\theta \in (0, \pi)$ 记 $v = \dot{\gamma}_1 (0)$ 与 $w = \dot{\gamma}_2(0)$ 的夹角, $\Pi_p = \mathrm{span}\{v, w\}$ 是 $T_p \mfd$ 的 $2$ 维截面. 证明:
+    \[
+        d(\gamma_1(t), \gamma_2(t)) = \sqrt{2(1 - \cos \theta)} \bigl[ 1 - \dfrac{1}{6}\K(\Pi_p) \cos^2(\theta / 2) t^2 + O(t^3) \bigr].
+    \]
+\end{problem}
 
 \end{document}
