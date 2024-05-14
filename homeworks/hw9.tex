@@ -443,6 +443,19 @@
     其中 $\K(\Pi_p)$ 表示 $p$ 点处关于 $\Pi_p$ 的截面曲率.
 \end{problem}
 
+\begin{solution}
+    对 $\exp_p \Pi_p$ 应用问题 1.3 的结论. 这是一个 $2$ 维的子流形, 其截面曲率就是 $K(\Pi_p)$. 因此
+    \[
+        L_r = \area(C_r) = 2\pi r - \dfrac{2K(\Pi_p)}{6}\pi r^3 + O(r^4).
+    \]
+
+    故
+    \[
+        \lim_{r \rightarrow 0}\dfrac{2\pi r - L_r}{r^3}
+        = \lim_{r \rightarrow 0} \dfrac{\dfrac{2K(\Pi_p)}{6}\pi r^3 + O(r^4)}{r^3} = \dfrac{\pi}{3}K(\Pi_p),
+    \]
+    问题得证.
+\end{solution}
 
 \subsection{问题 1.5}
 
@@ -452,5 +465,9 @@
         d(\gamma_1(t), \gamma_2(t)) = \sqrt{2(1 - \cos \theta)} \bigl[ 1 - \dfrac{1}{6}\K(\Pi_p) \cos^2(\theta / 2) t^2 + O(t^3) \bigr].
     \]
 \end{problem}
+
+\begin{solution}
+    
+\end{solution}
 
 \end{document}
