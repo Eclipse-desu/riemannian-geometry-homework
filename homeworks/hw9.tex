@@ -462,12 +462,89 @@
 \begin{problem}
     假设 $(\mfd, g)$ 是 $m$ 维 Riemann 流形, $\gamma_k \colon [0, 1] \rightarrow \mfd$, $k = 1, 2$ 是两条正规测地线 (速度为 $1$ 的测地线), 且满足 $\gamma_1 (0) = \gamma_2 (0) = p$. 用 $\theta \in (0, \pi)$ 记 $v = \dot{\gamma}_1 (0)$ 与 $w = \dot{\gamma}_2(0)$ 的夹角, $\Pi_p = \mathrm{span}\{v, w\}$ 是 $T_p \mfd$ 的 $2$ 维截面. 证明:
     \[
-        d(\gamma_1(t), \gamma_2(t)) = \sqrt{2(1 - \cos \theta)} \bigl[ 1 - \dfrac{1}{6}\K(\Pi_p) \cos^2(\theta / 2) t^2 + O(t^3) \bigr].
+        d(\gamma_1(t), \gamma_2(t)) = \sqrt{2(1 - \cos \theta)} \bigl[ 1 - \dfrac{1}{6}\K(\Pi_p) \cos^2(\theta / 2) t^2 + O(t^3) \bigr]t.
     \]
 \end{problem}
 
 \begin{solution}
-    
+    为计算距离, 设 $A(t)$ 为 $\gamma_2(t) = tw$ 关于 $\gamma_1(t) = tv$ 指数映射的切向量, 即 $\exp_{tv}A(t) = tw$. 考虑 $\sigma(t, s) := \exp_{tv}sA(t)$. $T := \sigma_{\ast}\partial_s$ 是 $tv$ 到 $tw$ 测地线 $a_t \colon s \mapsto \sigma(t, s)$ 的切向量场, 且测地线 $a_t$ 的长度为 
+    \[
+        L(a_t) = |T(t, 0)| = d(\gamma_1(t), \gamma_2(t)),
+    \]
+    而 $J := \sigma_{\ast}\partial_t$ 是 Jacobi 场, 满足
+    \[
+        \ddot{J} = \Rm(T, J)T,
+    \]
+    借此, 计算 $L^2 := (L(a_t))^2 = |T(t, 0)|^2$ 在 $p$ 点关于 $t$ 的导数:
+    \begin{itemize}
+        \item $1$ 阶:
+        \[
+            \dDif{L^2}{t}(p) = \Div{J}\Inner{T}{T}(p) = 2\Inner{\Div{J}T}{T}(0, 0) = 0.
+        \]
+        \item $2$ 阶: 因为 $J(t, 0) = v$, $J(t, 1) = w$, $p$ 处 $\ddot{J} = 0$, 所以 $J(0, s) = v + s(w - v)$. 即 $\Div{J}T(0, s) = \Div{T}J(0, s) = w - v$. 利用此结果, 以及 $T(0, s) = 0$,
+        \[
+            \begin{aligned}
+                \dDif{^2 L^2}{t^2}(0, 0) ={} & 2\Inner{\Div{J}\Div{J}T}{T}(p) + 2\Inner{\Div{J}T}{\Div{J}T}(0, 0) \\
+                ={} & 2|w - v|^2 = 4(1 - \cos \theta).
+            \end{aligned}
+        \]
+        \item $3$ 阶: 利用 $T(0, s) = 0$, 以及 $2\Inner{\Div{J}\Div{J}T}{\Div{J}T}(0, s) = J(\Inner{\Div{J}T}{\Div{J}T})(0, s) = J(2|v - w|^2) = 0$,
+        \[
+            % \begin{aligned}
+                \dDif{^3 L^2}{t^3}(0, 0) = 2\Inner{\Div{J}\Div{J}\Div{J}T}{T}(0, 0) + 2\Inner{\Div{J}\Div{J}T}{\Div{J}T}(0, 0) + 4\Inner{\Div{J}\Div{J}T}{\Div{J}T}(0, 0) = 0
+            % \end{aligned}
+        \]
+        \item $4$ 阶: 作为铺垫, 首先计算
+        \[
+            \begin{aligned}
+                \Div{J}\Div{J}T ={} & \Div{J}\Div{T}J \\
+                ={} & \Rm(J, T)J - \Div{T}\Div{J}J,
+            \end{aligned}
+        \]
+        和
+        \[
+            \begin{aligned}
+                {} & \Div{J}\Div{J}\Div{J}T(0, 0) \\
+                ={} & \Div{J}(\Rm(J, T)J) - \Div{J}\Div{T}\Div{J}J \\
+                ={} & (\Div{J}\Rm)(J, T)J + \Rm(\Div{J}J, T)J + \Rm(J, \Div{J}T)J + \Rm(J, T)\Div{J}J - \Div{J}\Div{T}\Div{J}J \\
+                ={} & \Rm(J, \Div{J}T)J(0, 0) - \Div{J}\Div{T}\Div{J}J(0, 0),
+            \end{aligned}
+        \]
+        其中, 最后一个等式用到了 $T(0, s) = 0$, 所以只要张量中有单独出现的 $T$, 就必须为 $0$. 此外, 借助这一点, 可以继续计算得到 $\Div{T}\Div{J}J(0, s) = \Div{J}\Div{T}J(0, s) = \Div{J}(w - v) = 0$; $\Div{J}J(0, 0) = 0$, $\Div{J}J(0, 1) = 0$. 其关于 $s$ 的导数 $\Div{T}\Div{J}J(0, s)$ 为 $0$, 所以 $\Div{J}J(0, s) = 0$. 利用以上结果,
+        \[
+            \begin{aligned}
+                {} & \Inner{\Div{J}\Div{T}\Div{J}J}{\Div{J}T}(0, 0) \\
+                ={} & J\Inner{\Div{T}\Div{J}J}{\Div{J}T}(0, 0) - \Inner{\Div{T}\Div{J}J}{\Div{J}\Div{J}T}(0, 0) \\
+                ={} & JT\Inner{\Div{J}J}{\Div{J}T}(0, 0) - J\Inner{\Div{T}\Div{J}T}{\Div{J}J}(0, 0) \\
+                ={} & TJ\Inner{\Div{J}J}{\Div{J}T}(0, 0) - \Inner{\Div{J}\Div{T}\Div{J}T}{\Div{J}J}(0, 0) - \Inner{\Div{T}\Div{J}T}{\Div{J}\Div{J}J}(0, 0) \\
+                ={} & TJ\Inner{\Div{J}J}{\Div{J}T}(0, 0).
+            \end{aligned}
+        \]
+        所以可以计算 $4$ 阶导数
+        \[
+            \begin{aligned}
+                \dDif{^4 L^2}{t^4}(0, 0) ={} & 8\Inner{\Div{J}\Div{J}\Div{J}T}{\Div{J}T}(0, 0) \\
+                ={} & 8\Inner{\Rm(J, \Div{J}T)J}{\Div{J}T}(0, 0) - TJ\Inner{\Div{J}J}{\Div{J}T}(0, 0) \\
+                ={} & -8\Rm(w - v, v, w - v, v) - TJ\Inner{\Div{J}J}{\Div{J}T}(0, 0).
+            \end{aligned}
+        \]
+        因为上式中, 将 $(0, 0)$ 替换为 $(0, s)$ 也是成立的($L = |T(0, s)|$), 因此 $TJ\Inner{\Div{J}J}{\Div{J}T}(0, s)$ 是和 $s$ 无关的常数. 而 
+        \[
+            J\Inner{\Div{J}J}{\Div{J}T}(0, t) = \Inner{\Div{J}\Div{J}J}{\Div{J}T}(0, t) + \Inner{\Div{J}J}{\Div{J}\Div{J}T}(0, t),
+        \]
+        所以 $J\Inner{\Div{J}J}{\Div{J}T}(0, 0) = J\Inner{\Div{J}J}{\Div{J}T}(0, 1) = 0$. 记 $\alpha(s) := J\Inner{\Div{J}J}{\Div{J}T}(0, s)$, 所以 $\alpha^\prime(s) = \mathrm{const.}$, $\alpha(0) = \alpha(1) = 0$, 所以 $\alpha(s) \equiv 0$. 因此 $TJ\Inner{\Div{J}J}{\Div{J}T}(0, s) \equiv 0$. 所以
+        \[
+            \dDif{^4 L^2}{t^4}(0, 0) = -8\Rm(w - v, v, w - v, v) = -8\K(\Pi_p)(1 - \cos^2 \theta).
+        \]
+    \end{itemize}
+    所以, 用 Taylor 展式
+    \[
+        L^2 = 2(1 - \cos \theta) t^2 - \dfrac{8}{4!}\K(\Pi_p)(1 - \cos^2 \theta) t^4 + O(t^5),
+    \]
+    因此用待定系数法可以算出
+    \[
+        L = \sqrt{2(1 - \cos \theta)} \bigl[t - \dfrac{1}{6}\K(\Pi_p) \cos^2(\theta / 2) t^3 + O(t^4) \bigr].
+    \]
 \end{solution}
 
 \end{document}
