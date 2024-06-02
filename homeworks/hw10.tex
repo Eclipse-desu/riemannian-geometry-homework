@@ -1,0 +1,132 @@
+\documentclass{ctexart}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+\usepackage{mathrsfs} % for \VecFld
+\usepackage{stmaryrd} % for \owedge
+
+\usepackage{xcolor, framed}
+\definecolor{shadecolor}{RGB}{241, 241, 255}
+\newcounter{problemname}
+\newenvironment{problem}{\begin{shaded}\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\end{shaded}\par}
+\newenvironment{solution}{\par\noindent\textbf{解答. }}{\par}
+
+\newtheorem*{lemma*}{引理}
+
+\newcommand{\cred}{\textcolor{red}}
+\newcommand{\cblue}{\textcolor{blue}}
+\newcommand{\ccyan}{\textcolor{cyan}}
+\newcommand{\cmag}{\textcolor{magenta}}
+\newcommand{\cpink}{\textcolor{pink}}
+
+\usepackage{bbm}
+
+\usepackage{geometry}
+\geometry{a4paper,scale=0.8}
+
+\input{../command.tex}
+
+\title{第十次作业}
+\author{洪艺中 12335025}
+\begin{document}
+\maketitle
+
+\subsection{179页 习题7}
+
+\begin{problem}
+    设 $(\mfd, g)$ 和 $(\bar{\mfd}, \bar{g})$ 均为 Riemann 流形, 证明:
+    \begin{enumerate}[label = (\roman*)]
+        \item 若 $\varphi \colon \mfd \rightarrow \bar{\mfd}$ 为等距同胚, 则 $\varphi$ 将 $(\mfd, g)$ 的测地线映为 $(\bar{\mfd}, \bar{g})$ 的测地线;
+        \item 若 $\varphi_1, \varphi_2 \colon \mfd \rightarrow \mfd$ 均为等距变换, $(\mfd, g)$ 完备且连通, 且存在一点 $p$ 使得 $\varphi_1(p) = \varphi_2(p)$ 和 $(\varphi_{1\ast})_p = (\varphi_{2\ast})_p$, 则 $\varphi_1 \equiv \varphi_2$.
+    \end{enumerate}
+\end{problem}
+
+\begin{solution}
+    \begin{enumerate}[label = (\roman*)]
+        \item 取 $\mfd$ 上测地线 $\gamma(t)$ 附近的一组光滑变分 $\alpha \colon [0, T] \times (-\varepsilon, \varepsilon) \rightarrow \mfd$, $(t, s) \mapsto \alpha(t, s)$, $\alpha(t, 0) = \gamma(t)$, $\gamma(s)$ 的长度是最小值. 因为 $\varphi$ 是等距, 所以 $\varphi \circ \alpha$ 保持所有曲线 $\alpha_s(t)$ 的长度, 因此 $\varphi \circ \alpha(t, 0) = \varphi \circ \gamma(t)$ 也是这个变分的最小值. 因此根据 $\alpha$ 的任意性和第一变分公式, $\varphi \circ \gamma$ 也是测地线.
+        \item 因为 $(\mfd, g)$ 完备且连通, 根据 Hopf-Rinow 定理, 其在 $p$ 点测地完备. 因为 $\varphi_1$, $\varphi_2$ 都是等距同胚, 所以其将测地线映为测地线. 因此 $\varphi_i(\exp_p v) = \exp_{\varphi_i(p)}((\varphi_{i\ast})_p v)$. 利用条件, 任取 $v \in T_p \mfd$, 有 $\varphi_1(\exp_p v) = \varphi_2(\exp_p v)$. 故 $\varphi_1 \equiv \varphi_2$.
+    \end{enumerate}
+\end{solution}
+
+\subsection{179页 习题8}
+
+\begin{problem}
+    设 $(\mfd, g)$ 为完备 Riemann 流形, $\gamma \colon [0, +\infty) \rightarrow \mfd$, $s \mapsto \gamma(s)$ 为测地线, 其中 $s$ 为弧长参数. 如果 $s = \rho(\gamma(0), \gamma(s))$, 其中 $\rho$ 是距离函数, 则称 $\gamma$ 为从 $\gamma(0)$ 点出发的\textbf{射线}. 设 $p$ 为非紧致完备 Riemann 流形 $(\mfd, g)$ 上任意一点, 证明: M 上存在从 $p$ 出发的一条射线.
+\end{problem}
+
+\begin{solution}
+    因为 $\mfd$ 非紧, 所以 $\mfd$ 直径不能有限. 因 $\mfd$ 测地完备, 对每个 $n \in \natu$, 存在 $v_n \in T_p \mfd$, $|v_n| = 1$, 且 $t \in [0, n]$ 时, $\exp_p tv_n$ 都是极小测地线. 因为 $T_p \mfd$ 中的单位球面 $S_p \mfd$ 是紧集, 所以 $\{ v_n \}$ 有收敛的子列(不妨仍记作 $\{ v_n \}$)收敛到 $v$. 对每个 $n \in \natu$, 由完备性, $m \geqslant n$ 时都有 $\lim_{m \rightarrow \infty} \exp_{p} nv_m = \exp_{p} nv$. 所以 $\exp_p tv$ 可以定义在 $t \in [0, +\infty)$. 即存在射线.
+\end{solution}
+
+\newpage
+\subsection{192页 习题1}
+
+\begin{problem}
+    证明: 由 (4.\ 2.\ 2) 式定义的诱导联络 $\tnabla$ 满足 (4.\ 2.\ 3) 和 (4.\ 2.\ 4) 式.
+\end{problem}
+
+\begin{solution}
+    因为 $\mathcal{N}$ 是 $\mfd$ 的嵌入子流形, 所以其也是正则子流形, 即存在 $\mfd$ 上 $p$ 附近的坐标图 $(\mathcal{U}, \psi; x^i)$ 使得 $x^{n + 1} = \cdots = x^{m} = 0$. 那么沿 $f \colon \mathcal{N} \rightarrow \mfd$ 的向量场可以用这组坐标对应的基向量表示. 同时, $\mathcal{N}$ 上的向量场 $X \in T_p \mathcal{N}$ 形为 $X = \sum_{k = 1}^{n} a^k \partial_{x^k}$, 所以其可以自然地延拓成为 $\mfd$ 上的光滑向量场 $\bar{X} = f_{\ast} X$ (取 $\partial_{x^{n + 1}}$ 到 $\partial_{x^m}$ 上的系数为 $0$). 根据定义, 此时
+    \[
+        \tDiv{X}W = \Div{\bar{X}}W,
+    \]
+    故 (4.\ 2.\ 3) 和 (4.\ 2.\ 4) 式由 $\mfd$ 上联络的性质立得.
+\end{solution}
+
+\subsection{192页 习题5}
+
+\newcommand{\dgam}{\gamma^{\prime}}
+\begin{problem}
+    设 $\gamma \colon [a, b] \rightarrow \mfd$, $s \mapsto \gamma(s)$ 是 Riemann 流形 $(\mfd, g)$ 的正规测地线. $X$, $Y$ 为沿 $\gamma$ 的 Jacobi 场. 证明:
+    \begin{enumerate}[label = (\roman*)]
+        \item 若 $X = f(s) \dgam(s)$, 则 $f(s) = as + b$, $a$, $b$ 为常数;
+        \item 若在 $\gamma$ 的两个 不同点处 $X$ 与 $\dgam$ 正交, 则 $\Inner{X }{\gamma^\prime} = 0$;
+        \item $\Inner{X}{\Div{\dgam}Y} - \Inner{\Div{\dgam}X}{Y} = \mathrm{const.}$.
+    \end{enumerate}
+\end{problem}
+
+\begin{solution}
+    \begin{enumerate}[label = (\roman*)]
+        \item 因为 $\Div{\dgam(s)}\dgam(s) = 0$, 所以 Jacobi 方程变为
+        \[
+            f^{\prime\prime}(s) \dgam(s) = \R(\dgam, f(s)\dgam)\dgam = 0,
+        \]
+        所以 $f(s) = as + b$.
+        \item $\Div{\dgam}\Div{\dgam}\Inner{X }{\gamma^\prime} = \Inner{\Div{\dgam}\Div{\dgam} X }{\gamma^\prime} = 0$, 记 $h(s) := \Inner{X(s) }{\gamma^\prime(s)}$, 那么有两点 $h(s_0) = h(s_1) = 0$ 且 $h^{\prime\prime}(s) = 0$. 所以 $h(s) \equiv 0$.
+        \item 对这个式子求导,
+        \[
+            \begin{aligned}
+                 {} & \Div{\dgam}(\Inner{X}{\Div{\dgam}Y} - \Inner{\Div{\dgam}X}{Y}) \\
+                ={} & \Inner{\Div{\dgam}X}{\Div{\dgam}Y} + \Inner{X}{\Div{\dgam}\Div{\dgam}Y} - \Inner{\Div{\dgam}\Div{\dgam}X}{Y} - \Inner{X}{\Div{\dgam}\Div{\dgam}Y} \\
+                ={} & 0.
+            \end{aligned}
+        \]
+    \end{enumerate}
+\end{solution}
+
+\newpage
+\subsection{192页 习题6}
+
+\begin{problem}
+    设 $\gamma \colon [0, l] \rightarrow (\mfd, g)$ 为正规测地线, 证明: 若 $N$ 为沿 $\gamma$ 平行的单位向量场, 使 $\Inner{N(t_0)}{\gamma^\prime(t_0)} = 0$, $V = f(t)N$ 为 $\gamma$ 的端点保持固定的变分向量场, 则
+    \[
+        \dDif{^2 L}{s^2}(0) = -\int_{0}^{l} f(f^{\prime\prime} + f\R(\gamma^\prime, N, \gamma^\prime, N)) \dif t.
+    \] 
+\end{problem}
+
+\begin{solution}
+    代入第二变分公式, 得到
+    \[
+        \begin{aligned}
+            \dDif{^2 L}{s^2}(0) ={} & \int_{0}^{l} \bigl[\Inner{\Div{\dgam}V}{\Div{\dgam}V} - \R(V, \dgam, V, \dgam)\bigr] \dif t \\
+            ={} & \int_{0}^{l} \bigl[\dgam(\Inner{V}{\Div{\dgam}V}) - \Inner{V}{\Div{\dgam}\Div{\dgam}V} - \R(V, \dgam, V, \dgam)\bigr] \dif t \\
+            ={} & -\int_{0}^{l} \bigl[ff^{\prime\prime} + f^2 \R(N, \dgam, N, \dgam)\bigr] \dif t
+        \end{aligned}
+    \]
+\end{solution}
+
+\end{document}
